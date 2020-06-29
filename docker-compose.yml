@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+
+  postgres:
+    # Bau das Image aus dem lokalen Dockerfile
+    image: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - pg.env
+    volumes:
+      - /home/uws/postgres/data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    ports:
+#      - "5050:5050"
+#    env_file:
+#      - pgadmin.env
+#    volumes:
+#      - /home/uws/postgres/pgadmin:/var/lib/pgadmin
+#    links:
+#      - postgres:postgres
+#    restart: unless-stopped
+#
+#  hilgi:
+#    image: hilgi:latest
+#    ports:
+#      - "80:8000"
+#    restart: unless-stopped
