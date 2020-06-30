@@ -1,0 +1,16 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<h1>Homepage</h1>
+<img class="mainpic" src="{% static 'images/Hilgertshausen_Wappen.png' %}">
+{% if user.is_authenticated %}
+  <p>Hi {{ user.email }}!</p>
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <p><a href="{% url 'login' %}">Log In</a> | </p>
+{% endif %}
+{% endblock content %}

@@ -24,9 +24,11 @@ services:
 #    links:
 #      - postgres:postgres
 #    restart: unless-stopped
-#
-#  hilgi:
-#    image: hilgi:latest
-#    ports:
-#      - "80:8000"
-#    restart: unless-stopped
+
+  hilgi:
+    image: hilgi:latest
+    environment:
+      - DBHOST=postgres
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
