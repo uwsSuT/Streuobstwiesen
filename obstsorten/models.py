@@ -17,11 +17,10 @@ class ObstSorten(models.Model):
                                  blank=True, size=20)
 
 class Wiese(models.Model):
-    wiesen_id     = models.AutoField(primary_key=True)
-    name          = models.CharField(max_length=30)
-    bilder        = ArrayField(models.ImageField(upload_to='uploads/Wiese'),
-                                 blank=True, size=20)
-    grafik        = models.ImageField(upload_to='uploads/Wiese', default=None)
+    wiesen_id     = models.IntegerField(primary_key=True)
+    name          = models.CharField(max_length=64)
+    bilder        = ArrayField(models.CharField(max_length=128), blank=True, null=True, size=20)
+    grafik        = models.ImageField(blank=True, upload_to='images/Wiese', default=None)
     obstwiese     = models.BooleanField(default=True)
     bluehwiese    = models.BooleanField(default=False)
 
@@ -29,7 +28,7 @@ class ObstBaum(models.Model):
     baum_id     = models.AutoField(primary_key=True)
     obst_sorte  = models.ForeignKey(ObstSorten, on_delete=models.CASCADE)
     wiese       = models.ForeignKey(Wiese, on_delete=models.CASCADE)
-    bilder      = ArrayField(models.ImageField(upload_to='uploads/Wiese'),
+    bilder      = ArrayField(models.ImageField(upload_to='uploads/Baum'),
                                  blank=True, size=20)
     zustand     = models.CharField(max_length=248, blank=True)
     letzter_schnitt = models.DateField(null=True)

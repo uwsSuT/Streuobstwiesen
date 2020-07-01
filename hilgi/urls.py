@@ -24,4 +24,5 @@ urlpatterns = [
 
     # Local apps
     path('', include('obstsorten.urls')),
+    path('wiese/', include('wiese.urls')),
 ]

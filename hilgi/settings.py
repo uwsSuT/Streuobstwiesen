@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Local
     'obstsorten',
+    'wiese',
     'benutzer.apps.BenutzerConfig',
 ]
 
