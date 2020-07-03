@@ -1,26 +1,28 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
+Obst_Type = [ 'Apfel', 'Birne', 'Kirsche', 'Zwetschge', 'Nuss', 'Quitte', 'Mispel', 'unbekannt']
+
 class ObstSorten(models.Model):
-    obst_type       = models.TextChoices('Obst_Type', 'Apfel, Birne, Kirche, Zwetschge, Nuss, Quitte, Mispel, unbekannt')
+    sorten_id       = models.IntegerField(primary_key=True)
+    obst_type       = models.IntegerField()
     obst_sorte      = models.CharField(max_length=64,
-        help_text='Obstsorte: Name der Obstsorte. z.B. rheinischer Winterrambour')
-    pflueck_reif    = models.CharField(max_length=30, blank=True)
-    genuss_reif     = models.CharField(max_length=30, blank=True)
-    verwendung      = models.CharField(max_length=248)
-    geschmack       = models.CharField(max_length=248)
-    lagerfaehigkeit = models.CharField(max_length=248)
-    alergie_info    = models.CharField(max_length=248)
-    www             = ArrayField(models.URLField(max_length=128, blank=True),
-                                 size=5)
-    bilder          = ArrayField(models.ImageField(upload_to='uploads/Sorte'),
-                                 blank=True, size=20)
+        help_text='Obstsorte: Name der Obstsorte. z.B. rheinischer Winterrambour', null=True)
+    pflueck_reif    = models.CharField(max_length=1024, blank=True, null=True)
+    genuss_reif     = models.CharField(max_length=1024, blank=True, null=True)
+    verwendung      = models.CharField(max_length=1024, null=True)
+    geschmack       = models.CharField(max_length=1024, null=True)
+    lagerfaehigkeit = models.CharField(max_length=1024, null=True)
+    alergie_info    = models.CharField(max_length=1024, null=True)
+    www             = ArrayField(models.URLField(max_length=256, blank=True),
+                                 size=5, null=True)
+    # bilder          = ArrayField(models.ImageField(upload_to='uploads/Sorte'), blank=True, size=20)
 
 class Wiese(models.Model):
     wiesen_id     = models.IntegerField(primary_key=True)
     name          = models.CharField(max_length=64)
-    bilder        = ArrayField(models.CharField(max_length=128), blank=True, null=True, size=20)
-    grafik        = models.ImageField(blank=True, upload_to='images/Wiese', default=None)
+    # bilder        = ArrayField(models.CharField(max_length=128), blank=True, null=True, size=20)
+    # grafik        = models.ImageField(blank=True, upload_to='images/Wiese', default=None)
     obstwiese     = models.BooleanField(default=True)
     bluehwiese    = models.BooleanField(default=False)
 
@@ -28,8 +30,7 @@ class ObstBaum(models.Model):
     baum_id     = models.AutoField(primary_key=True)
     obst_sorte  = models.ForeignKey(ObstSorten, on_delete=models.CASCADE)
     wiese       = models.ForeignKey(Wiese, on_delete=models.CASCADE)
-    bilder      = ArrayField(models.ImageField(upload_to='uploads/Baum'),
-                                 blank=True, size=20)
+    # bilder      = ArrayField(models.ImageField(upload_to='uploads/Baum'), blank=True, size=20)
     zustand     = models.CharField(max_length=248, blank=True)
     letzter_schnitt = models.DateField(null=True)
     

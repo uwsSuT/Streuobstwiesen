@@ -7,7 +7,12 @@ h1 {
   width: auto;
 }
 
-.mainpic {
-  height: 300px;
-  width: auto;
+.wiese.wiesenpic {
+  width: 640px;
+  height: auto;
+}
+
+.wiesenpic {
+  width: 1200px;
+  height: auto;
 }

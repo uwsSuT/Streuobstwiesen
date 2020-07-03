@@ -1,0 +1,23 @@
+{% extends 'wiese/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>{{object.wiesen_id }} - {{ object.name }}</h1>
+<p>
+    {% if grafik %}
+	<img class="wiesenpic" src="{% static grafik %}">
+    {% else %}
+	Keine Grafik vorhanden
+    {% endif %}
+
+    {% if object.obstwiese %}
+	<p>Die Wiese ist eine Obstwiese</p>
+    {% endif %}
+   
+    {% if object.bluehwiese %}
+	<p>Diese Wiese ist eine Blühwiese</p>
+    {% endif %}
+   
+</p> 
+{% endblock %}
+

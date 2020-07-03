@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h1>Update: {{object.wiesen_id }} - {{ object.name }}</h1>
+
+<form enctype="multipart/form-data" action='.' method='POST'>{% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit' value='Upload' />
+</form>
+
+
+{% endblock %}
