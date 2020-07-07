@@ -1,2 +1,4 @@
 staticfiles
 obstsorten/migrations
+*.swp
+__pycache__

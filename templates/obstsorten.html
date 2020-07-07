@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Obstsorten{% endblock title %}
+
+{% block content %}
+<div class="panel-body">
+    <table width="100%" class="table table-striped table-bordered table-hover" id="obstsorten-liste">
+        <thead>
+            <tr>
+                <th>Obst Typ</th>
+                <th>Sorte</th>
+                <th>Reife</th>
+                <th>Verwendung</th>
+                <th>Geschmack</th>
+                <th>Lagerfähigkeit</th>
+                <th>Allergie Info</th>
+                <th>WWW</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for instance in object %}
+                <tr>
+                    <th>{{ instance.obst_type }}</th>
+                    <th>{{ instance.obst_sorte }}</th>
+                    <th>{{ instance.pflueck_reif }}</th>
+                    <th>{{ instance.verwendung }}</th>
+                    <th>{{ instance.geschmack }}</th>
+                    <th>{{ instance.lagerfaehigkeit }}</th>
+                    <th>{{ instance.alergie_info }}</th>
+                    <th>
+			{% for xurl in instance.www %}
+			    <a href="{{ xurl }}">{{xurl}}</a>
+			{% endfor %}
+		    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

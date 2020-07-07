@@ -169,3 +169,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
+
+DATE_INPUT_FORMATS = ['%d-%m-%Y', '%Y-%m-%d', '%d.%m.%Y', '%d.%m.%y']

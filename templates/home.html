@@ -12,7 +12,9 @@
   <p>Hi {{ user.email }}!</p>
   <p><a href="{% url 'account_logout' %}">Log Out</a></p>
 {% else %}
-  <p>You are not logged in</p>
+  <p>Sie sind nicht angemeldet.</p>
+  <p>Zur Verwndung dieser WWW-Seite benötigen Sie eine Kennung. Diese 
+    erhalten Sie bei der Gemeinde Hilgrtshausen-Tandern.</p>
   <p><a href="{% url 'account_login' %}">Log In</a> | </p>
 {% endif %}
 {% endblock content %}

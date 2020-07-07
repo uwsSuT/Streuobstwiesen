@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
 from .forms import WieseModelForm, WiesenUpdateForm
-from obstsorten.models import Wiese
+from obstsorten.models import Wiese, ObstBaum, ObstSorten
 
 import os
 from os.path import join
@@ -40,12 +40,12 @@ class WieseCreateView(View):
 
 class WieseListView(View):
     #
-    # Darstellung aller Obst-Wiesen mit Karte und Lister der definierten Wiesen
+    # Darstellung aller Obst-Wiesen mit Karte und Liste der definierten Wiesen
     #
     template_name = "wiese/wiese_list.html"
 
     def get_queryset(self):
-        return Wiese.objects.all()
+        return Wiese.objects.all().extra(select={}).order_by('wiesen_id')
 
     def get(self, request, *args, **kwargs):
         #
@@ -69,10 +69,37 @@ class WieseView(WieseObjectMixin, View):
             if f.find("%s_" % wid) == 0:
                 return join('images', APP, f)
 
+    def __find_trees__(self, wid):
+        """
+            Suche alle Baäume der Wiese, die solen unterhalb des Bildes
+            aufgelistet werden
+        """
+        trees = ObstBaum.objects.filter(wiese=wid).order_by('baum_id')
+        ptrees = []
+        for tree in trees:
+            ptree = {
+                'baum_id' : tree.baum_id,
+                'name' : ObstSorten.objects.get(sorten_id=tree.sorten_id_id).obst_sorte,
+                'zustand' : tree.zustand,
+                'letzter_schnitt' : tree.letzter_schnitt,
+                }
+            #
+            # Die '99' Nummer sind unbestimmte Bäume da fügen wird keine
+            # URL ein
+            #
+            if '99' not in "%s" % tree.sorten_id_id:
+                ptree['url'] = tree.sorten_id_id
+            ptrees.append(ptree)
+
+        return ptrees
+
     def get(self, request, wiesen_id=None, *args, **kwargs):
         # GET method
         context = {'object': self.get_object(wiesen_id=self.kwargs.get('id')),
                    'grafik' : self.__find_grafik__(self.kwargs.get('id')),
+                   'trees' : self.__find_trees__(self.kwargs.get('id')),
+                   'wiesen_list' : Wiese.objects.all().order_by('wiesen_id'),
+                   'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
                   }
         return render(request, self.template_name, context)
 

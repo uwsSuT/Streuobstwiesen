@@ -1,7 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-Obst_Type = [ 'Apfel', 'Birne', 'Kirsche', 'Zwetschge', 'Nuss', 'Quitte', 'Mispel', 'unbekannt']
+Obst_Type = ( 'Apfel', 'Birne', 'Kirsche', 'Zwetschge', 'Nuss', 'Quitte', 'Mispel', 'unbekannt', 'Tod')
 
 class ObstSorten(models.Model):
     sorten_id       = models.IntegerField(primary_key=True)
@@ -28,10 +28,10 @@ class Wiese(models.Model):
 
 class ObstBaum(models.Model):
     baum_id     = models.AutoField(primary_key=True)
-    obst_sorte  = models.ForeignKey(ObstSorten, on_delete=models.CASCADE)
+    sorten_id   = models.ForeignKey(ObstSorten, on_delete=models.CASCADE)
     wiese       = models.ForeignKey(Wiese, on_delete=models.CASCADE)
     # bilder      = ArrayField(models.ImageField(upload_to='uploads/Baum'), blank=True, size=20)
     zustand     = models.CharField(max_length=248, blank=True)
-    letzter_schnitt = models.DateField(null=True)
+    letzter_schnitt = models.DateField(null=True, blank=True)
     
 

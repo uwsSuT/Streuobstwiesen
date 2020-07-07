@@ -17,6 +17,36 @@
     {% if object.bluehwiese %}
 	<p>Diese Wiese ist eine Blühwiese</p>
     {% endif %}
+
+    <div class="panel-body">
+	<table width="100%" class="table table-striped table-bordered table-hover" id="baum-liste">
+	    <thead>
+		<tr>
+		    <th>Baum Nr.</th>
+		    <th>Bezeichnung</th>
+		    <th>Zustand</th>
+		    <th>letzter Schnitt</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		{% for instance in trees %}
+		    <tr>
+			<th><button type="button" class="btn btn-default">
+			    {% if instance.url %}
+				<a href="{% url 'obstsorten' %}">
+			      {{ instance.baum_id }}</a>
+			    {% else %}
+			      {{ instance.baum_id }}
+			    {% endif %}
+			    </button></th>
+			<th>{{ instance.name }}</th>
+			<th>{{ instance.zustand }}</th>
+			<th>{{ instance.letzter_schnitt }}</th>
+		    </tr>
+		{% endfor %}
+	    </tbody>
+	</table>
+    </div>
    
 </p> 
 {% endblock %}
