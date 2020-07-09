@@ -2,3 +2,5 @@ staticfiles
 obstsorten/migrations
 *.swp
 __pycache__
+Pipfile
+hilgi/settings.py

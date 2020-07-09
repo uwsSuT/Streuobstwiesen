@@ -1,0 +1,85 @@
+#
+# Aufzeichnung der ersten Heroku Deploment Session
+#
+
+uws@ubuntu18-srv:~/django/obst$ heroku login
+uws@ubuntu18-srv:~/django/obst$ heroku create hilgi-docker
+ ›   Warning: heroku update available from 7.42.0 to 7.42.2.
+Creating ⬢ hilgi-docker... done
+https://hilgi-docker.herokuapp.com/ | https://git.heroku.com/hilgi-docker.git
+uws@ubuntu18-srv:~/django/obst$ heroku container:login
+ ›   Warning: heroku update available from 7.42.0 to 7.42.2.
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /home/uws/snap/docker/471/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+uws@ubuntu18-srv:~/django/obst$ heroku addons:create heroku-postgresql:hobby-dev -a hilgi-docker
+ ›   Warning: heroku update available from 7.42.0 to 7.42.2.
+Creating heroku-postgresql:hobby-dev on ⬢ hilgi-docker... free
+Database has been created and is available
+ ! This database is empty. If upgrading, you can transfer
+ ! data from another database with pg:copy
+Created postgresql-rigid-82873 as DATABASE_URL
+Use heroku addons:docs heroku-postgresql to view documentation
+uws@ubuntu18-srv:~/django/obst$  heroku container:push web -a hilgi-docker
+
+.
+.
+.
+
+latest: digest: sha256:ded3db2295e035b55b6da29eed0063a8821c311f6f1e01d3fbfb14d3690e15a1 size: 3482
+Your image has been successfully pushed. You can now release it with the 'container:release' command.
+uws@ubuntu18-srv:~/django/obst$ #heroku container:release web -a hilgi-docker
+uws@ubuntu18-srv:~/django/obst$ heroku config:set SECRET_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu'
+ ›   Warning: heroku update available from 7.42.0 to 7.42.2.
+Setting SECRET_KEY and restarting ⬢ hilgi-docker... done, v5
+SECRET_KEY: qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu
+uws@ubuntu18-srv:~/django/obst$ heroku container:release web -a hilgi-docker
+
+uws@ubuntu18-srv:~/django/obst$ heroku run python3 manage.py migrate -a hilgi-docker
+ ›   Warning: heroku update available from 7.42.0 to 7.42.2.
+Running python3 manage.py migrate on ⬢ hilgi-docker... up, run.4060 (Free)
+Operations to perform:
+  Apply all migrations: account, admin, auth, benutzer, contenttypes, obstsorten, sessions, sites
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying benutzer.0001_initial... OK
+  Applying account.0001_initial... OK
+  Applying account.0002_email_max_length... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying obstsorten.0001_initial... OK
+  Applying obstsorten.0002_auto_20200707_0913... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+  Applying sites.0002_alter_domain_unique... OK
+uws@ubuntu18-srv:~/django/obst$ 
+
+uws@ubuntu18-srv:~/django/obst$ heroku run python3 manage.py createsuperuser -a hilgi-docker
+ ›   Warning: heroku update available from 7.42.0 to 7.42.2.
+Running python3 manage.py createsuperuser on ⬢ hilgi-docker... up, run.1827 (Free)
+Username: uws
+Email address: uwe.w.sch@gmail.com
+Password: 
+Password (again): 
+Superuser created successfully.
+
+PASSWORD:           T1mySPassw0rd!
+
+
+

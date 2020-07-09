@@ -13,9 +13,9 @@ COPY obstsorten /app/obstsorten/
 COPY static /app/static/
 COPY staticfiles /app/staticfiles/
 COPY templates /app/templates/
+COPY init_db /app/init_db/
 COPY Pipfile /app/
 COPY manage.py /app/
-#ADD . /app/
 
 # set default environment variables
 ENV PYTHONUNBUFFERED 1
@@ -37,7 +37,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
         && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    rm -f /app/hilgi/settings.local.py
 
 
 # install environment dependencies

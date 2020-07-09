@@ -1,0 +1,19 @@
+#
+# Wie hängen die Daten aus dem QGIS auf dem Laptop mit den Django Daten
+# zusammen
+#
+
+Die CSV Files in init_db sind exports der Attributtabellen
+Die Datei "init_db/wiesen.txt" wurde von Hand ediert.
+
+
+die Bilder werden wie folgt kopiert:
+
+Obst-Sorten Bilder:
+    scp -p ~/privat/Streuobstwiesen/Bilder/Obst_Bilder/* uws@ubuntu18-srv:~/django/obst/static/images/obstsorten
+
+Die GIS Karten-Bilder:
+    scp -p ~/privat/Streuobstwiesen/Bilder/[0-9]*_.png uws@ubuntu18-srv:~/django/obst/static/images
+
+
+Baum_Bilder fehlen noch!

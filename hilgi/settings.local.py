@@ -19,7 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu'
+#
+# siehe Home/.bashrc und MindMap
+#
+SECRET_KEY = os.environ.get('HILGI_SEC_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -90,12 +93,11 @@ WSGI_APPLICATION = 'hilgi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE'   : 'django.db.backends.postgresql',
-        'NAME'     : 'hilgi_wiesen',
-        'USER'     : 'uws',
-        'PASSWORD' : 'admin123',
-#        'HOST'     : 'postgres',
+        'NAME'     : os.environ.get('DBNAME', default='hilgi_wiesen'),
+        'USER'     : os.environ.get('DBUSR', default='uws'),
+        'PASSWORD' : os.environ.get('DBPWD', default='Admin_123'),
         'HOST'     : os.environ.get('DBHOST', default='localhost'),
-        'PORT'     : '5432',
+        'PORT'     : os.environ.get('DBPORT', default='5432'),
     }
 }
 

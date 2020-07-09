@@ -15,16 +15,22 @@ class HomePageView(TemplateView):
 class AboutPageView(TemplateView):
     template_name = 'about.html'
 
+    def get(self, request, *args, **kwargs):
+        from hilgi import Version
+        context = { 'VERSION' : Version }
+        return render(request, self.template_name, context)
+
 class ObstSortenView(TemplateView):
     template_name = 'obstsorten.html'
 
-    def __find_grafik__(self, sid):
+    def __find_grafik__(self, oid):
         """
             such die zur Obstsorte zugehörige Grafik in dem Static Verzeichnis
         """
         pwd = os.getcwd()
         for f in os.listdir(join(pwd, 'static', 'images', APP)):
-            if f.find("%s_" % sid) == 0:
+            if f.find("%s_" % oid) == 0:
+                #print("OBST-BILD gefunden %s" % f)
                 return join('images', APP, f)
 
     def get_queryset(self):
@@ -40,7 +46,7 @@ class ObstSortenView(TemplateView):
                 'lagerfaehigkeit' : o.lagerfaehigkeit,
                 'alergie_info' : o.alergie_info,
                 'www' : o.www,
-                'grafik' : self.__find_grafik__(self.kwargs.get('id')),
+                'picture' : self.__find_grafik__(o.sorten_id),
                 }
             robst.append(sorte)
         return robst
