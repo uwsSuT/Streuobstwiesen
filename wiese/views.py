@@ -37,7 +37,6 @@ class WieseCreateView(View):
         context = {"form": form}
         return render(request, self.template_name, context)
 
-
 class WieseListView(View):
     #
     # Darstellung aller Obst-Wiesen mit Karte und Liste der definierten Wiesen

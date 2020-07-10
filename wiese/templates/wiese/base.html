@@ -43,6 +43,7 @@
 </head>
 <body>
 
+{% if user.is_authenticated %}
     <div id="wrapper">
  <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -118,7 +119,12 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/sb-admin-2.js' %}"></script>
-
+{% else %}
+    <p>Sie sind nicht angemeldet.</p>
+    <p>Zur Verwndung dieser WWW-Seite benötigen Sie eine Kennung. Diese
+      erhalten Sie bei der Gemeinde Hilgertshausen-Tandern.</p>
+    <p><a href="{% url 'account_login' %}">Log In</a> | </p>
+{% endif %}
 </body>
 
 </html>

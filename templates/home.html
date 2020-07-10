@@ -9,12 +9,12 @@
 <h1>Hilgertshausen - Tandern</h1>
 <p>Ortsteil Hilgertshausen</p>
 {% if user.is_authenticated %}
-  <p>Hi {{ user.email }}!</p>
-  <p><a href="{% url 'account_logout' %}">Log Out</a></p>
+    <p>Hallo {{ user.first_name }} {{ user.last_name }}!</p>
+    <p><a href="{% url 'account_logout' %}">Log Out</a></p>
 {% else %}
-  <p>Sie sind nicht angemeldet.</p>
-  <p>Zur Verwndung dieser WWW-Seite benötigen Sie eine Kennung. Diese 
-    erhalten Sie bei der Gemeinde Hilgrtshausen-Tandern.</p>
-  <p><a href="{% url 'account_login' %}">Log In</a> | </p>
+    <p>Sie sind nicht angemeldet.</p>
+    <p>Zur Verwndung dieser WWW-Seite benötigen Sie eine Kennung. Diese 
+      erhalten Sie bei der Gemeinde Hilgertshausen-Tandern.</p>
+    <p><a href="{% url 'account_login' %}">Log In</a> | </p>
 {% endif %}
 {% endblock content %}
