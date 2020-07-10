@@ -17,7 +17,22 @@ h1 {
   height: auto;
 }
 
+.baum_det_pic {
+  width: 320px;
+  height: auto;
+}
+
+.baumpic {
+  width: auto;
+  height: auto;
+}
+
 .obstpic {
   width: 100px;
+  height: auto;
+}
+
+.obst_big_pic {
+  width: 400px;
   height: auto;
 }

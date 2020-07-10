@@ -9,10 +9,10 @@ VERSION = 0.5.0
 
 build_local: 
 	- rm Pipfile.lock
-	python manage.py collectstatic --noinput || echo "\n\tpipenv shell # vergessen?!\n" && exit 1
+	python manage.py collectstatic --noinput 
 	cp -p hilgi/settings.local.py hilgi/settings.py
 	cp -p Pipfile.local Pipfile
-	docker build -t hilgi:latest -f Dockerfile-local .
+	docker build -t hilgi:$(VERSION) -f Dockerfile-local .
 
 build_heroku:
 	- rm Pipfile.lock

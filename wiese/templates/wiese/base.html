@@ -93,10 +93,29 @@
                             <!-- /.nav-second-level -->
                         </li>
 			{% endif %}
-			{% if obstsorten_list %}
-		        <li>
-                            <a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten</a>
-                        </li>
+			{% if obstsorten_menu %}
+			    <li>
+				<a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten<span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level">
+				    {% for otype, obst in obstsorten_menu.items %}
+				    <li>
+					<a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype }}<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+					{% for o in obst %}
+					    <li>
+						<a href="{% url 'obstsorten_detail' o %}"> {{ o }} </a>
+					    </li>
+					{% endfor %}
+					</ul>
+				    </li>
+				    {% endfor %}
+				</ul>
+				<!-- /.navo-second-level -->
+			    </li>
+			{% else %}
+			    <li>
+				<a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten</a>
+			    </li>
 			{% endif %}
 		    </ul>
                 </div>

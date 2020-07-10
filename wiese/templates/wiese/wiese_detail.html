@@ -33,7 +33,7 @@
 		    <tr>
 			<th><button type="button" class="btn btn-default">
 			    {% if instance.url %}
-				<a href="{% url 'obstsorten' %}">
+				<a href="{% url 'wiese:baum-detail' instance.baum_id %}">
 			      {{ instance.baum_id }}</a>
 			    {% else %}
 			      {{ instance.baum_id }}

@@ -25,13 +25,13 @@ services:
       - dpostgres:dpostgres
     restart: unless-stopped
 
-#  hilgi:
-#    image: hilgi:latest
-#    environment:
-#      - DBHOST=dpostgres
-#      - DBPWD=admin123
-#      - HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu'
-#      - DEBUG=0
-#    ports:
-#      - "8000:8000"
-#    restart: unless-stopped
+  hilgi:
+    image: hilgi:0.5.1
+    environment:
+      - DBHOST=dpostgres
+      - DBPWD=admin123
+      - HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu'
+      - DEBUG=0
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
