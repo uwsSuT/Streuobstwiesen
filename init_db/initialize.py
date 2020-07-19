@@ -3,9 +3,56 @@
 #
 # Initialisiere die Obstsorten in der Postgres DB
 #
+# Damit wir das Django Models Modul verwenden können, muss zunächst die
+# Django Umgebung gesetzt werden. Dass passiert durch die beiden Aufrufe
+#
+#   - settings.configure
+#   - django.setup()
+#
+# Erst danach können die Models importiert werden !!!
+#
+#
+# Hard coded Switch damit das Script auf Heroku laufen kann
+#  Start auf Heroku
+#   - heroku run bash -a hilgi-docker
+#   - python ./init_db/initialize.py
+#
+
+import os
+import django
+from django.conf import settings
+
+DATABASES = {
+    'default': {
+        'ENGINE'   : 'django.db.backends.postgresql',
+        'NAME'     : os.environ.get('DBNAME', default='hilgi_wiesen'),
+        'USER'     : os.environ.get('DBUSR', default='uws'),
+        'PASSWORD' : os.environ.get('DBPWD', default='admin123'),
+        'HOST'     : os.environ.get('DBHOST', default='localhost'),
+        'PORT'     : os.environ.get('DBPORT', default='5432'),
+    }
+}
+#
+# Hard coded Switch damit das Script auf Heroku laufen kann
+#  Start auf Heroku
+#   - heroku run bash -a hilgi-docker
+#   - python ./init_db/initialize.py
+#
+if not os.environ.get('HOSTNAME') == 'ubuntu18-srv':
+    import dj_database_url
+    db_from_env = dj_database_url.config()
+    DATABASES['default'].update(db_from_env)
+    DATABASES['default']['CONN_MAX_AGE'] = 500
+
+settings.configure(
+        DATABASES = DATABASES,
+        INSTALLED_APPS = ['obstsorten'],
+    )
+django.setup()
+
 
 from csv import reader
-from obstsorten.models import ObstSorten, Obst_Type, Wiese, ObstBaum
+from obstsorten.models import Obst_Type, ObstSorten, Wiese, ObstBaum
 
 enums = {
         'obst_typen' : Obst_Type,

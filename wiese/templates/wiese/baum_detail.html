@@ -1,0 +1,42 @@
+{% extends 'wiese/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>{{baum_infos.baum_id }} - {{ sorte.obst_sorte }}</h1>
+<p>
+    {% if baum_pics %}
+	{% for pic in baum_pics %}
+	    <a href="{% url 'wiese:baumpic' pic %}">
+	      <img class="baum_det_pic" src="{% static pic %}">
+	      </a>
+	{% endfor %}
+    {% else %}
+	Keine Grafik vorhanden
+    {% endif %}
+
+    <div class="panel-body">
+	<table width="100%" class="table table-striped table-bordered table-hover" id="baum-infos">
+	    <thead>
+		<tr>
+		    <th>Baum Nr.</th>
+		    <th>Standort / Wiese</th>
+		    <th>Zustand</th>
+		    <th>letzter Schnitt</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		<tr>
+		    <th><button type="button" class="btn btn-default">
+			  {{ baum_infos.baum_id }}
+			</button></th>
+		    <th>{{ wiese }}</th>
+		    <th>{{ baum_infos.zustand }}</th>
+		    <th>{{ baum_infos.letzter_schnitt }}</th>
+		</tr>
+	    </tbody>
+	</table>
+    </div>
+   
+</p> 
+{% endblock %}
+
