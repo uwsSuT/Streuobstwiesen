@@ -13,25 +13,25 @@ services:
       - /home/uws/postgres/data:/var/lib/postgresql/data
     restart: unless-stopped
 
-  pgadmin:
-    image: dpage/pgadmin4
-    ports:
-      - "5050:5050"
-    env_file:
-      - pgadmin.env
-    volumes:
-      - /home/uws/postgres/pgadmin:/var/lib/pgadmin
-    links:
-      - dpostgres:dpostgres
-    restart: unless-stopped
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    ports:
+#      - "5050:5050"
+#    env_file:
+#      - pgadmin.env
+#    volumes:
+#      - /home/uws/postgres/pgadmin:/var/lib/pgadmin
+#    links:
+#      - dpostgres:dpostgres
+#    restart: unless-stopped
 
   hilgi:
-    image: hilgi:0.5.1
+    image: hilgi:0.5.0
     environment:
       - DBHOST=dpostgres
       - DBPWD=admin123
       - HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu'
       - DEBUG=0
     ports:
-      - "8000:8000"
+      - "8002:8000"
     restart: unless-stopped
