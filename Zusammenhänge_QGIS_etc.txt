@@ -6,14 +6,30 @@
 Die CSV Files in init_db sind exports der Attributtabellen
 Die Datei "init_db/wiesen.txt" wurde von Hand ediert.
 
+    CSV der Obstbäume:
+        Rechte Maustaste auf den Layer Obstbäume ->
+            Exportiern -> Object speichern als
+                Baeume.csv
+
+    CSV der Obstsorten stammt aus dem Spreadsheet 
+        ~/privat/Streuobstwiesen/Obstsorten.ods
+
 
 die Bilder werden wie folgt kopiert:
 
 Obst-Sorten Bilder:
-    scp -p ~/privat/Streuobstwiesen/Bilder/Obst_Bilder/* uws@ubuntu18-srv:~/django/obst/static/images/obstsorten
+    scp -p ~/privat/Streuobstwiesen/Bilder/Obst_Bilder/* <GIT_Project>/django/obst/static/images/obstsorten
 
 Die GIS Karten-Bilder:
-    scp -p ~/privat/Streuobstwiesen/Bilder/[0-9]*_.png uws@ubuntu18-srv:~/django/obst/static/images
+    scp -p ~/privat/Streuobstwiesen/Bilder/[0-9]*_.png <GIT_Project>/django/obst/static/images
 
 
 Baum_Bilder fehlen noch!
+
+================================================================================
+#       Was ist zu tun bei Änderungen im GIS
+================================================================================
+1. CSV genereiren (s.o.)
+2. CSV im GIT ablegen (~/GIT_projects/streuobst_wiesen/init_db)
+3. neue Wiesen Bilder im GIT ablegen (~/GIT_projects/streuobst_wiesen/static/images/wiese)
+4. auf dem ubuntu18 die CSV in der DB aktualisieren
