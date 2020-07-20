@@ -163,7 +163,7 @@ class BaumView(WieseObjectMixin, View):
 
     def get(self, request, wiesen_id=None, *args, **kwargs):
         # GET method
-        print("baum-detail: %s" % self.kwargs.get('id'))
+        # print("baum-detail: %s" % self.kwargs.get('id'))
         baum = ObstBaum.objects.get(baum_id=self.kwargs.get('id'))
         context = {
            'baum_pics'  : self.__find_pics__(self.kwargs.get('id')),

@@ -5,10 +5,11 @@
 #
 ## uws : 2020.07.09
 
-VERSION = 0.5.0
+VERSION = 0.5.1
 
 build_local: 
 	- rm Pipfile.lock
+	./manage_version.sh $(VERSION)
 	python manage.py collectstatic --noinput 
 	cp -p hilgi/settings.local.py hilgi/settings.py
 	cp -p Pipfile.local Pipfile
