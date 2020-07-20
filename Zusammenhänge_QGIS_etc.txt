@@ -33,3 +33,26 @@ Baum_Bilder fehlen noch!
 2. CSV im GIT ablegen (~/GIT_projects/streuobst_wiesen/init_db)
 3. neue Wiesen Bilder im GIT ablegen (~/GIT_projects/streuobst_wiesen/static/images/wiese)
 4. auf dem ubuntu18 die CSV in der DB aktualisieren
+    # export PYTHONPATH=~/django/obst
+    # python init_db/initialize.py
+
+
+Tests:
+==============================================================================
+local testen; mit 
+    - pipenv shell
+    - gunicorn hilgi.wsgi:application --bind 0.0.0.0:8002
+
+Docker testen
+    - makefile VERSION anpassen
+    - make build_local
+
+==============================================================================
+Veröffentlichen:
+==============================================================================
+    - heroku login ; ACHTUNG: braucht X und einen Firefox
+    - make build_heroku   ; braucht u.U. "heroku container:login"
+
+    - Login auf der Heroku Umgebung
+        - heroku run bash -a hilgi-docker
+        - export PYTHONPATH=$PWD; python init_db/initialize.py
