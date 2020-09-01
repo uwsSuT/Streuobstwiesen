@@ -7,6 +7,13 @@
 
 VERSION = 0.5.1
 
+LOCAL_PIC_DIR = "static/images/baum"
+QGIS_PIC_DIR = "/home/uws/privat/Streuobstwiesen/Bilder/Baum_Bilder/"
+WIESEN_NAMES = Buergermeisterwiese \
+		        Skater-Tennisplatz\
+				Spielplatz\
+			   
+
 build_local: 
 	- rm Pipfile.lock
 	./manage_version.sh $(VERSION)
@@ -31,4 +38,17 @@ build_heroku:
 
 
 copy_pics:
-	echo ToBeDone
+	set -x ;\
+	actdir=$$(pwd); export actdir ;\
+	for d in $(WIESEN_NAMES); do \
+		cd $(QGIS_PIC_DIR)/$$d; \
+		cp -p $$(cat Nr)*.jpg $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
+		cd $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
+		for pic in *.jpg; do \
+			identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
+			if [ $$? -eq 0 ]; then \
+				convert -size 4032x3024 $${pic} -resize 640x480 /tmp/$${pic}; \
+				mv /tmp/$${pic} .;\
+			fi; \
+		done; \
+	done
