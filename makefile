@@ -28,3 +28,7 @@ build_heroku:
 	heroku config:set HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu' -a hilgi-docker
 	heroku container:release web -a hilgi-docker
 	heroku run python3 manage.py migrate -a hilgi-docker
+
+
+copy_pics:
+	echo ToBeDone
