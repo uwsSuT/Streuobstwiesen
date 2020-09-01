@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('HILGI_SEC_KEY')
 # DEBUG = True
 DEBUG = int(os.environ.get('DEBUG', default=1)) 
 
-ALLOWED_HOSTS = ['ubuntu18-srv']
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST', default='ubuntu20-srv')]
 
 
 # Application definition

@@ -44,11 +44,12 @@ if not os.environ.get('HOSTNAME') == 'ubuntu18-srv':
     DATABASES['default'].update(db_from_env)
     DATABASES['default']['CONN_MAX_AGE'] = 500
 
-settings.configure(
-        DATABASES = DATABASES,
-        INSTALLED_APPS = ['obstsorten'],
-    )
-django.setup()
+if not settings.configured:
+    settings.configure(
+            DATABASES = DATABASES,
+            INSTALLED_APPS = ['obstsorten'],
+        )
+    django.setup()
 
 
 from csv import reader
@@ -150,8 +151,8 @@ def insert_baeume(fname):
             999       : unbekannt
             1000      : Der Baum ist Tod :-(
 
-        Die Bäume haben zurzeit noch keine Nummern, daher zählen wir,
-        die hier selbst hoch
+        Die Bäume haben zurzeit nur teilweise Nummern, daher zählen wir,
+        die anderen selbst hoch
     """
     baum_id = 0
     first = True
@@ -181,6 +182,8 @@ def insert_baeume(fname):
             if not baum[nr_baum]:
                 baum_id += 1
                 bid = baum_id
+            else:
+                bid = int(baum[nr_baum])
             sorten_id = ObstSorten.objects.get(sorten_id=int(baum[nr_id]))
             wiese = Wiese.objects.get(wiesen_id=int(baum[nr_wiese]))
             zustand = baum[nr_zustand]
@@ -200,4 +203,4 @@ if __name__ == '__main__':
 
     insert_obstsorten('init_db/Obstsorten.csv')
     insert_wiesen('init_db/wiesen.txt')
-    insert_baeume('init_db/Baeume.csv')
+    insert_baeume('init_db/Baeume_2020_09.csv')

@@ -18,6 +18,9 @@ class ObstSorten(models.Model):
                                  size=5, null=True)
     # bilder          = ArrayField(models.ImageField(upload_to='uploads/Sorte'), blank=True, size=20)
 
+    def __str__(self):
+        return self.obst_sorte
+
 class Wiese(models.Model):
     wiesen_id     = models.IntegerField(primary_key=True)
     name          = models.CharField(max_length=64)
@@ -25,6 +28,9 @@ class Wiese(models.Model):
     # grafik        = models.ImageField(blank=True, upload_to='images/Wiese', default=None)
     obstwiese     = models.BooleanField(default=True)
     bluehwiese    = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.obst_sorte
 
 class ObstBaum(models.Model):
     baum_id     = models.AutoField(primary_key=True)
@@ -34,4 +40,7 @@ class ObstBaum(models.Model):
     zustand     = models.CharField(max_length=248, blank=True)
     letzter_schnitt = models.DateField(null=True, blank=True)
     
+    def __str__(self):
+        return "%s_%s" % (self.baum_id, self.sorten_id__obst_sorte)
+
 
