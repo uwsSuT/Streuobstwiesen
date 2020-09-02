@@ -21,6 +21,7 @@
 import os
 import django
 from django.conf import settings
+from pprint import pformat
 
 DATABASES = {
     'default': {
@@ -158,7 +159,7 @@ def insert_baeume(fname):
     first = True
     with open(fname, newline='') as csvfile:
         for baum in reader(csvfile, delimiter=',', quotechar='"'):
-            print("Baum: ", baum)
+            #print("Baum: ", baum)
             if first:
                 # Überschriften
                 first = False
@@ -184,8 +185,12 @@ def insert_baeume(fname):
                 bid = baum_id
             else:
                 bid = int(baum[nr_baum])
-            sorten_id = ObstSorten.objects.get(sorten_id=int(baum[nr_id]))
-            wiese = Wiese.objects.get(wiesen_id=int(baum[nr_wiese]))
+            try:
+                sorten_id = ObstSorten.objects.get(sorten_id=int(baum[nr_id]))
+                wiese = Wiese.objects.get(wiesen_id=int(baum[nr_wiese]))
+            except:
+                print("COULD Not initialize Tree: %s" % pformat(baum))
+                continue
             zustand = baum[nr_zustand]
             if baum[nr_schnitt]:
                 letzter_schnitt = baum[nr_schnitt]

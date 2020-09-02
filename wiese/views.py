@@ -6,7 +6,7 @@ from obstsorten.models import Wiese, ObstBaum, ObstSorten
 from obstsorten.views import ObstLinkIn
 
 import os
-from os.path import join, exists
+from os.path import join, exists, isdir
 from pprint import pformat
 
 APP = 'wiese'
@@ -54,7 +54,7 @@ class WieseListView(WieseObjectMixin, View):
         # - dynamisches ermitteln des Grafik-Namens
         #
         context = {'wiesen_list': self.get_queryset(),
-                   'grafik' : 'images/wiese/Hilgh_StreuobstWiesen_2020_07.png',
+                   'grafik' : 'images/wiese/Hilgh_StreuobstWiesen_2020_09.png',
                    'obstsorten_menu' : self.get_Obst_menu(),
                   }
         return render(request, self.template_name, context)
@@ -120,7 +120,7 @@ class BaumView(WieseObjectMixin, View):
           - BaumInfos
     """
     template_name = "wiese/baum_detail.html" # BaumView
-    def __find_pics__(self, wid):
+    def __find_pics__(self, baum, wiesen_name):
         """
             such die zur baum_id zugehörigen Bilder in dem Static Verzeichnis
             gib diese als Liste zurück
@@ -133,7 +133,15 @@ class BaumView(WieseObjectMixin, View):
             return []
 
         for f in os.listdir(join(pwd, 'static', 'images', 'baum')):
-            if f.find("%s_" % wid) == 0:
+            if isdir(join(pwd, 'static', 'images', 'baum', f)) and \
+                    f == wiesen_name:
+                print("FOUND Dir: %s" % f)
+                for b in os.listdir(join(pwd, 'static', 'images', 'baum', f)):
+                    if b.find("%s_" % baum.baum_id) == 0:
+                        print("FOUND Tree: %s" % b)
+                        baum_pics.append(join('images', 'baum', f, b))
+
+            elif f.find("%s_" % baum.baum_id) == 0:
                 baum_pics.append(join('images', 'baum', f))
         return baum_pics
 
@@ -165,11 +173,12 @@ class BaumView(WieseObjectMixin, View):
         # GET method
         # print("baum-detail: %s" % self.kwargs.get('id'))
         baum = ObstBaum.objects.get(baum_id=self.kwargs.get('id'))
+        wiesen_name = Wiese.objects.get(wiesen_id=baum.wiese_id).name
         context = {
-           'baum_pics'  : self.__find_pics__(self.kwargs.get('id')),
+           'baum_pics'  : self.__find_pics__(baum, wiesen_name),
            'baum_infos' : baum,
            'sorte'      : ObstSorten.objects.get(sorten_id=baum.sorten_id_id),
-           'wiese'      : Wiese.objects.get(wiesen_id=baum.wiese_id).name,
+           'wiese'      : wiesen_name,
            'obstsorten_menu' : self.get_Obst_menu(),
           }
         return render(request, self.template_name, context)
@@ -244,7 +253,7 @@ class ObstWiesenView(WieseObjectMixin, View):
     template_name = "wiese/obstwiesen.html" # Obstwiesen Überblick
 
     def get(self, request, *args, **kwargs):
-        context = {'grafik' : 'image/wiese/Hilgh_StreuobstWiesen_2020_07.png',
+        context = {'grafik' : 'image/wiese/Hilgh_StreuobstWiesen_2020_09.png',
                    'obstsorten_menu' : self.get_Obst_menu(),
                   }
         return render(request, self.template_name, context)

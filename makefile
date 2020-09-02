@@ -8,10 +8,12 @@
 VERSION = 0.5.1
 
 LOCAL_PIC_DIR = "static/images/baum"
-QGIS_PIC_DIR = "/home/uws/privat/Streuobstwiesen/Bilder/Baum_Bilder/"
+LOCAL_WIESEN_DIR = "static/images/wiese"
+QGIS_WIESEN_DIR = "/home/uws/privat/Streuobstwiesen/Bilder"
+QGIS_PIC_DIR = "/home/uws/privat/Streuobstwiesen/Bilder/Baum_Bilder"
 WIESEN_NAMES = Buergermeisterwiese \
-		        Skater-Tennisplatz\
-				Spielplatz\
+		Skater_Tennisplatz\
+		Spielplatz\
 			   
 
 build_local: 
@@ -37,8 +39,12 @@ build_heroku:
 	heroku run python3 manage.py migrate -a hilgi-docker
 
 
+copy_wiesen:
+	echo "Das geht nur auf dem LAPTOP"
+	cp -p $(QGIS_WIESEN_DIR)/[0-9]*_*.png $(LOCAL_WIESEN_DIR)
+
 copy_pics:
-	set -x ;\
+	echo "Das geht nur auf dem LAPTOP"
 	actdir=$$(pwd); export actdir ;\
 	for d in $(WIESEN_NAMES); do \
 		cd $(QGIS_PIC_DIR)/$$d; \

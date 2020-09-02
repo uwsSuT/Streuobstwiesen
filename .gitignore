@@ -1,5 +1,5 @@
 staticfiles
-obstsorten/migrations
+migrations/*.py
 *.swp
 __pycache__
 Pipfile
