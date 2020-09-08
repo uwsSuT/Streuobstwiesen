@@ -5,7 +5,7 @@
 #
 ## uws : 2020.07.09
 
-VERSION = 0.5.1
+VERSION = 0.5.2
 
 LOCAL_PIC_DIR = "static/images/baum"
 LOCAL_WIESEN_DIR = "static/images/wiese"
@@ -14,6 +14,9 @@ QGIS_PIC_DIR = "/home/uws/privat/Streuobstwiesen/Bilder/Baum_Bilder"
 WIESEN_NAMES = Buergermeisterwiese \
 		Skater_Tennisplatz\
 		Spielplatz\
+		Kunstpfad_Nord\
+		Kunstpfad_Ost\
+		Feldkruez\
 			   
 
 build_local: 
@@ -46,15 +49,26 @@ copy_wiesen:
 copy_pics:
 	echo "Das geht nur auf dem LAPTOP"
 	actdir=$$(pwd); export actdir ;\
+    set -x; \
 	for d in $(WIESEN_NAMES); do \
 		cd $(QGIS_PIC_DIR)/$$d; \
+		echo "===================================================
+	XXX  : Check ob ein Bild neuer ist nur die sollten kopiert werden
+	====================================================="; \
 		cp -p $$(cat Nr)*.jpg $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
 		cd $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
 		for pic in *.jpg; do \
 			identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
 			if [ $$? -eq 0 ]; then \
-				convert -size 4032x3024 $${pic} -resize 640x480 /tmp/$${pic}; \
+				convert $${pic} -resize 640x480 /tmp/$${pic}; \
 				mv /tmp/$${pic} .;\
+			else \
+				identify $${pic} | grep "9248x6936" >/dev/null 2>&1; \
+				if [ $$? -eq 0 ]; then \
+					convert $${pic} -resize 640x480 /tmp/$${pic}; \
+					mv /tmp/$${pic} .;\
+				fi; \
 			fi; \
 		done; \
 	done
+
