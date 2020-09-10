@@ -28,7 +28,7 @@
                     <td>{{ object.lagerfaehigkeit }}</td>
                     <td>{{ object.alergie_info }}</td>
                     <td>
-			{% for xurl in www %}
+			{% for xurl in object.www %}
 			    <a href="{{ xurl }}">{{xurl}}</a><br>
 			{% endfor %}
 		    </td>
@@ -40,13 +40,17 @@
 	    <img class="obst_big_pic" src="{% static object.picture %}">
 	{% endif %}
     </p>
-    <p>
+    <h2>
 	Bäume mit dieser Frucht findet man auf folgenden Wiesen:
-    </p>
-    <p>
-        {% for wiese, id in wiesen_sorte.items %}
-	<a href="/wiese/{{ id }}"> {{ wiese }}</a> <br>
-	{% endfor %}
-    </p>
+    </h2>
+    <table width="50%" class="table table-striped table-bordered table-hover" id="wiesen-liste">
+        <tbody>
+	    {% for wiese, id in wiesen_sorte.items %}
+	    <tr>
+		<td> <a href="/wiese/{{ id }}"> {{ wiese }}</a> </td>
+	    </tr>
+	    {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock content %}

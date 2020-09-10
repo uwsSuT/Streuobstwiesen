@@ -45,7 +45,7 @@ class WieseListView(WieseObjectMixin, View):
     template_name = "wiese/wiese_list.html"
 
     def get_queryset(self):
-        return Wiese.objects.all().extra(select={}).order_by('wiesen_id')
+        return Wiese.objects.all().extra(select={}).order_by('name')
 
     def get(self, request, *args, **kwargs):
         #
@@ -106,7 +106,7 @@ class WieseView(WieseObjectMixin, View):
            'object': self.get_object(wiesen_id=self.kwargs.get('id')),
            'grafik' : self.__find_grafik__(self.kwargs.get('id')),
            'trees' : self.__find_trees__(self.kwargs.get('id')),
-           'wiesen_list' : Wiese.objects.all().order_by('wiesen_id'),
+           'wiesen_list' : Wiese.objects.all().order_by('name'),
            'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
            'obstsorten_menu' : self.get_Obst_menu(),
            }

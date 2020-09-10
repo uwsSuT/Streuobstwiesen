@@ -23,7 +23,7 @@ class AboutPageView(TemplateView):
         return render(request, self.template_name, context)
 
 class ObstLinkIn(object):
-    obst = ObstSorten.objects.all().order_by('sorten_id')
+    obst = ObstSorten.objects.all().order_by('obst_sorte')
     def get_Obst_menu(self):
         """
             generier ein zwei-dimensionales Dictionary mit
@@ -57,19 +57,27 @@ class ObstSortenView(ObstLinkIn, TemplateView):
     def get_queryset(self):
         # obst = ObstSorten.objects.all().order_by('sorten_id')
         robst = []
-        for o in self.obst:
-            sorte = {
-                'obst_type' : Obst_Type[o.obst_type],
-                'obst_sorte' : o.obst_sorte,
-                'pflueck_reif' : o.pflueck_reif,
-                'verwendung' : o.verwendung,
-                'geschmack' : o.geschmack,
-                'lagerfaehigkeit' : o.lagerfaehigkeit,
-                'alergie_info' : o.alergie_info,
-                'www' : o.www,
-                'picture' : self.__find_grafik__(o.sorten_id),
-                }
-            robst.append(sorte)
+        for oid in range(0,len(Obst_Type)):
+            # hol immer nur die Obstsorten für den Type
+            if Obst_Type[oid] == 'unbekannt' or \
+                    Obst_Type[oid] == 'Tod':
+                        continue
+            obst = ObstSorten.objects.filter(obst_type=oid).order_by('obst_sorte')
+            for o in obst:
+                if 'unbestimmt' in o.obst_sorte:
+                    continue
+                sorte = {
+                    'obst_type' : Obst_Type[o.obst_type],
+                    'obst_sorte' : o.obst_sorte,
+                    'pflueck_reif' : o.pflueck_reif,
+                    'verwendung' : o.verwendung,
+                    'geschmack' : o.geschmack,
+                    'lagerfaehigkeit' : o.lagerfaehigkeit,
+                    'alergie_info' : o.alergie_info,
+                    'www' : o.www,
+                    'picture' : self.__find_grafik__(o.sorten_id),
+                    }
+                robst.append(sorte)
         return robst
 
     def get(self, request, sid=None, *args, **kwargs):

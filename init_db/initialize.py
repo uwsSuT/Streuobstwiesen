@@ -159,13 +159,13 @@ def insert_baeume(fname):
     first = True
     with open(fname, newline='') as csvfile:
         for baum in reader(csvfile, delimiter=',', quotechar='"'):
-            #print("Baum: ", baum)
+            print("Baum: ", baum)
             if first:
                 # Überschriften
                 first = False
                 #
                 # extrahiere aus den Überschriftnamen die Position für unten
-                # Eine änderung in der Atttributtabelle im GIS kann zu einer
+                # Eine Änderung in der Atttributtabelle im GIS kann zu einer
                 # Änderung der Reihenfolge führen
                 #
                 for i in range(len(baum)):
@@ -201,11 +201,9 @@ def insert_baeume(fname):
                            zustand=zustand, letzter_schnitt=letzter_schnitt)
             obj.save()
 
-
-
 if __name__ == '__main__':
 
 
     insert_obstsorten('init_db/Obstsorten.csv')
     insert_wiesen('init_db/wiesen.txt')
-    insert_baeume('init_db/Baeume_2020_09.csv')
+    insert_baeume('init_db/Baeume.csv')
