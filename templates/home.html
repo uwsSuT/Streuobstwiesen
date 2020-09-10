@@ -4,7 +4,7 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<h1>Streuobst- und Blühwiesen der Gemeinde </h1>
+<h1>Streuobst- und Blüh-wiesen der Gemeinde </h1>
 <img class="mainpic" src="{% static 'images/Hilgertshausen_Wappen.png' %}">
 <h1>Hilgertshausen - Tandern</h1>
 <p>Ortsteil Hilgertshausen</p>
@@ -12,9 +12,19 @@
     <p>Hallo {{ user.first_name }} {{ user.last_name }}!</p>
     <p><a href="{% url 'account_logout' %}">Log Out</a></p>
 {% else %}
-    <p>Sie sind nicht angemeldet.</p>
-    <p>Zur Verwndung dieser WWW-Seite benötigen Sie eine Kennung. Diese 
-      erhalten Sie bei der Gemeinde Hilgertshausen-Tandern.</p>
-    <p><a href="{% url 'account_login' %}">Log In</a> | </p>
+    <div class="row">
+	<div class="col-mg-12">
+	    <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+		    <strong>Sie sind nicht angemeldet.</strong>
+		</div>
+                <div class="panel-body text">
+		    Zur Verwendung dieser WWW-Seite benötigen Sie eine Kennung.
+		    Diese erhalten Sie bei der Gemeinde Hilgertshausen-Tandern.
+		    <h3><a href="{% url 'account_login' %}">Log In</a> </h3>
+		</div>
+	    </div>
+	</div>
+    </div>
 {% endif %}
 {% endblock content %}

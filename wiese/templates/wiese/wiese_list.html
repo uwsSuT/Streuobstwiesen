@@ -22,7 +22,9 @@
 			<a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}">
 			  {{ instance.wiesen_id }}</a>
 			</button></th>
-		    <th>{{ instance.name }}</th>
+		    <th>
+			<a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}"> {{ instance.name }} </a>
+		    </th>
 		</tr>
 	    {% endfor %}
 	</tbody>

@@ -139,10 +139,23 @@
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/sb-admin-2.js' %}"></script>
 {% else %}
-    <p>Sie sind nicht angemeldet.</p>
-    <p>Zur Verwndung dieser WWW-Seite benötigen Sie eine Kennung. Diese
-      erhalten Sie bei der Gemeinde Hilgertshausen-Tandern.</p>
-    <p><a href="{% url 'account_login' %}">Log In</a> | </p>
+    <div class="row">
+	<div class="d-flex flex-column flex-md-row align-items-center">
+	    <img class="mainpic" src="{% static 'images/Hilgertshausen_Wappen.png' %}">
+	</div>
+        <div class="col-mg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+                    <strong>Sie sind nicht angemeldet.</strong>
+                </div>
+                <div class="panel-body text-center">
+                    Zur Verwendung dieser WWW-Seite benötigen Sie eine Kennung.
+                    Diese erhalten Sie bei der Gemeinde Hilgertshausen-Tandern.
+		    <h3><a href="{% url 'account_login' %}">Log In</a></h3>
+		</div>
+            </div>
+        </div>
+    </div>
 {% endif %}
 </body>
 
