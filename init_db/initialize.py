@@ -135,6 +135,14 @@ def insert_wiesen(fname):
                     bluehwiese=bluehwiese)
             obj.save()
 
+def delete_baeume():
+    """
+        Lösche alle Bäume für einen reinit
+    """
+    for baum in ObstBaum.objects.all():
+        baum.delete()
+
+
 def insert_baeume(fname):
     """
         Initialisiere die Baum-Tabelle

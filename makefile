@@ -16,8 +16,8 @@ WIESEN_NAMES = Buergermeisterwiese \
 		Spielplatz\
 		Kunstpfad_Nord\
 		Kunstpfad_Ost\
-		Feldkruez\
-			   
+		Feldkreuz\
+		Gumpmuehle
 
 build_local: 
 	- rm Pipfile.lock
@@ -52,9 +52,9 @@ copy_pics:
     set -x; \
 	for d in $(WIESEN_NAMES); do \
 		cd $(QGIS_PIC_DIR)/$$d; \
-		echo "===================================================
-	XXX  : Check ob ein Bild neuer ist nur die sollten kopiert werden
-	====================================================="; \
+		echo "===================================================";\
+	echo "XXX  : Check ob ein Bild neuer ist nur die sollten kopiert werden";\
+	echo "====================================================="; \
 		cp -p $$(cat Nr)*.jpg $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
 		cd $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
 		for pic in *.jpg; do \
