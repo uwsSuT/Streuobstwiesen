@@ -1,6 +1,7 @@
 staticfiles
 migrations/*.py
 *.swp
+*.pgw
 __pycache__
 Pipfile
 hilgi/settings.py

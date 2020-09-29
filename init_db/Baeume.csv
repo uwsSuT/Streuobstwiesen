@@ -1,54 +1,54 @@
 id,Sorte,Art,Reifezeit,Wiesen_Nr,Baum_Bild,Blueten,Frucht,Schnitt,Baum_Nr,Zustand
-99,Apfel unbestimmt,Apfel,,1,,,,,,
-14,"Rheinischer Bohnapfel
-",Apfel,,1,,,,,,
-11,Wiltshire,Apfel,,1,,,,,,
-11,Wiltshire,Apfel,,1,,,,,,
-11,Wiltshire,Apfel,,1,,,,,,
-15,"Jakob Fischer
-",Apfel,,1,,,,,,
+99,Apfel_unbestimmt,Apfel,,1,,,,,108,
+14,"Rheinischer_Bohnapfel
+",Apfel,,1,,,,,102,
+11,Wiltshire,Apfel,,1,,,,,109,
+11,Wiltshire,Apfel,,1,,,,,110,
+11,Wiltshire,Apfel,,1,,,,,101,
+15,"Jakob_Fischer
+",Apfel,,1,,,,,106,
 12,"Brettacher
-",Apfel,,1,,,,,,
+",Apfel,,1,,,,,107,
 13,"Boskoop
-",Apfel,,1,,,,,,
+",Apfel,,1,,,,,105,
 22,"Wettringer Taubenapfel
-",Apfel,,1,,,,,,
-299,Zwetschge - unbestimmt,Zwetschge,,1,,,,,,
-401,Walnuß,Nuss,,1,,,,,,
-99,Apfel unbestimmt,Apfel,,2,,,,,,
-102,"Neue Poiteau
-",Birne,,2,,,,,,
-101,"Gute Graue
-",Birne,,2,,,,,,
-299,Zwetschge - unbestimmt,Zwetschge,,2,,,,,,
-15,Jakob Ficher,Apfel,,2,,,,,,
+",Apfel,,1,,,,,103,
+299,Zwetschge_unbestimmt,Zwetschge,,1,,,,,104,
+401,Walnuß,Nuss,,1,,,,,111,
+99,Apfel_unbestimmt,Apfel,,2,,,,,220,
+102,"Neue_Poiteau
+",Birne,,2,,,,,218,
+101,"Gute_Graue
+",Birne,,2,,,,,217,
+299,Zwetschge_unbestimmt,Zwetschge,,2,,,,,215,
+15,Jakob_Ficher,Apfel,,2,,,,,214,
 8,"Maunzenapfel
-",Apfel,,2,,,,,,
-299,Zwetschge - unbestimmt,Zwetschge,,2,,,,,,
-299,Zwetschge - unbestimmt,Zwetschge,,2,,,,,,
+",Apfel,,2,,,,,212,
+299,Zwetschge_unbestimmt,Zwetschge,,2,,,,,211,
+299,Zwetschge _unbestimmt,Zwetschge,,2,,,,,209,
 23,"Florina
-",Apfel,,2,,,,,,
+",Apfel,,2,,,,,207,
 8,"Maunzenapfel
-",Apfel,,2,,,,,,
-399,"Kirsche unbestimmt
-",Kirsche,,2,,,,,,
-399,"Kirsche unbestimmt
-",Kirsche,,2,,,,,,
-399,"Kirsche unbestimmt
-",Kirsche,,2,,,,,,
-14,"Rheinischer Bohnapfel
-",Apfel,,2,,,,,,
-4,"Danzinger Kantapfel
-",Apfel,,2,,,,,,
-199,Birne unbestimmt,Birne,,2,,,,,,
+",Apfel,,2,,,,,204,
+399,"Kirsche_unbestimmt
+",Kirsche,,2,,,,,202,
+399,"Kirsche_unbestimmt
+",Kirsche,,2,,,,,201,
+399,"Kirsche_unbestimmt
+",Kirsche,,2,,,,,203,
+14,"Rheinischer_Bohnapfel
+",Apfel,,2,,,,,205,
+4,"Danzinger_Kantapfel
+",Apfel,,2,,,,,206,
+199,Birne_unbestimmt,Birne,,2,,,,,221,
 13,"Boskoop
-",Apfel,,2,,,,,,
-2,"Jacob Lebel
-",Apfel,,2,,,,,,
-2,"Jacob Lebel
-",Apfel,,2,,,,,,
+",Apfel,,2,,,,,208,
+2,"Jacob_Lebel
+",Apfel,,2,,,,,216,
+2,"Jacob_Lebel
+",Apfel,,2,,,,,210,
 8,"Maunzenapfel
-",Apfel,,2,,,,,,
+",Apfel,,2,,,,,213,
 13,"Boskoop
 ",Apfel,,4,,,,,404,
 13,"Boskoop
@@ -64,15 +64,15 @@ id,Sorte,Art,Reifezeit,Wiesen_Nr,Baum_Bild,Blueten,Frucht,Schnitt,Baum_Nr,Zustan
 399,"Kirsche–unbestimmt
 ",Kirsche,,5,,,,,501,
 99,"Apfel–unbestimmt
-",Apfel,,5,,,,2020-03-14,502,
+",Apfel,,5,,,,2020/03/14,502,
 99,"Apfel-unbestimmt
-",Apfel,,5,,,,2020-03-14,503,
+",Apfel,,5,,,,2020/03/14,503,
 99,"Apfel–unbestimmt
-",Apfel,,5,,,,2020-03-14,505,
+",Apfel,,5,,,,2020/03/14,505,
 15,"Jakob-Fischer
-",Apfel,,5,,,,2020-03-14,504,
+",Apfel,,5,,,,2020/03/14,504,
 199,"Birne–unbestimmt
-",Birne,,5,,,,2020-03-14,506,
+",Birne,,5,,,,2020/03/14,506,
 199,"Birne–unbestimmt
 ",Birne,,5,,,,,507,
 201,Fränkische -Hauszwetschge,Zwetschge,,5,,,,,508,
@@ -80,39 +80,39 @@ id,Sorte,Art,Reifezeit,Wiesen_Nr,Baum_Bild,Blueten,Frucht,Schnitt,Baum_Nr,Zustan
 201,Fränkische-Hauszwetschge,Zwetschge,,5,,,,,510,
 201,Fränkische-Hauszwetschge,Zwetschge,,5,,,,,511,
 7,"Goldparmäne
-",Apfel,,5,,,,2020-03-14,512,
+",Apfel,,5,,,,2020/03/14,512,
 7,"Goldparmäne
-",Apfel,,5,,,,2020-03-14,514,
-5,Rheinischer-Winterrambur,Apfel,,5,,,,2020-03-14,515,
+",Apfel,,5,,,,2020/03/14,514,
+5,Rheinischer-Winterrambur,Apfel,,5,,,,2020/03/14,515,
 301,"Süßkirche
-",Kirsche,,5,,,,2020-03-14,513,
+",Kirsche,,5,,,,2020/03/14,513,
 7,"Goldparmäne
-",Apfel,,6,,,,2020-03-14,601,
+",Apfel,,6,,,,2020/03/14,601,
 1,"Korbiniansapfel
-",Apfel,,6,,,,2020-03-14,602,
+",Apfel,,6,,,,2020/03/14,602,
 2,"Jacob-Lebel
-",Apfel,,6,,,,2020-03-14,603,
+",Apfel,,6,,,,2020/03/14,603,
 3,"Prinz-Albrecht
-",Apfel,,6,,,,2020-03-14,604,
+",Apfel,,6,,,,2020/03/14,604,
 6,"Kaiser-Wilhelm
-",Apfel,,6,,,,2020-03-14,608,
-5,Rheinischer-Winterrambur,Apfel,,6,,,,2020-03-14,607,
+",Apfel,,6,,,,2020/03/14,608,
+5,Rheinischer-Winterrambur,Apfel,,6,,,,2020/03/14,607,
 4,"Danzinger-Kantapfel
-",Apfel,,6,,,,2020-03-14,605,
+",Apfel,,6,,,,2020/03/14,605,
 9,"Topaz
-",Apfel,,6,,,,2020-03-14,609,
+",Apfel,,6,,,,2020/03/14,609,
 199,"Birne–unbestimmt
-",Birne,,6,,,,2020-03-14,610,
+",Birne,,6,,,,2020/03/14,610,
 199,"Birne–unbestimmt
-",Birne,,6,,,,2020-03-14,611,
+",Birne,,6,,,,2020/03/14,611,
 199,"Birne–unbestimmt
-",Birne,,6,,,,2020-03-14,612,
+",Birne,,6,,,,2020/03/14,612,
 101,"Gute-Graue
-",Birne,,6,,,,2020-03-14,613,
+",Birne,,6,,,,2020/03/14,613,
 99,"Apfel–unbestimmt
-",Apfel,,6,,,,2020-03-14,614,
+",Apfel,,6,,,,2020/03/14,614,
 99,"Apfel–unbestimmt
-",Apfel,,6,,,,2020-03-14,615,
+",Apfel,,6,,,,2020/03/14,615,
 99,Apfel-unbestimmt (Klarapfel),Apfel,,6,,,,,616,
 202,"Früh-Zwetschge
 ",Zwetschge,,7,,,,,701,
@@ -121,20 +121,20 @@ id,Sorte,Art,Reifezeit,Wiesen_Nr,Baum_Bild,Blueten,Frucht,Schnitt,Baum_Nr,Zustan
 202,"Früh-Zwetschge
 ",Zwetschge,,7,,,,,703,
 9,"Topaz
-",Apfel,,7,,,,2020-03-14,705,
+",Apfel,,7,,,,2020/03/14,705,
 2,"Jacob-Lebel
-",Apfel,,7,,,,2020-03-14,706,
+",Apfel,,7,,,,2020/03/14,706,
 201,Fränkische-Hauszwetschge,Zwetschge,,7,,,,,711,
 201,Fränkische-Hauszwetschge,Zwetschge,,7,,,,,710,
 201,Fränkische-Hauszwetschge,Zwetschge,,7,,,,,709,
 201,Fränkische-Hauszwetschge,Zwetschge,,7,,,,,708,
 201,Fränkische-Hauszwetschge,Zwetschge,,7,,,,,707,
 10,"Fromms-Goldrenette
-",Apfel,,7,,,,2020-03-14,712,
-5,Rheinischer-Winterrambur,Apfel,,7,,,,2020-03-14,713,
-5,Rheinischer-Winterrambur,Apfel,,7,,,,2020-03-14,714,
+",Apfel,,7,,,,2020/03/14,712,
+5,Rheinischer-Winterrambur,Apfel,,7,,,,2020/03/14,713,
+5,Rheinischer-Winterrambur,Apfel,,7,,,,2020/03/14,714,
 99,"Apfel-unbestimmt
-",Apfel,,7,,,,2020-03-14,715,
+",Apfel,,7,,,,2020/03/14,715,
 19,"Glockenapfel
 ",Apfel,,8,,,,,801,
 401,Walnuß,Nuss,,8,,,,,802,
@@ -185,59 +185,54 @@ Winterrambur",Apfel,,8,,,,,817,
 13,"Boskoop
 ",Apfel,,8,,,,,826,
 12,"Brettacher
-",Apfel,,9,,,,,,
-199,"Birne – unbestimmt
-",Birne,,9,,,,,,
-199,"Birne – unbestimmt
-",Birne,,9,,,,,,
-399,"Kirsche – unbestimmt
-",Kirsche,,9,,,,,,
+",Apfel,,9,,,,,914,
+199,"Birne_unbestimmt
+",Birne,,9,,,,,913,
+199,"Birne_unbestimmt
+",Birne,,9,,,,,911,
+399,"Kirsche_unbestimmt
+",Kirsche,,9,,,,,912,
 203,"Schöneberger
-",Zwetschge,,9,,,,,,
-205,"Reneclode (Griach)
-",Zwetschge,,9,,,,,,
-205,"Reneclode (Griach)
-",Zwetschge,,9,,,,,,
+",Zwetschge,,9,,,,,910,
+205,"Reneclode_(Griach)
+",Zwetschge,,9,,,,,908,
+205,"Reneclode_(Griach)
+",Zwetschge,,9,,,,,907,
 108,"Wildbirne
-",Birne,,9,,,,,,
-99,"Apfel – unbestimmt
-",Apfel,,9,,,,,,
-15,"Jakob Fischer
-",Apfel,,9,,,,,,
+",Birne,,9,,,,,906,
+99,"Apfel_unbestimmt
+",Apfel,,9,,,,,905,
+15,"Jakob_Fischer
+",Apfel,,9,,,,,903,
 4,"Conference
-",Birne,,9,,,,,,
-204,"Wangenheimer 
-Frühzwetschge",Zwetschge,,9,,,,,,
-399,"Kirsche – unbestimmt
-",Kirsche,,9,,,,,,
-99,"Apfel – unbestimmt
-",Apfel,,10,,,,,,
-999,"unbekannter Baum
-",unbekannt,,10,,,,,,
-99,"Apfel – unbestimmt
-",Apfel,,10,,,,,,
-99,"Apfel – unbestimmt
-",Apfel,,10,,,,,,
-999,"unbekannter Baum
-",unbekannt,,10,,,,,,
-999,"unbekannter Baum
-",unbekannt,,10,,,,,,
-99,"Apfel – unbestimmt
-",Apfel,,10,,,,,,
-199,"Birne – unbestimmt
-",Birne,,10,,,,,,
-99,"Apfel – unbestimmt
-",Apfel,,10,,,,,,
-501,"Echte  Mispel
-",Mispel,,10,,,,,,
-501,"Echte  Mispel
-",Mispel,,10,,,,,,
-99,"Apfel – unbestimmt
-",Apfel,,10,,,,,,
-199,"Birne – unbestimmt
-",Birne,,10,,,,,,
-999,"unbekannter Baum
-",unbekannt,,10,,,,,,
+",Birne,,9,,,,,901,
+204,Wangenheimer _Frühzwetschge,Zwetschge,,9,,,,,902,
+399,"Kirsche unbestimmt
+",Kirsche,,9,,,,,904,
+27,"Geheimrat_Dr._Oldenburg
+",Apfel,,10,,,,,1001,
+15,Jakob_Fischer,Apfel,,10,,,,,1002,
+15,Jkob_Fischer,Apfel,,10,,,,,1003,
+99,"Apfel–unbestimmt
+",Apfel,,10,,,,,1008,
+108,Wildbirne,Birne,,10,,,,,1007,
+99,Apfel_unbekannt,Apfel,September,10,,,,,1006,
+29,"Holsteiner Cox
+",Apfel,,10,,,,,1005,
+199,"Birne–unbestimmt
+",Birne,,10,,,,,1009,
+28,"Berner_Rosenapfel
+",Apfel,,10,,,,,1004,
+501,"Echte_Mispel
+",Mispel,,10,,,,,1010,
+501,"Echte_Mispel
+",Mispel,,10,,,,,1111,
+99,"Apfel_unbestimmt
+",Apfel,,10,,,,,1113,
+199,"Birne_unbestimmt
+",Birne,,10,,,,,1112,
+999,"unbekannter_Baum
+",unbekannt,,10,,,,,1114,
 401,Walnuß,Nuss,,3,,,,,313,
 401,Walnuß,Nuss,,3,,,,,312,
 99,unbekannter Apfel,Apfel,,3,,,,,310,
@@ -250,53 +245,54 @@ Frühzwetschge",Zwetschge,,9,,,,,,
 99,unbekannter Apfel,Apfel,,3,,,,,311,"beschädigt, angefahren"
 399,unbekannte Kirsche,Kirsche,,3,,,,,302,
 99,unbekannter Apfel,Apfel,,3,,,,,301,
-99,Apfel unbestimmt,Apfel,,12,,,,,,
-99,Apfel unbestimmt,Apfel,,12,,,,,,
-299,Zwetschge,Zwetschge,,12,,,,,,
-199,Birne,Birne,,12,,,,,,
-13,Boskoop,Apfel,,12,,,,,,
-5,"Rheinischer 
-Winterrambur",Apfel,,12,,,,,,
-99,Apfel unbestimmt,Apfel,,12,,,,,,
-99,Apfel unbestimmt,Apfel,,12,,,,,,
-399,Kirsche unbestimmt,Kirsche,,12,,,,,,
-299,Zwetschge unbestimmt,Zwetschge,,13,,,,,,
-299,Zwetschge unbestimmt,Zwetschge,,13,,,,,,
-299,Zwetschge unbestimmt,Zwetschge,,13,,,,,,
-299,Zwetschge unbestimmt,Zwetschge,,13,,,,,,
-299,Zwetschge unbestimmt,Zwetschge,,13,,,,,,
-99,Apfel unbestimmt,Apfel,,13,,,,,,
-99,Apfel unbestimmt,Apfel,,13,,,,,,
-13,Boskoop,Apfel,,13,,,,,,
-205,Reneklode,Zwetschge,,11,,,,,,
-99,unbekannter Apfel,Apfel,,11,,,,,,
-99,unbekannter Apfel,Apfel,,11,,,,,,
-99,unbekannter Apfel,Apfel,,11,,,,,,
+1,Korbiniansapfel,Apfel,,12,,,,,1201,
+24,Schöner_von_Herrnhut,Apfel,,12,,,,,1202,
+299,Zwetschge,Zwetschge,,12,,,,,1203,
+199,Birne,Birne,,12,,,,,1204,
+13,Boskoop,Apfel,,12,,,,,1205,
+25,Lohrer_Rambur,Apfel,,12,,,,,1206,
+99,Apfel_unbestimmt,Apfel,,12,,,,,1207,"Schlecht; Vergreist"
+2,Jacob_Lebel,Apfel,,13,,,,,1301,
+399,Kirsche_unbestimmt,Kirsche,,13,,,,,1302,
+299,Zwetschge_unbestimmt,Zwetschge,,13,,,,,1303,
+399,Kirsche_unbestimmt,Kirsche,,13,,,,,1304,
+202,Hauszwetschge,Zwetschge,,13,,,,,1305,
+299,Zwetschge_unbestimmt,Zwetschge,,13,,,,,1310,
+299,Zwetschge_unbestimmt,Zwetschge,,13,,,,,1309,
+99,Apfel_unbestimmt,Apfel,,13,,,,,1308,
+99,Apfel_unbestimmt,Apfel,,13,,,,,1307,
+26,Zabergäu_Renette,Apfel,,13,,,,,1306,
+205,Reneklode,Zwetschge,,11,,,,,1109,
+6,Kaiser_Wilhelm,Apfel,,11,,,,,1111,
+99,Apfel_unbestimmt,Apfel,,11,,,,,1107,
+6,Kaiser_Wilhelm,Apfel,,11,,,,,1106,
 201,Fränkische-Hauszwetschge,Zwetschge,,6,,,,,617,
 9,"Topaz
-",Apfel,,7,,,,2020-03-14,704,
-16,Gelber Edelapfel,Apfel,,2,,,,,,
-99,Apfel-unbestimmt,Apfel,,6,,,,2020-03-14,606,
-401,Walnuß,Nuss,,11,,,,,,
-199,Birne unbestimmt,Birne,,11,,,,,,
-199,Birne unbestimmt,Birne,,11,,,,,,
-99,unbekannter Apfel,Apfel,,11,,,,,,
-99,unbestimmt,Apfel,,14,,,,,,
-99,unbestimmt,Apfel,,14,,,,,,
-299,unbestimmt,Zwetschge,,14,,,,,,
+",Apfel,,7,,,,2020/03/14,704,
+16,Gelber_Edelapfel,Apfel,,2,,,,,219,
+99,Apfel-unbestimmt,Apfel,,6,,,,2020/03/14,606,
+401,Walnuß,Nuss,,11,,,,,1101,
+199,Birne_unbestimmt,Birne,,11,,,,,1104,
+101,Gute_Graue,Birne,,11,,,,,1103,
+16,Gelber_Edelapfel,Apfel,,11,,,,,1108,
+30,"Gloster
+",Apfel,,14,,,,,1401,
+30,"Gloster
+",Apfel,,14,,,,,1402,
+299,Zwetschge_unbestimmt,Zwetschge,,14,,,,,1404,
+999,unbestimmt,unbestimmt,,14,,,,,14141,
 999,unbestimmt,unbestimmt,,14,,,,,,
-999,unbestimmt,unbestimmt,,14,,,,,,
-999,unbekannt,unbekannt,,14,,,,,,
-999,unbekannt,unbekannt,,14,,,,,,
-999,unbekannt,unbekannt,,14,,,,,,
-206,Mirabelle,Zwetschge,,14,,,,,,
-206,Mirabelle,Zwetschge,,14,,,,,,
-399,unbekannt,Kirsche,,14,,,,,,
-99,unbekannter Apfel,Apfel,,11,,,,,,
+199,Birne_unbekannt,Birne,,14,,,,,1403,
+15,Jakob_Fischer,Apfel,,14,,,,,1405,
+15,Jakob_Fischer,Apfel,,14,,,,,1406,
+206,Mirabelle,Zwetschge,,14,,,,,1407,
+206,Mirabelle,Zwetschge,,14,,,,,1408,
+399,Kirsche_unbekannt,Kirsche,,14,,,,,1409,
+2,Jakob_Lebel,Apfel,,11,,,,,1105,
 ,,,,,,,,,,
-199,Birne unbestimmt,Birne,,11,,,,,,
-99,unbekannter Apfel,Apfel,,11,,,,,,
-99,unbekannter Apfel,Apfel,,11,,,,,,
+199,Birne_unbestimmt,Birne,,11,,,,,1110,
+16,Gelber_Edelapfel,Apfel,,11,,,,,1112,
+2,Jakob_Lebel,Apfel,,11,,,,,1102,
 399,unbekannte Kirsche,Kirsche,,3,,,,,308,stark beschädigt
 299,Zwetschge unbestimmt,Zwetschge,,15,,,,,1501,
 299,Zwetschge unbestimmt,Zwetschge,,15,,,,,1502,

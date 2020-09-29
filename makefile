@@ -17,7 +17,17 @@ WIESEN_NAMES = Buergermeisterwiese \
 		Kunstpfad_Nord\
 		Kunstpfad_Ost\
 		Feldkreuz\
-		Gumpmuehle
+		Gumpmuehle \
+		Bruenndlweg_Richtung_Thalmannsdorf \
+		Sportplatz_Bruenndlkapelle \
+		Mannrieder_Berg \
+		Ferlhof_Kunstpfad \
+		MuenchnerStr_West \
+		MuenchnerStr_Ost \
+		Osterfeuer \
+		Stadelham_Gartelsried \
+
+
 
 build_local: 
 	- rm Pipfile.lock
@@ -50,14 +60,20 @@ copy_pics:
 	echo "Das geht nur auf dem LAPTOP"
 	actdir=$$(pwd); export actdir ;\
     set -x; \
-	for d in $(WIESEN_NAMES); do \
-		cd $(QGIS_PIC_DIR)/$$d; \
+	for wn in $(WIESEN_NAMES); do \
+		cd $(QGIS_PIC_DIR)/$$wn; \
 		echo "===================================================";\
-	echo "XXX  : Check ob ein Bild neuer ist nur die sollten kopiert werden";\
-	echo "====================================================="; \
-		cp -p $$(cat Nr)*.jpg $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
-		cd $${actdir}/$(LOCAL_PIC_DIR)/$$d; \
-		for pic in *.jpg; do \
+		echo " Check ob ein Bild neuer ist nur die sollten kopiert werden";\
+		echo "====================================================="; \
+		for pic in $$(cat Nr)*.jpg; do \
+			if [  -e $${actdir}/$(LOCAL_PIC_DIR)/$$wn/$$pic ] && \
+			   [ ! $$pic -nt $${actdir}/$(LOCAL_PIC_DIR)/$$wn/$$pic ]; \
+			   then \
+				echo "PIC $$pic is not newer"; \
+				continue; \
+			fi; \
+			cp -p $$pic $${actdir}/$(LOCAL_PIC_DIR)/$$wn; \
+			cd $${actdir}/$(LOCAL_PIC_DIR)/$$wn; \
 			identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
 			if [ $$? -eq 0 ]; then \
 				convert $${pic} -resize 640x480 /tmp/$${pic}; \
@@ -69,6 +85,6 @@ copy_pics:
 					mv /tmp/$${pic} .;\
 				fi; \
 			fi; \
+			cd $(QGIS_PIC_DIR)/$$wn; \
 		done; \
 	done
-
