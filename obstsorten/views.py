@@ -24,11 +24,13 @@ class AboutPageView(TemplateView):
 
 class ObstLinkIn(object):
     obst = ObstSorten.objects.all().order_by('obst_sorte')
+
     def get_Obst_menu(self):
         """
             generier ein zwei-dimensionales Dictionary mit
             Obstsorten-Type : ObstSorte
         """
+        obst_menu = []
         obst_sorten_menu = {}
         for os in self.obst:
             otype = Obst_Type[os.obst_type]
@@ -39,7 +41,13 @@ class ObstLinkIn(object):
                 obst_sorten_menu[otype] = [os.obst_sorte]
             else:
                 obst_sorten_menu[otype].append(os.obst_sorte)
-        return obst_sorten_menu
+        for o in sorted(obst_sorten_menu.keys()):
+            os = {
+                    'name': o,
+                    'obstsorten' : obst_sorten_menu[o],
+                 }
+            obst_menu.append(os)
+        return obst_menu
 
 class ObstSortenView(ObstLinkIn, TemplateView):
     template_name = 'obstsorten.html'

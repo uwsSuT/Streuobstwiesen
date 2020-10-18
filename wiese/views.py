@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import TemplateView, ListView
+from django_tables2 import SingleTableView, SingleTableMixin
 from django.views import View
 
 from .forms import WieseModelForm, WiesenUpdateForm
 from obstsorten.models import Wiese, ObstBaum, ObstSorten
 from obstsorten.views import ObstLinkIn
+from wiese.tables import WiesenTable
 
 import os
 from os.path import join, exists, isdir
@@ -38,26 +41,35 @@ class WieseCreateView(View):
         context = {"form": form}
         return render(request, self.template_name, context)
 
-class WieseListView(WieseObjectMixin, View):
+class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
     #
     # Darstellung aller Obst-Wiesen mit Karte und Liste der definierten Wiesen
     #
+    model = Wiese
+    table_class = WiesenTable
     template_name = "wiese/wiese_list.html"
 
-    def get_queryset(self):
-        return Wiese.objects.all().extra(select={}).order_by('name')
+#    def get_queryset(self):
+#        return Wiese.objects.all().order_by('name')
+#
+#    def get(self, request, *args, **kwargs):
+#        #
+#        # mögliche Verbesserungen: 
+#        # - Anzahl Bäume
+#        # - dynamisches ermitteln des Grafik-Namens
+#        #
+#        context = {'wiesen_list': self.get_queryset(),
+#                   'grafik' : 'images/wiese/Hilgh_StreuobstWiesen_2020_09.png',
+#                   'obstsorten_menu' : self.get_Obst_menu(),
+#                  }
+#        return render(request, self.template_name, context)
 
-    def get(self, request, *args, **kwargs):
-        #
-        # mögliche Verbesserungen: 
-        # - Anzahl Bäume
-        # - dynamisches ermitteln des Grafik-Namens
-        #
-        context = {'wiesen_list': self.get_queryset(),
-                   'grafik' : 'images/wiese/Hilgh_StreuobstWiesen_2020_09.png',
-                   'obstsorten_menu' : self.get_Obst_menu(),
-                  }
-        return render(request, self.template_name, context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['grafik'] ='images/wiese/Hilgh_StreuobstWiesen_2020_09.png'
+        context['obstsorten_menu'] = self.get_Obst_menu()
+
+        return context
 
 class WieseView(WieseObjectMixin, View):
     """

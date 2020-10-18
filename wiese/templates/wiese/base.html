@@ -70,6 +70,9 @@
                 </li>
                 <!-- /.dropdown -->
             </ul>
+	    <ul class="nav navbar-top">
+		<a class="navbar-brand" href="/obstsorten">Obstsorten</a>
+            </ul>
             <!-- /.navbar-top-links -->
 
             <div class="navbar-default sidebar" role="navigation">
@@ -97,11 +100,11 @@
 			    <li>
 				<a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten<span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-				    {% for otype, obst in obstsorten_menu.items %}
+				    {% for otype in obstsorten_menu %}
 				    <li>
-					<a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype }}<span class="fa arrow"></span></a>
+					<a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype.name }}<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-					{% for o in obst %}
+					{% for o in otype.obstsorten %}
 					    <li>
 						<a href="{% url 'obstsorten_detail' o %}"> {{ o }} </a>
 					    </li>

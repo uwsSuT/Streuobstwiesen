@@ -23,6 +23,8 @@ import django
 from django.conf import settings
 from pprint import pformat
 
+from schtob.lib.util import compile_start_time
+
 DATABASES = {
     'default': {
         'ENGINE'   : 'django.db.backends.postgresql',
@@ -201,7 +203,8 @@ def insert_baeume(fname):
                 continue
             zustand = baum[nr_zustand]
             if baum[nr_schnitt]:
-                letzter_schnitt = baum[nr_schnitt]
+                letzter_schnitt = compile_start_time(baum[nr_schnitt],
+                            tformat='DATETIME')
             else:
                 letzter_schnitt = None
 
