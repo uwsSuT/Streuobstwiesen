@@ -113,15 +113,15 @@ class ObstSortenDetView(TemplateView):
     def get_queryset(self):
         o = ObstSorten.objects.get(obst_sorte=self.kwargs.get('sorte'))
         sorte = {
-            'obst_type' : Obst_Type[o.obst_type],
-            'obst_sorte' : o.obst_sorte,
-            'pflueck_reif' : o.pflueck_reif,
-            'verwendung' : o.verwendung,
-            'geschmack' : o.geschmack,
+            'obst_type'       : Obst_Type[o.obst_type],
+            'obst_sorte'      : o.obst_sorte,
+            'pflueck_reif'    : o.pflueck_reif,
+            'verwendung'      : o.verwendung,
+            'geschmack'       : o.geschmack,
             'lagerfaehigkeit' : o.lagerfaehigkeit,
-            'alergie_info' : o.alergie_info,
-            'www' : o.www,
-            'picture' : self.__find_grafik__(o.sorten_id),
+            'alergie_info'    : o.alergie_info,
+            'www'             : o.www,
+            'picture'         : self.__find_grafik__(o.sorten_id),
             'sorten_id'       : o.sorten_id,
             }
         return sorte
@@ -129,7 +129,7 @@ class ObstSortenDetView(TemplateView):
     def find_wiesen(self, sorten_id):
         """
             hole alle Wiesen auf der diese Obst-Sorte wächst
-            hierzu müssen wir zunächst alle Bäume vom Type finden 
+            hierzu müssen wir zunächst alle Bäume vom Type finden
             in deren Elementen sind die Wiesen-Ids enthalten
         """
         wiesen = {}

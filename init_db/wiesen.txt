@@ -10,6 +10,6 @@
 10:Stadelham_Gartelsried:True:False
 11:Osterfeuer:True:False
 12:MuenchnerStr_Ost:True:False
-13:MuechnerStr_West:True:False
+13:MuenchnerStr_West:True:False
 14:Ferlhof_Kunstpfad:True:False
 15:Skater_Tennisplatz:True:False

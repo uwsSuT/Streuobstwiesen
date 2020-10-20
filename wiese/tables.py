@@ -15,4 +15,5 @@ class WiesenTable(tables.Table):
                 }
         fields = ('wiesen_id', 'name')
 
+    # gneriere einen URL-Link für den Namen-der Wiese
     name = TemplateColumn('<a href="/wiese/{{record.pk}}">{{record.name}}</a>')

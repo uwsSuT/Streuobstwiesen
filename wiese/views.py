@@ -54,7 +54,7 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
 #
 #    def get(self, request, *args, **kwargs):
 #        #
-#        # mögliche Verbesserungen: 
+#        # mögliche Verbesserungen:
 #        # - Anzahl Bäume
 #        # - dynamisches ermitteln des Grafik-Namens
 #        #
@@ -85,8 +85,11 @@ class WieseView(WieseObjectMixin, View):
         """
         pwd = os.getcwd()
         for f in os.listdir(join(pwd, 'static', 'images', APP)):
-            if f.find("%s_" % wid) == 0:
+            print("__find_grafik__: f: <%s> wid: %s" % (f,wid))
+            if f.find("%s_" % wid) == 0 and \
+               'png' in f.lower():
                 return join('images', APP, f)
+        return "NOT FOUND"
 
     def __find_trees__(self, wid):
         """
@@ -192,6 +195,7 @@ class BaumView(WieseObjectMixin, View):
            'sorte'      : ObstSorten.objects.get(sorten_id=baum.sorten_id_id),
            'wiese'      : wiesen_name,
            'obstsorten_menu' : self.get_Obst_menu(),
+           'wiesen_list' : Wiese.objects.all().order_by('name'),
           }
         return render(request, self.template_name, context)
 
@@ -200,13 +204,17 @@ class BaumPicView(WieseObjectMixin, View):
         Zeig nur das Bild des Baumes, aber in voller Größe
     """
     template_name = "wiese/baum_pic.html" # BaumView
-    def get(self, request, pic=None, *args, **kwargs):
+    def get(self, request, pic=None, id=0, *args, **kwargs):
         # GET method
         print("baum-pic: %s" % self.kwargs.get('pic'))
+        baum = ObstBaum.objects.get(baum_id=id)
         context = {
-                   'baum_pic'  : self.kwargs.get('pic'),
-                   'obstsorten_menu' : self.get_Obst_menu(),
-                  }
+           'baum_pic'  : self.kwargs.get('pic'),
+           'baum_infos' : baum,
+           'sorte' : ObstSorten.objects.get(sorten_id=baum.sorten_id_id),
+           'obstsorten_menu' : self.get_Obst_menu(),
+           'wiesen_list' : Wiese.objects.all().order_by('name'),
+          }
         return render(request, self.template_name, context)
 
 class WieseUpdateView(WieseObjectMixin, View):

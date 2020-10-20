@@ -23,7 +23,7 @@ SECRET_KEY = os.environ.get('HILGI_SEC_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = int(os.environ.get('DEBUG', default=0)) 
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
 ALLOWED_HOSTS = ['*']
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # Third-party
+    'django_tables2',
     'crispy_forms',
     'allauth',
     'allauth.account',
@@ -98,7 +99,7 @@ DATABASES = {
         'PORT'     : '5432',
     }
 }
-""" Heroku database settings. """ 
+""" Heroku database settings. """
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)

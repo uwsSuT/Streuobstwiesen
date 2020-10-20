@@ -6,32 +6,12 @@
 
 {% block content %}
 
-<img class="mainpic" src="{% static grafik %}">
+<div class="row">
+    <img class="img-fluid" src="{% static grafik %}" style="width:100%">
 
-<div class="panel-body">
-    <table width="100%" class="table table-striped table-bordered table-hover" id="obstwiesen-liste">
-	<thead>
-	    <tr>
-		<th width="10%">Wiesen Nr.</th>
-		<th width="90%">Wiesen Name</th>
-	    </tr>
-	</thead>
-	<tbody>
-	    {% for instance in wiesen_list %}
-		<tr>
-		    <th><button type="button" class="btn btn-default">
-			<a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}">
-			  {{ instance.wiesen_id }}</a>
-			</button></th>
-		    <th>
-			<a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}"> {{ instance.name }} </a>
-		    </th>
-		</tr>
-	    {% endfor %}
-	</tbody>
-    </table>
+    <div class="panel-body">
+        {% render_table table %}
+    </div>
 </div>
-
-{% render_table table %}
 
 {% endblock content %}

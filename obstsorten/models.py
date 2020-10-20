@@ -30,7 +30,7 @@ class Wiese(models.Model):
     bluehwiese    = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.obst_sorte
+        return self.name
 
 class ObstBaum(models.Model):
     baum_id     = models.AutoField(primary_key=True)
@@ -39,8 +39,11 @@ class ObstBaum(models.Model):
     # bilder      = ArrayField(models.ImageField(upload_to='uploads/Baum'), blank=True, size=20)
     zustand     = models.CharField(max_length=248, blank=True)
     letzter_schnitt = models.DateField(null=True, blank=True)
-    
+
     def __str__(self):
-        return "%s_%s" % (self.baum_id, self.sorten_id__obst_sorte)
+        try:
+            return "%s_%s" % (self.baum_id, self.sorten_id.obst_sorte)
+        except:
+            return "%s" % self.baum_id
 
 

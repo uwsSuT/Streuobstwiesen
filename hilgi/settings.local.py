@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('HILGI_SEC_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = int(os.environ.get('DEBUG', default=1)) 
+DEBUG = int(os.environ.get('DEBUG', default=1))
 
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOST', default='ubuntu20-srv')]
 
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # Third-party
+    'django_tables2',
     'crispy_forms',
     'allauth',
     'allauth.account',

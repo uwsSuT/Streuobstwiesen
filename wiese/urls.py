@@ -18,5 +18,5 @@ urlpatterns = [
     path('update/<int:id>/', WieseUpdateView.as_view(), name='wiesen-update'),
     path('delete/<int:id>/', WieseDeleteView.as_view(), name='wiesen-delete'),
     path('baum/<int:id>/', BaumView.as_view(), name='baum-detail'),
-    path('baumpic/<path:pic>/', BaumPicView.as_view(), name='baumpic'),
+    path('baumpic/<path:pic>/<int:id>/', BaumPicView.as_view(), name='baumpic'),
 ]

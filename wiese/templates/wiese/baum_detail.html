@@ -6,7 +6,7 @@
 <p>
     {% if baum_pics %}
 	{% for pic in baum_pics %}
-	    <a href="{% url 'wiese:baumpic' pic %}">
+	    <a href="{% url 'wiese:baumpic' pic baum_infos.baum_id %}">
 	      <img class="baum_det_pic" src="{% static pic %}">
 	      </a>
 	{% endfor %}
