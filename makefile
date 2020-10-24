@@ -5,7 +5,7 @@
 #
 ## uws : 2020.07.09
 
-VERSION = 0.6.0
+VERSION = 0.6.1
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -32,8 +32,13 @@ WIESEN_NAMES = Buergermeisterwiese \
 		Stadelham_Gartelsried \
 
 
+make_schtob:
+	mkdir -p schtob/lib
+	cp ../NetWorker_REST_API/schtob/__init__.py schtob
+	cp ../NetWorker_REST_API/schtob/nsr_api_defines.py schtob
+	cp ../NetWorker_REST_API/schtob/lib/*.py schtob/lib/
 
-build_local: 
+build_local: make_schtob
 	- rm Pipfile.lock
 	./manage_version.sh $(VERSION)
 	cp -p hilgi/settings.local.py hilgi/settings.py
@@ -42,19 +47,22 @@ build_local:
 	python manage.py collectstatic --noinput 
 	cp -p Pipfile.local Pipfile
 	docker build -t hilgi:$(VERSION) -f Dockerfile-local .
+	rm -rf schtob
 
-build_heroku:
+build_heroku: make_schtob
 	- rm Pipfile.lock
 	cp -p hilgi/settings.heroku.py hilgi/settings.py
 	cp -p Pipfile.heroku Pipfile
 	HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu' \
 	python manage.py collectstatic --noinput
 	docker build -t hilgi-docker-obst:$(VERSION) -f Dockerfile .
+	heroku container:login
 	heroku container:push web -a hilgi-docker
 	heroku config:set HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu' -a hilgi-docker
 	heroku container:release web -a hilgi-docker
+	heroku run python3 manage.py makemigrations -a hilgi-docker
 	heroku run python3 manage.py migrate -a hilgi-docker
-
+	rm -rf schtob
 
 copy_wiesen:
 	echo "Das geht nur auf dem LAPTOP"

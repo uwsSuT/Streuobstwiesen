@@ -13,8 +13,10 @@ COPY obstsorten /app/obstsorten/
 COPY static /app/static/
 COPY staticfiles /app/staticfiles/
 COPY templates /app/templates/
+COPY init_db /app/init_db/
 COPY Pipfile /app/
 COPY manage.py /app/
+COPY schtob /app/schtob/
 #ADD . /app/
 
 # set default environment variables

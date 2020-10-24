@@ -16,6 +16,7 @@ COPY templates /app/templates/
 COPY init_db /app/init_db/
 COPY Pipfile /app/
 COPY manage.py /app/
+COPY schtob /app/schtob/
 
 # set default environment variables
 ENV PYTHONUNBUFFERED 1
