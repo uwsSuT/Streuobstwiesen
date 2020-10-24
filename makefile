@@ -5,12 +5,16 @@
 #
 ## uws : 2020.07.09
 
-VERSION = 0.5.2
+VERSION = 0.6.0
 
-LOCAL_PIC_DIR = "static/images/baum"
-LOCAL_WIESEN_DIR = "static/images/wiese"
+STATIC_IMG_DIR = "static/images"
+LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
+LOCAL_WIESEN_DIR = $(STATIC_IMG_DIR)/wiese
+LOCAL_ACTION_DIR = $(STATIC_IMG_DIR)/aktionen
 QGIS_WIESEN_DIR = "/home/uws/privat/Streuobstwiesen/Bilder"
-QGIS_PIC_DIR = "/home/uws/privat/Streuobstwiesen/Bilder/Baum_Bilder"
+QGIS_PIC_DIR = $(QGIS_WIESEN_DIR)/Baum_Bilder
+QGIS_ACTION_DIR = $(QGIS_WIESEN_DIR)/Aktionen
+
 WIESEN_NAMES = Buergermeisterwiese \
 		Skater_Tennisplatz\
 		Spielplatz\
@@ -88,3 +92,34 @@ copy_pics:
 			cd $(QGIS_PIC_DIR)/$$wn; \
 		done; \
 	done
+
+copy_action_pics:
+	echo "Das geht nur auf dem LAPTOP"
+	actdir=$$(pwd); export actdir ;\
+    set -x; \
+	cd $(QGIS_ACTION_DIR); \
+	echo "===================================================";\
+	echo " Check ob ein Bild neuer ist nur die sollten kopiert werden";\
+	echo "====================================================="; \
+	for pic in *.jpg; do \
+		if [  -e $${actdir}/$(LOCAL_ACTION_DIR)/$$pic ] && \
+		   [ ! $$pic -nt $${actdir}/$(LOCAL_ACTION_DIR)/$$pic ]; \
+		   then \
+			echo "PIC $$pic is not newer"; \
+			continue; \
+		fi; \
+		cp -p $$pic $${actdir}/$(LOCAL_ACTION_DIR); \
+		cd $${actdir}/$(LOCAL_ACTION_DIR); \
+		identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
+		if [ $$? -eq 0 ]; then \
+			convert $${pic} -resize 640x480 /tmp/$${pic}; \
+			mv /tmp/$${pic} .;\
+		else \
+			identify $${pic} | grep "9248x6936" >/dev/null 2>&1; \
+			if [ $$? -eq 0 ]; then \
+				convert $${pic} -resize 640x480 /tmp/$${pic}; \
+				mv /tmp/$${pic} .;\
+			fi; \
+		fi; \
+		cd $(QGIS_ACTION_DIR); \
+	done; \

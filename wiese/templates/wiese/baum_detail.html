@@ -1,17 +1,18 @@
-{% extends 'wiese/base.html' %}
+{% extends 'sorten_info.html' %}
 {% load static %}
 
-{% block content %}
+{% block title %} {{ sorte.obst_sorte }} {% endblock title %}
+{% block pre_sorte %}
 <h1>{{baum_infos.baum_id }} - {{ sorte.obst_sorte }}</h1>
 <p>
     {% if baum_pics %}
-	{% for pic in baum_pics %}
-	    <a href="{% url 'wiese:baumpic' pic baum_infos.baum_id %}">
-	      <img class="baum_det_pic" src="{% static pic %}">
-	      </a>
-	{% endfor %}
+        {% for pic in baum_pics %}
+            <a href="{% url 'wiese:baumpic' pic baum_infos.baum_id %}">
+              <img class="baum_det_pic" src="{% static pic %}">
+              </a>
+        {% endfor %}
     {% else %}
-	Keine Grafik vorhanden
+        Keine Grafik vorhanden
     {% endif %}
 
     <div class="panel-body">

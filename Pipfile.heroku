@@ -16,6 +16,7 @@ bootstrap4 = "0.1.0"
 django-guardian = "2.3.0"
 django-allauth = "0.42.0"
 whitenoise = "5.1.0"
+django-tables2 = "2.3.2"
 django-heroku = "*"
 
 [requires]

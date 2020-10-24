@@ -23,7 +23,7 @@
             {% for instance in object %}
                 <tr>
                     <th>{{ instance.obst_type }}</th>
-                    <th>{{ instance.obst_sorte }}</th>
+                    <th><a href="/obstsorten_detail/{{ instance.obst_sorte }}"> {{ instance.obst_sorte }}</a></th>
                     <th>{{ instance.pflueck_reif }}</th>
                     <th>{{ instance.verwendung }}</th>
                     <th>{{ instance.geschmack }}</th>
