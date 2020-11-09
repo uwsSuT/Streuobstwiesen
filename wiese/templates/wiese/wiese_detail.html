@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block content %}
-<h1>{{object.wiesen_id }} - {{ object.name }}</h1>
-<p>
+<div class="row">
+<h2>{{object.wiesen_id }} - {{ object.name }}</h2>
+
     {% if grafik %}
-	<img class="wiesenpic" src="{% static grafik %}">
+	<img class="img-fluid" src="{% static grafik %}"style="width:100%">
     {% else %}
 	Keine Grafik vorhanden
     {% endif %}
@@ -34,12 +35,21 @@
 			<th><button type="button" class="btn btn-default">
 			    {% if instance.url %}
 				<a href="{% url 'wiese:baum-detail' instance.baum_id %}">
-			      {{ instance.baum_id }}</a>
+			      {{ instance.baum_id }}
+                </a>
 			    {% else %}
 			      {{ instance.baum_id }}
 			    {% endif %}
 			    </button></th>
-			<th>{{ instance.name }}</th>
+			<th>
+			    {% if instance.url %}
+                    <a href="{% url 'wiese:baum-detail' instance.baum_id %}">
+                    {{ instance.name }}
+                    </a>
+			    {% else %}
+                    {{ instance.name }}
+			    {% endif %}
+            </th>
 			<th>{{ instance.zustand }}</th>
 			<th>{{ instance.letzter_schnitt }}</th>
 		    </tr>
@@ -47,7 +57,6 @@
 	    </tbody>
 	</table>
     </div>
-   
-</p> 
+</div>
 {% endblock %}
 

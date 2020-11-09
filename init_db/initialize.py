@@ -64,7 +64,7 @@ enums = {
 
 def insert_obstsorten(fname):
     """
-        fname ist eine CSV Datei in der die Obstsorten mit Ihren 
+        fname ist eine CSV Datei in der die Obstsorten mit Ihren
         Attributen definiert sind
     """
     first = True
@@ -136,6 +136,25 @@ def insert_wiesen(fname):
             obj = Wiese(wiesen_id=wiesen_id, name=name, obstwiese=obstwiese,
                     bluehwiese=bluehwiese)
             obj.save()
+
+def delete_all():
+    delete_baeume()
+    delete_wiesen()
+    delete_obstsorten()
+
+def delete_obstsorten():
+    """
+        Lösche alle Obstsorten für einen reinit
+    """
+    for sorte in ObstSorten.objects.all():
+        sorte.delete()
+
+def delete_wiesen():
+    """
+        Lösche alle Wiesen für einen reinit
+    """
+    for wiese in Wiese.objects.all():
+        wiese.delete()
 
 def delete_baeume():
     """
