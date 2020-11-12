@@ -137,6 +137,13 @@ def insert_wiesen(fname):
                     bluehwiese=bluehwiese)
             obj.save()
 
+
+def re_init():
+    delete_all()
+    insert_obstsorten('init_db/Obstsorten.csv')
+    insert_wiesen('init_db/wiesen.txt')
+    insert_baeume('init_db/Baeume.csv')
+
 def delete_all():
     delete_baeume()
     delete_wiesen()

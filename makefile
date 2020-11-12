@@ -5,7 +5,7 @@
 #
 ## uws : 2020.07.09
 
-VERSION = 0.6.1
+VERSION = 0.6.3
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -88,12 +88,12 @@ copy_pics:
 			cd $${actdir}/$(LOCAL_PIC_DIR)/$$wn; \
 			identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
 			if [ $$? -eq 0 ]; then \
-				convert $${pic} -resize 640x480 /tmp/$${pic}; \
+				convert $${pic} -resize 1024x768 /tmp/$${pic}; \
 				mv /tmp/$${pic} .;\
 			else \
 				identify $${pic} | grep "9248x6936" >/dev/null 2>&1; \
 				if [ $$? -eq 0 ]; then \
-					convert $${pic} -resize 640x480 /tmp/$${pic}; \
+					convert $${pic} -resize 1024x768 /tmp/$${pic}; \
 					mv /tmp/$${pic} .;\
 				fi; \
 			fi; \
@@ -120,12 +120,12 @@ copy_action_pics:
 		cd $${actdir}/$(LOCAL_ACTION_DIR); \
 		identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
 		if [ $$? -eq 0 ]; then \
-			convert $${pic} -resize 640x480 /tmp/$${pic}; \
+			convert $${pic} -resize 1024x768 /tmp/$${pic}; \
 			mv /tmp/$${pic} .;\
 		else \
 			identify $${pic} | grep "9248x6936" >/dev/null 2>&1; \
 			if [ $$? -eq 0 ]; then \
-				convert $${pic} -resize 640x480 /tmp/$${pic}; \
+				convert $${pic} -resize 1024x768 /tmp/$${pic}; \
 				mv /tmp/$${pic} .;\
 			fi; \
 		fi; \

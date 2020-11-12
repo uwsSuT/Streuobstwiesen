@@ -24,15 +24,15 @@ services:
 ##    links:
 ##      - dpostgres:dpostgres
 ##    restart: unless-stopped
-#
-#  hilgi:
-#    image: hilgi:0.6.1
-#    environment:
-#      - DBHOST=dpostgres
-#      - DBPWD=admin123
-#      - ALLOWED_HOST=localhost
-#      - HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu'
-#      - DEBUG=1
-#    ports:
-#      - "8002:8000"
-#    restart: unless-stopped
+
+  hilgi:
+    image: hilgi:0.6.3
+    environment:
+      - DBHOST=dpostgres
+      - DBPWD=admin123
+      - ALLOWED_HOST=localhost
+      - HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu'
+      - DEBUG=1
+    ports:
+      - "8002:8000"
+    restart: unless-stopped
