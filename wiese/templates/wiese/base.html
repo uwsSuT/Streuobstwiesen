@@ -39,7 +39,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
 
@@ -48,84 +47,94 @@
  <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-    collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Hilgertshausen</a>
+                <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/">
+                    <img class="rounded-circle" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" height=27 border=5px>
+                </a>
             </div>
             <!-- /.navbar-header -->
+            <ul class="nav navbar-nav">
+                <li>
+                <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/"> Hilgertshausen</a>
+                </li>
+                <li>
+                    <a class="navbar-brand" href="/obstsorten">Obstsorten</a>
+                </li>
+            </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="{% url 'account_logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li>
+                            <a class="p-2 text-dark" href="{% url 'about' %}">About</a>
+                        </li>
+    {% if user.is_staff %}
+                        <li>
+                            <a class="p-2 text-dark" href="/">Gruppen Seite</a>
+                        </li>
+    {% endif %}
+                        <li>
+                            <a href="{% url 'account_logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
             </ul>
-	    <ul class="nav navbar-top">
-		<a class="navbar-brand" href="/obstsorten">Obstsorten</a>
-            </ul>
-            <!-- /.navbar-top-links -->
+    <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-		        <li>
-                            <a href="{% url 'wiese:wiesen-list' %}"><i class="fa fa-dashboard fa-fw"></i>     Überblick</a>
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+        <li>
+            <a href="{% url 'wiese:wiesen-list' %}"><i class="fa fa-dashboard fa-fw"></i>     Überblick</a>
+        </li>
+        {% if wiesen_list %}
+            <li>
+                <a href="#"><i class="fa fa-eye fa-fw"></i> Obstwiesen<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    {% for instance in wiesen_list %}
+                        <li>
+                            <a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}">
+                                {{ instance.name }}
+                            </a>
                         </li>
-			{% if wiesen_list %}
-		        <li>
-                            <a href="#"><i class="fa fa-eye fa-fw"></i> Obstwiesen<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-				{% for instance in wiesen_list %}
-				<li>
-				    <a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}">
-					{{ instance.name }}
-                                    </a>
-                                </li>
-				{% endfor %}
-                            </ul>
-                            <!-- /.nav-second-level -->
+                    {% endfor %}
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+        {% endif %}
+        {% if obstsorten_menu %}
+            <li>
+            <a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten<span class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+                {% for otype in obstsorten_menu %}
+                <li>
+                    <a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype.name }}<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                    {% for o in otype.obstsorten %}
+                        <li>
+                        <a href="{% url 'obstsorten_detail' o %}"> {{ o }} </a>
                         </li>
-			{% endif %}
-			{% if obstsorten_menu %}
-			    <li>
-				<a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten<span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level">
-				    {% for otype in obstsorten_menu %}
-				    <li>
-					<a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype.name }}<span class="fa arrow"></span></a>
-					<ul class="nav nav-second-level">
-					{% for o in otype.obstsorten %}
-					    <li>
-						<a href="{% url 'obstsorten_detail' o %}"> {{ o }} </a>
-					    </li>
-					{% endfor %}
-					</ul>
-				    </li>
-				    {% endfor %}
-				</ul>
-				<!-- /.navo-second-level -->
-			    </li>
-			{% else %}
-			    <li>
-				<a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten</a>
-			    </li>
-			{% endif %}
-		    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+                    {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+            <!-- /.navo-second-level -->
+            </li>
+        {% else %}
+            <li>
+            <a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten</a>
+            </li>
+        {% endif %}
+    </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+    </div>
+    <!-- /.navbar-static-side -->
+</nav>
 
         <div id="page-wrapper">
             {% block content %}{% endblock %}
@@ -144,7 +153,11 @@
 {% else %}
     <div class="row">
 	<div class="d-flex flex-column flex-md-row align-items-center">
-	    <img class="mainpic" src="{% static 'images/Hilgertshausen_Wappen.png' %}">
+        <center>
+            <p><h1>Streuobstwiesen der Gemeinde Hilgertshausen</h1></p>
+	    <img class="mainpic" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" width=200>
+        </center>
+        <p><br></p>
 	</div>
         <div class="col-mg-12">
             <div class="panel panel-primary">

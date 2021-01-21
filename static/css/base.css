@@ -1,6 +1,3 @@
-h1 {
-  color: red;
-}
 
 .bookcover {
   height: 300px;
@@ -35,4 +32,8 @@ h1 {
 .obst_big_pic {
   width: 400px;
   height: auto;
+}
+
+.menupic {
+    border : 5px;
 }

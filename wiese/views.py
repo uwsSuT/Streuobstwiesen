@@ -52,25 +52,11 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
     table_class = WiesenTable
     template_name = "wiese/wiese_list.html"
 
-#    def get_queryset(self):
-#        return Wiese.objects.all().order_by('name')
-#
-#    def get(self, request, *args, **kwargs):
-#        #
-#        # mögliche Verbesserungen:
-#        # - Anzahl Bäume
-#        # - dynamisches ermitteln des Grafik-Namens
-#        #
-#        context = {'wiesen_list': self.get_queryset(),
-#                   'grafik' : 'images/wiese/Hilgh_StreuobstWiesen_2020_09.png',
-#                   'obstsorten_menu' : self.get_Obst_menu(),
-#                  }
-#        return render(request, self.template_name, context)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['grafik'] ='images/wiese/Hilgh_StreuobstWiesen_2020_09.png'
         context['obstsorten_menu'] = self.get_Obst_menu()
+        context['wiesen_list'] = Wiese.objects.all().order_by('name')
 
         return context
 
@@ -88,8 +74,6 @@ class WieseView(WieseObjectMixin, View):
         """
         pwd = os.getcwd()
         for f in os.listdir(join(pwd, 'static', 'images', APP)):
-            if DEBUG:
-                print("__find_grafik__: f: <%s> wid: %s" % (f,wid))
             if f.find("%s_" % wid) == 0 and \
                'png' in f.lower():
                 return join('images', APP, f)

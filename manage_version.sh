@@ -12,3 +12,9 @@ HERE
 
 done
 
+ed docker-compose.yml <<HERE
+/image: hilgi
+s/hilgi:.*/hilgi:$1/
+w
+q
+HERE
