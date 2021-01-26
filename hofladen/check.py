@@ -1,7 +1,7 @@
 #!/bin/python3
 
 #
-# Initialisiere die Obstsorten und Hoflaeden in der Postgres DB
+# Check die Informationen der Hoflaeden in der Postgres DB
 #
 # Damit wir das Django Models Modul verwenden können, muss zunächst die
 # Django Umgebung gesetzt werden. Dass passiert durch die beiden Aufrufe
@@ -18,7 +18,6 @@
 #   - python ./init_db/initialize.py
 #
 
-import os
 import django
 from django.conf import settings
 from pprint import pformat
@@ -231,6 +230,91 @@ def insert_baeume(fname):
                            zustand=zustand, letzter_schnitt=letzter_schnitt)
             obj.save()
 
+def init_hoflaeden(fname, TEST=False):
+    """
+        initialiesiere die HofLaeden Tabelle neu
+    """
+    hof_id = 0
+    first = True
+    second = False
+    hof_id = 0
+    with open(fname, newline='') as csvfile:
+        for laden in reader(csvfile, delimiter=',', quotechar='"'):
+            print("Hofladen: ", laden)
+            if first:
+                column = {}
+                if len(laden[0]) == 0:
+                    # leere Zeile am Anfang
+                    continue
+                if laden[0] == 'Name':
+                    first = False
+                    second = True
+                    # Vanessas Spreadsheet hat unschöne Überschriften
+                    # die in 2 Zeilen aufgeteilt sind
+                    #   Bsp.
+                    # Obst,,,,Bienenprodukte,,
+                    # Beere,Apfel,Birne,....,Honig,Propolis
+                    #
+                    # D.h. aus der ersten Zeile müssen wir die Überschriften
+                    # ermitteln und aus der Folgezeile die
+                    #    Unterkategorie
+                    rubriken = []
+                    bio_found = False
+                    for p in range(len(laden)):
+                        if laden[p] == 'Bio' or bio_found:
+                            bio_found = True
+                            if not laden[p]:
+                                continue
+                            rubriken.append(
+                                { 'name' : laden[p],
+                                  'pos'  : p,
+                                  'unterrubrik' : []
+                                } )
+                        else:
+                            column[laden[p]] = p
+                continue
+            if second:
+                second = False
+                # behandle die Rubriken
+                print("rubriken: %s" % pformat(rubriken))
+                print("column: %s" % pformat(column))
+                rubrik = 0
+                for p in range(len(laden)):
+                    if rubrik < len(rubriken) and \
+                       p == rubriken[rubrik]['pos']:
+                        act_rubrik = rubrik
+                        rubrik += 1
+                    if laden[p]:
+                        rubriken[act_rubrik]['unterrubrik'].append(laden[p])
+                print("rubriken: %s" % pformat(rubriken))
+                continue
+            # Das sind die Läden
+            hof_id += 1
+            if TEST:
+                hofladen = {
+                    'id' : hof_id,
+                    'name' : laden[0],
+                    'adresse' : laden[column['Straße']],
+                    'plz' : laden[column['PLZ']],
+                    'ort' : laden[column['Ort']],
+                    'tel_nr' : laden[column['Telefonnummer']],
+                    'www' : laden[column['Homepage']],
+                    'email' : laden[column['Email']],
+                    'vertrieb' : laden[column['sonstiger Vertrieb']],
+                    }
+                print("Hofladen: %s" % pformat(hofladen))
+            else:
+                obj = Hofladen(id=hof_id,
+                    name=laden[0],
+                    adresse=laden[column['Straße']],
+                    plz=laden[column['PLZ']],
+                    ort=laden[column['Ort']],
+                    tel_nr=laden[column['Telefonnummer']],
+                    www=laden[column['Homepage']],
+                    email=laden[column['Email']],
+                    vertrieb=laden[column['sonstiger Vertrieb']])
+                obj.save()
+
 
 if __name__ == '__main__':
 
@@ -238,3 +322,5 @@ if __name__ == '__main__':
     insert_obstsorten('init_db/Obstsorten.csv')
     insert_wiesen('init_db/wiesen.txt')
     insert_baeume('init_db/Baeume.csv')
+
+    init_hoflaeden('hofverkauf/Hofverkauf.csv', TEST=True)

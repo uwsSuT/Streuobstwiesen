@@ -1,0 +1,13 @@
+{% extends 'geo_base.html' %}
+{% load static %}
+
+{% block title %}
+	Hofläden rund um Hilgertshausen-Tandern
+{% endblock title %}
+
+{% block content %}
+  	{{ markers|json_script:"markers-data" }}
+  	<div id="map"></div>
+  	<script src="{% static 'newmap.js' %}"></script>
+{% endblock %}
+
