@@ -3,10 +3,34 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Uwe W. Schäfer">
+
   <title>
     {% block title %}
+      Hofläden rund um Hilgertshausen
     {% endblock title %}
   </title>
+
+<!-- Bootstrap Core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- MetisMenu CSS -->
+  <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
+  <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <!-- LeafLet  -->
   <link rel="stylesheet" href="{% static 'css/leaflet.css' %}" />
   <script src="{% static 'js/leaflet.js' %}"></script>
   <link rel="stylesheet" href="{% static 'leaflet-plugins/leaflet-markercluster/MarkerCluster.css' %}"/>
@@ -17,193 +41,139 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <style>
-    /* Fixed sidenav, full height */
+    /* Main content */
+    .main {
+      margin-left: 250px; /* Same as the width of the sidenav */
+      font-size: 20px; /* Increased text to enable scrolling */
+      padding: 0px 10px;
+    }
 
-.sidenav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  
-  top: 30;
-  left: 0;
-  background-color: white;
-  overflow-x: hidden;
-  padding-top: 10px;
-}
-
-/* Style the sidenav links and the dropdown button */
-.sidenav a, .dropdown-btn {
-  padding: 0px 8px 6px 10px;
-  text-decoration: none;
-  font-size: 16px;
-  color: black;
-  display: block;
-  border: none;
-  background: white;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  outline: none;
-}
-
-/* On mouse-over */
-.sidenav a:hover, .dropdown-btn:hover {
-  background-color: #ddd;
-}
-
-/* Main content */
-.main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-/* Add an active class to the active dropdown button */
-.active {
-  background-color: blue;
-  color: white;
-}
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
-.dropdown-container {
-  display: none;
-  background-color: #262626;
-  padding-left: 2px;
-}
-.dropdown-container2 {
-  display: none;
-  background-color: #262626;
-  padding-left: 4px;
-}
-
-/* Optional: Style the caret down icon */
-.fa-caret-down {
-  float: right;
-  padding-right: 2px;
-}
-
-/* Some media queries for responsiveness */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 12px;}
-  .sidenav a {font-size: 16px;}
-}
     #map {
       height: 700px;
       width: 700px;
       border: solid 1px black;
     }
-
-.navbar {
-  width: 100%;
-  background-color: white;
-  overflow: auto;
-}
-
-.navbar image {
-  background-color: white;
-}
-
-.navbar a {
-  float: left;
-  padding: 6px;
-  color: black;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.navbar a:hover {
-  background-color: #ddd;
-}
-
-.active {
-  background-color: lightblue;
-}
-
   </style>
 </head>
 <body>
 
 <div class="navbar">
-  <a class="image" href="https://www.hilgertshausen-tandern.de/">
-        <img class="rounded-circle" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" 
-        height=27> </a>
-  <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/"> Hilgertshausen</a>
-  <a href="{% url 'hofladen:hofladen-view' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">
-          Alle
-        </a>
-  <a href="{% url 'about' %}"><i class="fa fa-fw fa-envelope"></i> Kontakt</a>
-</div>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/">
+        <img class="rounded-circle" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" height=27 border=5px>
+      </a>
+      </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-nav">
+          <li>
+            <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/"> Hilgertshausen</a>
+          </li>
+          <li>
+            <a class="navbar-brand" href="{% url 'hofladen:hofladen-view' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">
+              Alle</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                         <a class="p-2 text-dark" href="{% url 'about' %}">Kontakt</a>
+                    </li>
+                  {% if user.is_staff %}
+                    <li>
+                         <a class="p-2 text-dark" href="/">Gruppen Seite</a>
+                    </li>
+                  {% endif %}
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
 
-<div class="sidenav">
-  <a href="{% url 'hofladen:hofladen-view' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">
-          Alle Verkaufsstellen
-        </a>
-
-  <a href="{% url 'hofladen:bio-view' %}">Bio Produkte</a>
-  
-  <button class="dropdown-btn">
-    Bio Siegel 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    {% for o in OekoSiegel %}
-        <a href="{% url 'hofladen:bio-view' o.id%}"> {{ o.name }} </a>     
-    {% endfor %}
-  </div>
-
-  <button class="dropdown-btn">
-    Rubriken 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    {% for o in rubriken %}
-        <a href="{% url 'hofladen:hofladen-view' o.id%}"> {{ o.name }} </a>     
-    {% endfor %}
-  </div>
-  <button class="dropdown-btn">
-    Artikel einer Rubrik 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    {% for o in unterrubriken %}
-        <button class="dropdown-btn">
-            {{ o.name }}  
-           <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container2">
-          {% for artikel in o.unterrubrik %}
-              <a href="{% url 'hofladen:hofladen-view' o.id artikel.id %}"> {{ artikel.name }} </a>
-          {% endfor %}
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse collapse in">
+            <ul class="nav" id="side-menu">
+              <li>
+                 <a href="{% url 'hofladen:hofladen-view' %}"><i class="fa fa-dashboard fa-fw"></i>
+                Alle Verkaufsstellen</a>
+              </li>
+              <li>
+                  <a href="{% url 'hofladen:bio-view' %}">Bio Produkte</a>
+              </li>
+              <li>
+                  <a href="#"><i class="fa fa-eye fa-fw"></i> 
+                      Bio Siegel
+                      <span class="fa arrow"></span>
+                  </a>
+                  <ul class="nav nav-second-level">
+                      {% for o in OekoSiegel %}
+                        <li>
+                          <a href="{% url 'hofladen:bio-view' o.id%}"> {{ o.name }} </a>
+                        </li>
+                      {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                  <a href="#"><i class="fa fa-eye fa-fw"></i> 
+                      Rubriken
+                      <span class="fa arrow"></span>
+                  </a>
+                  <ul class="nav nav-second-level">
+                      {% for o in rubriken %}
+                        <li>
+                            <a href="{% url 'hofladen:hofladen-view' o.id%}"> 
+                              {{ o.name }}
+                            </a>
+                        </li>
+                      {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                  <a href=#><i class="fa fa-eye fa-fw"></i>  
+                      Artikel einer Rubrik
+                      <span class="fa arrow"></span>
+                  </a>
+                  <ul class="nav nav-second-level">
+                    {% for otype in unterrubriken %}
+                        <li>
+                            <a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype.name }}
+                                <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                {% for artikel in otype.unterrubrik %}
+                                    <li>
+                                        <a href="{% url 'hofladen:hofladen-view' otype.id artikel.id %}">     {{ artikel.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                    </ul>
+              </li>
+            </ul>
         </div>
-    {% endfor %}
+    </div>
+  </nav>
+
+
+
+  <div class="main">
+      
+    {% block content %}
+    {% endblock content %}
   </div>
 </div>
 
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
 
-<div class="main">
-    
-  {% block content %}
-  {% endblock content %}
-</div>
-
-<script>
-    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-    var dropdown = document.getElementsByClassName("dropdown-btn");
-    var i;
-
-    for (i = 0; i < dropdown.length; i++) {
-      dropdown[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-          dropdownContent.style.display = "none";
-        } else {
-          dropdownContent.style.display = "block";
-        }
-        }
-      );
-    }
-</script>
+<!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/sb-admin-2.js' %}"></script>
 
   <script src="{% static 'hofladen_map.js' %}"></script>
 

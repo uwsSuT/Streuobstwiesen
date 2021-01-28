@@ -235,9 +235,6 @@ class HofladenCl():
                         print("add Hof 2")
                     self.__add_hof2Rubrik__(hof_id, act_rubrik)
 
-
-        self.verbose = 1
-
     def create_new_geo_json_elem(self, hofladen):
         """
             Generiere ein neues Feature in der GEO-Json Datei
@@ -414,6 +411,8 @@ class HofladenCl():
                 "name"      : hof.name,
                 "id"        : hof.id,
                 "www"       : hof.www,
+                "adresse"   : hof.adresse,
+                "ort"       : hof.ort,
                 "Telefon"   : hof.tel_nr,
             },
             "geometry": {

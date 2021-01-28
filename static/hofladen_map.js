@@ -18,12 +18,20 @@ var basemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 
 const markers = JSON.parse(document.getElementById('markers-data').textContent);
 
-var points = L.geoJSON(markers);
-
-var markerCluster = L.markerClusterGroup();
-
-points.addTo(markerCluster);
-markerCluster.addTo(map);
+function popUp(feature, layer) {
+        var text = "<p><b>" + layer.feature.properties.name + "</b></p>" + 
+                   "<p><b>Tel. Nr: " + layer.feature.properties.Telefon + "</b></p>" + 
+                   "<p>" + layer.feature.properties.adresse + "<br>" +
+                           layer.feature.properties.ort + "</p>" +
+	               '<p><a target="_blank" rel="noopener noreferrer" href="' + 
+	                layer.feature.properties.www + "\"</a>" + layer.feature.properties.www + "</p>"; 
+	    layer.bindPopup(text);
+    }
+var points = L.geoJSON(markers, {
+	onEachFeature: popUp
+});
+var clusters = L.markerClusterGroup();
+clusters.addLayer(points).addTo(map);
 
 map.fitBounds(feature.getBounds(), { padding: [100, 100] });
 
