@@ -103,7 +103,7 @@
                 Alle Verkaufsstellen</a>
               </li>
               <li>
-                  <a href="{% url 'hofladen:bio-view' %}">Bio Produkte</a>
+                  <a href="{% url 'hofladen:bio-view' 1 %}">Bio Produkte</a>
               </li>
               <li>
                   <a href="#"><i class="fa fa-eye fa-fw"></i> 
@@ -113,7 +113,7 @@
                   <ul class="nav nav-second-level">
                       {% for o in OekoSiegel %}
                         <li>
-                          <a href="{% url 'hofladen:bio-view' o.id%}"> {{ o.name }} </a>
+                          <a href="{% url 'hofladen:bio-view' 1 o.id%}"> {{ o.name }} </a>
                         </li>
                       {% endfor %}
                   </ul>
@@ -156,7 +156,7 @@
                     </ul>
               </li>
               <li>
-                  <a href="{% url 'hofladen:unverp-view' %}"><b>unverpackte</b> Ware</a>
+                  <a href="{% url 'hofladen:unverp-view' 1 %}"><b>unverpackte</b> Ware</a>
               </li>
             </ul>
         </div>

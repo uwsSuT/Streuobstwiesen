@@ -10,7 +10,7 @@ from pprint import pformat
 from hofladen.models import Hofladen, HofRubrik, Unterrubrik
 
 LADENPOS = 1
-Eigenschaft = ('BIO', 'SIEGEL', 'UNVERPACKT')
+Eigenschaften = ('BIO', 'SIEGEL', 'UNVERPACKT')
 
 class HofladenCl():
     def __init__(self, csv_name="", geo_json="", TEST=False, verbose=0):
@@ -434,6 +434,9 @@ class HofladenCl():
                 - aus dem geojson File
             ein neues GEO-JSON Dict
         """
+        if self.verbose:
+            print("get_geo_objects: rubrik_id: %s, urubrik_id: %s, bio: %s, unverpackt: %s" %(
+                rubrik_id, urubrik_id, bio, unverpackt))
         if geo_json_file:
             if not exists(geo_json_file):
                 print("Can't find geo_json file: '%s'" % geo_json_file)
@@ -484,7 +487,7 @@ class HofladenCl():
             #
             # Die Öko-Siegel und die Rubrik Bio wollen nicht in das Rubriken Menü
             #
-            if rub.name.upper() in Eigenschaft:
+            if rub.name.upper() in Eigenschaften:
                 continue
             rubriken.append(rub)
         return rubriken
@@ -495,7 +498,7 @@ class HofladenCl():
         """
         unterrubrik = []
         for rubrik in HofRubrik.objects.all().order_by('name'):
-            if rubrik.name.upper() in Eigenschaft:
+            if rubrik.name.upper() in Eigenschaften:
                 continue
             d = {
                 'name' : rubrik.name,
