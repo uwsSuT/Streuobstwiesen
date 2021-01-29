@@ -11,20 +11,21 @@
 			<h2> Nur Hofläden mit dem BIO-Siegel: '{{ BioSiegel }}'
 			</h2>
 		{% else %}
-			<h2> Alle Hofläden und Vermarkter <br>
+			<h2> Hofläden und Vermarkter <br>
 				von BIO-Produkten
 			</h2>
 		{% endif %}
+    {% elif UNVERPACKT %}
+    	<h3> Hofläden die einen Großteil Ihrer Ware 'unverpackt' verkaufen </h3>
     {% elif Artikel %}
     	<h3> Hofläden die den Artikel '{{ Artikel }}' führen </h3>
     {% else %}
 	    {% if rubrik %}
 	    	<h3> Hofläden aus der Rubrik: <b>{{ rubrik }}</b></h3>
 	    {% else %}
-	    	<h3> Alle Hofläden, Selbstvermarkter <br>
-	    		und deren zusätzliche Verkaufsstellen <br>
-	    		
-	    	 im Umkreis von Hilgertshausen-Tandern</h3>
+	    	<h3> Hofläden, Selbstvermarkter <br>
+	    		 und zusätzliche Verkaufsstellen <br>
+	    	     im Umkreis von Hilgertshausen-Tandern</h3>
 	    {% endif %}
     {% endif %}
 

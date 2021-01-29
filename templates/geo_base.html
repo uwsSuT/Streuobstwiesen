@@ -44,7 +44,7 @@
     /* Main content */
     .main {
       margin-left: 250px; /* Same as the width of the sidenav */
-      font-size: 20px; /* Increased text to enable scrolling */
+      font-size: 16px; /* Increased text to enable scrolling */
       padding: 0px 10px;
     }
 
@@ -154,6 +154,9 @@
                         </li>
                     {% endfor %}
                     </ul>
+              </li>
+              <li>
+                  <a href="{% url 'hofladen:unverp-view' %}"><b>unverpackte</b> Ware</a>
               </li>
             </ul>
         </div>

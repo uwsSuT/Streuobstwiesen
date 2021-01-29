@@ -1,7 +1,7 @@
 const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 const map = L.map('map', {
 	center: [48.43128, 11.35208],
-    zoom: 10
+    zoom:10
 })
 
 // add Hilgertshausen Rathaus als eigenen Layer

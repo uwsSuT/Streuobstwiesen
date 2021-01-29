@@ -22,7 +22,6 @@ class HofladenView(HofladenLinkIn):
 	def get_context_data(self, **kwargs):
 		"""Return the view context data."""
 
-		print("HofladenView: kwargs: %s" % pformat(kwargs))
 		context = super().get_context_data(**kwargs)
 	
 		hofl = HofladenCl(verbose=1)
@@ -47,7 +46,6 @@ class BioView(HofladenLinkIn):
 	def get_context_data(self, **kwargs):
 		"""Return the view context data."""
 
-		print("HofladenView: kwargs: %s" % pformat(kwargs))
 		context = super().get_context_data(**kwargs)
 	
 		hofl = HofladenCl(verbose=1)
@@ -63,3 +61,20 @@ class BioView(HofladenLinkIn):
 		
 		return context
 
+class UnverpacktView(HofladenLinkIn):
+	template_name = "hofladen/hofladen_view.html" # MAP-View
+	
+	def get_context_data(self, **kwargs):
+		"""Return the view context data."""
+
+		context = super().get_context_data(**kwargs)
+	
+		hofl = HofladenCl(verbose=1)
+		self.get_menu_entrys(context, hofl)
+
+		hofl.verbose=2
+
+		context['UNVERPACKT'] = True
+		context["markers"] = hofl.get_geo_objects(unverpackt=True)
+
+		return context

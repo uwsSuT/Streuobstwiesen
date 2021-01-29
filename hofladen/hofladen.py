@@ -10,6 +10,7 @@ from pprint import pformat
 from hofladen.models import Hofladen, HofRubrik, Unterrubrik
 
 LADENPOS = 1
+Eigenschaft = ('BIO', 'SIEGEL', 'UNVERPACKT')
 
 class HofladenCl():
     def __init__(self, csv_name="", geo_json="", TEST=False, verbose=0):
@@ -46,6 +47,7 @@ class HofladenCl():
 
         self.BioID = HofRubrik.objects.filter(name='Bio')[0].id
         self.SiegelID = HofRubrik.objects.filter(name='Siegel')[0].id
+        self.UnverpacktID = HofRubrik.objects.filter(name='Unverpackt')[0].id
 
     def __init_geo_json__(self):
         """
@@ -423,7 +425,8 @@ class HofladenCl():
         self.geojson_dict['features'].append(feature)
 
 
-    def get_geo_objects(self, geo_json_file="", rubrik_id=0, urubrik_id=0, bio=False):
+    def get_geo_objects(self, geo_json_file="", rubrik_id=0, urubrik_id=0, bio=False, 
+        unverpackt=False):
         """
             generier
                 - aus den Postgres Daten
@@ -446,6 +449,8 @@ class HofladenCl():
                 rubrik_id = self.SiegelID
             else:
                 rubrik_id = self.BioID
+        if unverpackt:
+            rubrik_id = self.UnverpacktID
 
         #
         # lies die Daten aus der DB
@@ -479,8 +484,7 @@ class HofladenCl():
             #
             # Die Öko-Siegel und die Rubrik Bio wollen nicht in das Rubriken Menü
             #
-            if rub.name.upper() == 'BIO' or \
-               rub.name.upper() == 'SIEGEL':
+            if rub.name.upper() in Eigenschaft:
                 continue
             rubriken.append(rub)
         return rubriken
@@ -491,7 +495,7 @@ class HofladenCl():
         """
         unterrubrik = []
         for rubrik in HofRubrik.objects.all().order_by('name'):
-            if rubrik.name.upper() == 'SIEGEL':
+            if rubrik.name.upper() in Eigenschaft:
                 continue
             d = {
                 'name' : rubrik.name,
