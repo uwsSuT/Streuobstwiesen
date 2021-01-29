@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.gis',
 
     # Third-party
     'django_tables2',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     # Local
     'obstsorten',
     'wiese',
+    'hofladen',
     'benutzer.apps.BenutzerConfig',
 ]
 

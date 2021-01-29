@@ -45,9 +45,13 @@ class HofladenCl():
         if geo_json:
             self.__init_geo_json__()
 
-        self.BioID = HofRubrik.objects.filter(name='Bio')[0].id
-        self.SiegelID = HofRubrik.objects.filter(name='Siegel')[0].id
-        self.UnverpacktID = HofRubrik.objects.filter(name='Unverpackt')[0].id
+        try:
+            self.BioID = HofRubrik.objects.filter(name='Bio')[0].id
+            self.SiegelID = HofRubrik.objects.filter(name='Siegel')[0].id
+            self.UnverpacktID = HofRubrik.objects.filter(name='Unverpackt')[0].id
+        except:
+            pass # Das kann passieren wenn die Tabellen noch nicht
+                 # existieren
 
     def __init_geo_json__(self):
         """
@@ -425,7 +429,7 @@ class HofladenCl():
         self.geojson_dict['features'].append(feature)
 
 
-    def get_geo_objects(self, geo_json_file="", rubrik_id=0, urubrik_id=0, bio=False, 
+    def get_geo_objects(self, geo_json_file="", rubrik_id=0, urubrik_id=0, bio=False,
         unverpackt=False):
         """
             generier
