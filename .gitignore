@@ -5,3 +5,4 @@ migrations/*.py
 __pycache__
 Pipfile
 hilgi/settings.py
+hofladen/migrations

@@ -3,9 +3,9 @@
 # einmal local 
 # einmal für Heroku
 #
-## uws : 2020.07.09
+## uws : 2021.01.31
 
-VERSION = 0.6.4
+VERSION = 0.7.1
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -48,6 +48,8 @@ build_local: make_schtob
 	cp -p Pipfile.local Pipfile
 	docker build -t hilgi:$(VERSION) -f Dockerfile-local .
 	rm -rf schtob
+	echo "TO Start the new Image run "
+	echo "    docker-compose -f docker-compose.yml up"
 
 build_heroku: make_schtob
 	- rm Pipfile.lock
