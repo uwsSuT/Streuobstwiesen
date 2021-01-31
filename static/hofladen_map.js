@@ -23,6 +23,7 @@ function popUp(feature, layer) {
                    "<p><b>Tel. Nr: " + layer.feature.properties.Telefon + "</b></p>" + 
                    "<p>" + layer.feature.properties.adresse + "<br>" +
                            layer.feature.properties.ort + "</p>" +
+                   "<p><b>Angebot:</b> " + layer.feature.properties.Rubriken + "</p>" +
 	               '<p><a target="_blank" rel="noopener noreferrer" href="' + 
 	                layer.feature.properties.www + "\"</a>" + layer.feature.properties.www + "</p>"; 
 	    layer.bindPopup(text);

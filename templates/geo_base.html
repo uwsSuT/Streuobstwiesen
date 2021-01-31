@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,9 +20,7 @@
   <!-- MetisMenu CSS -->
   <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
 
-  <!-- Custom CSS -->
-  <link href="{% static 'css/base.css' %}" rel="stylesheet">
-  <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
+
 
   <!-- jQuery -->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
@@ -40,19 +38,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <style>
-    /* Main content */
-    .main {
-      margin-left: 250px; /* Same as the width of the sidenav */
-      font-size: 16px; /* Increased text to enable scrolling */
-      padding: 0px 10px;
-    }
+ <link rel="stylesheet" href="{% static 'hilgi_map.css' %}">
 
-    #map {
-      height: 700px;
-      width: 700px;
-      border: solid 1px black;
-    }
+  <style>
+   
   </style>
 </head>
 <body>
@@ -94,8 +83,12 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-
-    <div class="navbar-default sidebar" role="navigation">
+</nav>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <nav>
+      <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse collapse in">
             <ul class="nav" id="side-menu">
               <li>
@@ -162,14 +155,14 @@
         </div>
     </div>
   </nav>
+</div>
 
-
-
-  <div class="main">
-      
-    {% block content %}
-    {% endblock content %}
-  </div>
+    <div class="col-sm-9">
+      <div class="main">      
+        {% block content %}
+        {% endblock content %}
+      </div>
+    </div>
 </div>
 
 <!-- Metis Menu Plugin JavaScript -->

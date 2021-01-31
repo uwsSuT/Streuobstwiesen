@@ -420,6 +420,7 @@ class HofladenCl():
                 "adresse"   : hof.adresse,
                 "ort"       : hof.ort,
                 "Telefon"   : hof.tel_nr,
+                "Rubriken"  : ", ".join(self.__getRubrik4Hof__(hof.id)),
             },
             "geometry": {
                 "type": "Point",
@@ -481,6 +482,20 @@ class HofladenCl():
         if self.verbose > 1:
             print("get_geo_objects: %s" % pformat(self.geojson_dict))
         return self.geojson_dict
+
+    def __getRubrik4Hof__(self, hof_id):
+        """
+            Hol alle Rubriken in den der Hof angegeben ist
+        """
+        rubriken = []
+        for rubrik in HofRubrik.objects.raw(
+            "select id,name from hofladen_hofrubrik where %s = ANY(hofladen_list)" % (
+            hof_id)):
+            if rubrik.name.upper() in Eigenschaften:
+                continue
+            rubriken.append(rubrik.name)
+        
+        return rubriken
 
     def get_rubriken(self):
         """

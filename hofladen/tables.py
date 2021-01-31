@@ -14,9 +14,10 @@ class HofladenTable(tables.Table):
             }
         row_attrs = { 'data-id' : lambda record: record.id,
             }
-        fields = ('name', 'adresse', 'plz', 'ort', 'tel_nr', 'www', 'email')
+        fields = ('name', 'adresse', 'plz', 'ort', 'tel_nr', 'www', 'email', 'vertrieb')
     
     # generier einen Link für die WWW-Seite
     www = TemplateColumn('<a href="{{record.www}}">{{record.www}}</a>')
+    vertrieb = TemplateColumn('<a href="{{record.vertrieb}}">{{record.vertrieb}}</a>')
     email = TemplateColumn('<a href="mailto:{{record.email}}">{{record.email}}')
     
