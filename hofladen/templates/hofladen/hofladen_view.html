@@ -1,0 +1,46 @@
+{% extends 'geo_base.html' %}
+{% load django_tables2 %}
+{% load static %}
+
+{% block title %}
+	Hofläden rund um Hilgertshausen-Tandern
+{% endblock title %}
+
+{% block content %}
+	{% if BIO %}
+		{% if BioSiegel %}
+			<h2> Nur Hofläden mit dem BIO-Siegel: '{{ BioSiegel }}'
+			</h2>
+		{% else %}
+			<h2> Hofläden und Vermarkter <br>
+				von BIO-Produkten
+			</h2>
+		{% endif %}
+    {% elif UNVERPACKT %}
+    	<h3> Hofläden die einen Großteil Ihrer Ware 'unverpackt' verkaufen </h3>
+    {% elif Artikel %}
+    	<h3> Hofläden die den Artikel '{{ Artikel }}' führen </h3>
+    {% else %}
+	    {% if rubrik %}
+	    	<h3> Hofläden aus der Rubrik: <b>{{ rubrik }}</b></h3>
+	    {% else %}
+	    	<h3> Hofläden, Selbstvermarkter <br>
+	    		 und zusätzliche Verkaufsstellen <br>
+	    	     im Umkreis von Hilgertshausen-Tandern</h3>
+	    {% endif %}
+    {% endif %}
+
+
+    {{ markers|json_script:"markers-data" }}
+
+  	<div id="map"></div>
+
+  	{% render_table table %}
+    
+{% endblock %}
+
+{% block script %}
+	<script src="{% static 'hofladen_map.js' %}"></script>
+{% endblock %}
+
+

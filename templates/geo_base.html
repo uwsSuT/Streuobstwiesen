@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Uwe W. Schäfer">
+
+  <title>
+    {% block title %}
+      Hofläden rund um Hilgertshausen
+    {% endblock title %}
+  </title>
+
+<!-- Bootstrap Core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- MetisMenu CSS -->
+  <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
+
+
+
+  <!-- jQuery -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <!-- LeafLet  -->
+  <link rel="stylesheet" href="{% static 'css/leaflet.css' %}" />
+  <script src="{% static 'js/leaflet.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'leaflet-plugins/leaflet-markercluster/MarkerCluster.css' %}"/>
+  <link rel="stylesheet" href="{% static 'leaflet-plugins/leaflet-markercluster/MarkerCluster.Default.css' %}"/>
+  <script src="{% static 'leaflet-plugins/leaflet-markercluster/MarkerCluster.js' %}">    </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <link rel="stylesheet" href="{% static 'hilgi_map.css' %}">
+
+  <style>
+   
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/">
+        <img class="rounded-circle" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" height=27 border=5px>
+      </a>
+      </div>
+        <!-- /.navbar-header -->
+        <ul class="nav navbar-nav">
+          <li>
+            <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/"> Hilgertshausen</a>
+          </li>
+          <li>
+            <a class="navbar-brand" href="{% url 'hofladen:hofladen-view' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">
+              Alle</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                         <a class="p-2 text-dark" href="{% url 'about' %}">Kontakt</a>
+                    </li>
+                  {% if user.is_staff %}
+                    <li>
+                         <a class="p-2 text-dark" href="/">Gruppen Seite</a>
+                    </li>
+                  {% endif %}
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+</nav>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <nav>
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse collapse in">
+            <ul class="nav" id="side-menu">
+              <li>
+                 <a href="{% url 'hofladen:hofladen-view' %}"><i class="fa fa-dashboard fa-fw"></i>
+                Alle Verkaufsstellen</a>
+              </li>
+              <li>
+                  <a href="{% url 'hofladen:bio-view' 1 %}">Bio Produkte</a>
+              </li>
+              <li>
+                  <a href="#"><i class="fa fa-eye fa-fw"></i> 
+                      Bio Siegel
+                      <span class="fa arrow"></span>
+                  </a>
+                  <ul class="nav nav-second-level">
+                      {% for o in OekoSiegel %}
+                        <li>
+                          <a href="{% url 'hofladen:bio-view' 1 o.id%}"> {{ o.name }} </a>
+                        </li>
+                      {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                  <a href="#"><i class="fa fa-eye fa-fw"></i> 
+                      Rubriken
+                      <span class="fa arrow"></span>
+                  </a>
+                  <ul class="nav nav-second-level">
+                      {% for o in rubriken %}
+                        <li>
+                            <a href="{% url 'hofladen:hofladen-view' o.id%}"> 
+                              {{ o.name }}
+                            </a>
+                        </li>
+                      {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                  <a href=#><i class="fa fa-eye fa-fw"></i>  
+                      Artikel einer Rubrik
+                      <span class="fa arrow"></span>
+                  </a>
+                  <ul class="nav nav-second-level">
+                    {% for otype in unterrubriken %}
+                        <li>
+                            <a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype.name }}
+                                <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                {% for artikel in otype.unterrubrik %}
+                                    <li>
+                                        <a href="{% url 'hofladen:hofladen-view' otype.id artikel.id %}">     {{ artikel.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                    </ul>
+              </li>
+              <li>
+                  <a href="{% url 'hofladen:unverp-view' 1 %}"><b>unverpackte</b> Ware</a>
+              </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+</div>
+
+    <div class="col-sm-9">
+      <div class="main">      
+        {% block content %}
+        {% endblock content %}
+      </div>
+    </div>
+</div>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
+
+<!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/sb-admin-2.js' %}"></script>
+
+  <script src="{% static 'hofladen_map.js' %}"></script>
+
+</body>
+</html>

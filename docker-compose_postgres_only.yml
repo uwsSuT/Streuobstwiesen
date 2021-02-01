@@ -13,6 +13,12 @@ services:
       - /home/uws/postgres/data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
 #  pgadmin:
 #    image: dpage/pgadmin4
 #    ports:
