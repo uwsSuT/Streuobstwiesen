@@ -1,6 +1,8 @@
 {% extends 'wiese/base.html' %}
 {% load django_tables2 %}
 {% load static %}
+
+
   
 {% block title %}Streuobstwiesen{% endblock title %}
 
@@ -8,11 +10,26 @@
 
 <div class="row">
     <h2> Streuobstwiesen</h2>
-    <img class="img-fluid" src="{% static grafik %}" style="width:100%">
-    <div class="panel-body">
-        {% render_table table %}
-    </div>
+  
+    {% if baeume_statisch %}
+        <!-- statische Präsentation der Bäume mit Pictures aus dem GIS -->
+        <img class="img-fluid" src="{% static grafik %}" style="width:100%">
+        <div class="panel-body">
+          {% render_table table %}
+        </div>
+    {% else %}
+        <!-- Dynamische Präsentation der Bäume mit Laeflet -->
+        {{ markers|json_script:"markers-data" }}
+
+        <div id="map"></div>
+    {% endif %}
+
 
 </div>
 
+{% block script %}
+  <script src="{% static 'wiese_map.js' %}"></script>
+{% endblock script %}
+
 {% endblock content %}
+

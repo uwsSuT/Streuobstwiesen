@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import TemplateView, ListView
 from django_tables2 import SingleTableView, SingleTableMixin
 from django.views import View
@@ -7,6 +7,8 @@ from .forms import WieseModelForm, WiesenUpdateForm
 from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type
 from obstsorten.views import ObstLinkIn
 from wiese.tables import WiesenTable
+from baeume.baeume import BaumVerwaltung
+from hilgi.utils import BaumSessionClass
 
 import os
 from os.path import join, exists, isdir
@@ -53,11 +55,26 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
     template_name = "wiese/wiese_list.html"
 
     def get_context_data(self, **kwargs):
+        """
+            Holt die ContextDaten vom Model und der WiesenTabelle
+            wird hier noch mal um die dynamischen geo_objects
+            und um die Menu-Entry erweitert
+        """
         context = super().get_context_data(**kwargs)
+        baeume = BaumVerwaltung()
+
+        if not 'baeume_statisch' in self.request.session:
+            context['baeume_statisch'] = ''
+            context['baeume_dynamisch'] = "disabled"
+        else:
+            context['baeume_statisch'] = self.request.session['baeume_statisch']
+            context['baeume_dynamisch'] = self.request.session['baeume_dynamisch']
+
+        context["markers"] = baeume.get_geo_objects()
+
         context['grafik'] ='images/wiese/Hilgh_StreuobstWiesen_2020_09.png'
         context['obstsorten_menu'] = self.get_Obst_menu()
         context['wiesen_list'] = Wiese.objects.all().order_by('name')
-
         return context
 
 class WieseView(WieseObjectMixin, View):
@@ -284,3 +301,13 @@ class ObstWiesenView(WieseObjectMixin, View):
                    'obstsorten_menu' : self.get_Obst_menu(),
                   }
         return render(request, self.template_name, context)
+
+def Set_dynamic_static_view(request, val):
+    print("Set_dynamic_static_view: %s" % val)
+    if val == 'dynamic':
+        request.session['baeume_statisch'] = ""
+        request.session['baeume_dynamisch'] = "disabled"
+    else:
+        request.session['baeume_statisch'] = "disabled"
+        request.session['baeume_dynamisch'] = ""
+    return redirect(reverse("wiese:wiesen-list"))

@@ -19,13 +19,14 @@ var basemap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 const markers = JSON.parse(document.getElementById('markers-data').textContent);
 
 function popUp(feature, layer) {
-        var text = "<p><b>" + layer.feature.properties.name + "</b></p>" + 
-                   "<p><b>Tel. Nr: " + layer.feature.properties.Telefon + "</b></p>" + 
-                   "<p>" + layer.feature.properties.adresse + "<br>" +
-                           layer.feature.properties.ort + "</p>" +
-                   "<p><b>Angebot:</b> " + layer.feature.properties.Rubriken + "</p>" +
-	               '<p><a target="_blank" rel="noopener noreferrer" href="' + 
-	                layer.feature.properties.www + "\"</a>" + layer.feature.properties.www + "</p>"; 
+    var text = "<p><b>" + layer.feature.properties.name + "</b></p>" + 
+               "<p><b>Tel. Nr: " + layer.feature.properties.Telefon + "</b></p>" + 
+               "<p>" + layer.feature.properties.adresse + "<br>" +
+                       layer.feature.properties.ort + "</p>" +
+               "<p><b>Angebot:</b> " + layer.feature.properties.Rubriken + "</p>" +
+	           '<p><a target="_blank" rel="noopener noreferrer" href="' + 
+	                layer.feature.properties.www + "\"</a>" + 
+	                layer.feature.properties.www + "</p>"; 
 	    layer.bindPopup(text);
     }
 var points = L.geoJSON(markers, {
