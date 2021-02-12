@@ -12,23 +12,26 @@
     <h2> Streuobstwiesen</h2>
   
     {% if baeume_statisch %}
-        <!-- statische Präsentation der Bäume mit Pictures aus dem GIS -->
-        <img class="img-fluid" src="{% static grafik %}" style="width:100%">
-        <div class="panel-body">
-          {% render_table table %}
-        </div>
+        {% if grafik %}
+            <!-- statische Präsentation der Bäume mit Pictures aus dem GIS -->
+            <img class="img-fluid" src="{% static grafik %}" style="width:100%">
+        {% endif %}
     {% else %}
         <!-- Dynamische Präsentation der Bäume mit Laeflet -->
-        {{ markers|json_script:"markers-data" }}
+        {{ baeume|json_script:"markers-data" }}
+        {{ wiesen|json_script:"wiesen-data" }}
 
         <div id="map"></div>
     {% endif %}
+    <div class="panel-body">
+      {% render_table table %}
+    </div>
 
 
 </div>
 
 {% block script %}
-  <script src="{% static 'wiese_map.js' %}"></script>
+  <script src="{% static 'js/wiese_map.js' %}"></script>
 {% endblock script %}
 
 {% endblock content %}

@@ -3,12 +3,19 @@
 
 {% block content %}
 <div class="row">
-<h2>{{object.wiesen_id }} - {{ object.name }}</h2>
+<h2>{{object.wiesen_id }} - {{ object.www_name }}</h2>
 
-    {% if grafik %}
-	<img class="img-fluid" src="{% static grafik %}"style="width:100%">
+    {% if baeume_statisch %}
+        {% if grafik %}
+            <img class="img-fluid" src="{% static grafik %}"style="width:100%">
+        {% else %}
+        Keine Grafik vorhanden
+        {% endif %}
     {% else %}
-	Keine Grafik vorhanden
+        <!-- Dynamische Präsentation der Bäume mit Laeflet -->
+        {{ baeume|json_script:"markers-data" }}
+        {{ wiese_geo_info|json_script:"wiese-geo-data" }}
+        <div id="map"></div>
     {% endif %}
 
     {% if object.obstwiese %}
@@ -58,5 +65,10 @@
 	</table>
     </div>
 </div>
-{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/wiese_details.js' %}"></script>
+{% endblock script %}
+
+{% endblock content %}
 

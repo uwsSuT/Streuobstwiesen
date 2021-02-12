@@ -1,3 +1,7 @@
+import os
+from os.path import join, exists, isdir
+from pprint import pformat
+
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import TemplateView, ListView
 from django_tables2 import SingleTableView, SingleTableMixin
@@ -7,12 +11,11 @@ from .forms import WieseModelForm, WiesenUpdateForm
 from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type
 from obstsorten.views import ObstLinkIn
 from wiese.tables import WiesenTable
-from baeume.baeume import BaumVerwaltung
+from wiese.wiese import WiesenLeaflet
+from baeume.baeume import BaumLeaflet
 from hilgi.utils import BaumSessionClass
 
-import os
-from os.path import join, exists, isdir
-from pprint import pformat
+from init_db import  Streuobst_geo
 
 DEBUG = int(os.environ.get('DEBUG', default=1))
 
@@ -25,6 +28,15 @@ class WieseObjectMixin(ObstLinkIn, object):
         if wiesen_id is not None:
             obj = get_object_or_404(self.model, wiesen_id=wiesen_id)
         return obj
+
+    def set_dynamic(self, context):
+        if not 'baeume_statisch' in self.request.session:
+            context['baeume_statisch'] = ''
+            context['baeume_dynamisch'] = "disabled"
+        else:
+            context['baeume_statisch'] = self.request.session['baeume_statisch']
+            context['baeume_dynamisch'] = self.request.session['baeume_dynamisch']
+
 
 class WieseCreateView(View):
     template_name = "wiese/wiese_create.html" # DetailView
@@ -61,21 +73,27 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
             und um die Menu-Entry erweitert
         """
         context = super().get_context_data(**kwargs)
-        baeume = BaumVerwaltung()
+        baeume = BaumLeaflet()
+        wiesen = WiesenLeaflet(geo_json_file=Streuobst_geo)
+        #print("WieseListView: dir: %s" % pformat(dir(self)))
 
-        if not 'baeume_statisch' in self.request.session:
-            context['baeume_statisch'] = ''
-            context['baeume_dynamisch'] = "disabled"
-        else:
-            context['baeume_statisch'] = self.request.session['baeume_statisch']
-            context['baeume_dynamisch'] = self.request.session['baeume_dynamisch']
+        self.set_dynamic(context)
 
-        context["markers"] = baeume.get_geo_objects()
+        #
+        # Die beiden Parameter baeume und wiesen werden im JavaScript
+        # verwendet
+        #
+        context["baeume"] = baeume.get_geo_objects()
+        context["wiesen"] = wiesen.get_geo_objects()
 
         context['grafik'] ='images/wiese/Hilgh_StreuobstWiesen_2020_09.png'
         context['obstsorten_menu'] = self.get_Obst_menu()
         context['wiesen_list'] = Wiese.objects.all().order_by('name')
+
         return context
+
+# MittelPunkt für eine Wiese    48.42748/11.36285
+
 
 class WieseView(WieseObjectMixin, View):
     """
@@ -120,16 +138,41 @@ class WieseView(WieseObjectMixin, View):
 
         return ptrees
 
-    def get(self, request, wiesen_id=None, *args, **kwargs):
+    def __get_geo_json_info__(self, wid):
+        """
+            Hol die GEO-JSON Info für die Wiese
+        """
+        geo_wiesen = WiesenLeaflet(geo_json_file=Streuobst_geo)
+        wiese = Wiese.objects.get(wiesen_id=wid)
+        geo_info = geo_wiesen.get_geo_info4wiese(wiese.www_name)
+
+        #print("get_geo_json_info: %s" % pformat(geo_info))
+
+        # In dem GEO-JSON vom GIS steckt ein MultiPolygon
+        # wir können hier aber nur ein Polygon brauchen!
+        #
+        # zu allem Übel sind die Longitude und latitude Werte in dem
+        # GEO-Json in der falschen Reihenfolge, also drehen wir die hier
+        geo = []
+        for point in geo_info['geometry']['coordinates'][0][0]:
+            geo.append([point[1], point[0]])
+
+        return geo
+
+    def get(self, request, wid=None, *args, **kwargs):
         # GET method
+        baeume = BaumLeaflet()
         context = {
-           'object': self.get_object(wiesen_id=self.kwargs.get('id')),
-           'grafik' : self.__find_grafik__(self.kwargs.get('id')),
-           'trees' : self.__find_trees__(self.kwargs.get('id')),
-           'wiesen_list' : Wiese.objects.all().order_by('name'),
-           'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
-           'obstsorten_menu' : self.get_Obst_menu(),
-           }
+            'object': self.get_object(wiesen_id=wid),
+            'grafik' : self.__find_grafik__(wid),
+            'trees' : self.__find_trees__(wid),
+            'wiesen_list' : Wiese.objects.all().order_by('name'),
+            'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
+            'obstsorten_menu' : self.get_Obst_menu(),
+            'baeume' :  baeume.get_geo_objects(),
+            'wiese_geo_info' : self.__get_geo_json_info__(wid),
+        }
+        self.set_dynamic(context)
         return render(request, self.template_name, context)
 
 class BaumView(WieseObjectMixin, View):

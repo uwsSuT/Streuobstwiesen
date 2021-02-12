@@ -1,6 +1,11 @@
-
+"""
+    Helper Classen für die Darstellung von Bäumen, Wiesen und
+    Hofläden
+"""
 class GeoJsonClass():
-
+    """
+        Basis-Class für die Verwendung als LEAFLET Object
+    """
     QueryArgs = ('baueme_statisch')
 
     def __init__(self):
