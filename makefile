@@ -5,7 +5,7 @@
 #
 ## uws : 2021.01.31
 
-VERSION = 0.7.1
+VERSION = 0.7.5
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum

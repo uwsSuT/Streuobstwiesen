@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+set -x
+SCHTOB_SUBDIRS='schtob/nsr_rest_api 
+                schtob/dd_rest_api 
+                schtob/nsr_tools 
+                schtob/lib 
+                schtob/grafana
+                schtob/postgres 
+                schtob/nsr_sessions
+                schtob/calc_nsr_used_capacity
+                bin
+                NetWorkerDoku/bin
+                NetWorkerDoku/lib
+                '
+HILGI_SUBDIRS='baeume
+               hofladen
+               init_db
+               obstsorten
+               wiese'
+
+# S & T
+(cd bin; ctags ../schtob/*/*.py *.py )
+for d in $HILGI_SUBDIRS; do
+    cd $d
+    ctags *.py ../*/*.py 
+    cd -
+done
+ctags */*.py 

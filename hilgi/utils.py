@@ -12,16 +12,13 @@ class GeoJsonClass():
         """
             Helper Class für die Darstellung von Bäumen und Hofläden
         """
-        print("GeoJsonClass: init")
-        self.init_goejson_struct()
+        self.geojson_dict = self.__init_feature__()
 
-        
-
-    def init_goejson_struct(self):
+    def __init_feature__(self):
         """
-            Bau die GEOjson Strucktur auf
+            gib einen GEO-JSOn Feature Strucktur zurück
         """
-        self.geojson_dict = {
+        return  {
             "type": "FeatureCollection",
             "crs": {
                 "type": "name",
@@ -31,6 +28,14 @@ class GeoJsonClass():
             },
             "features": []
         }
+
+    def init_layer(self, layer_names):
+        """
+            Bau einen GEOjson Strucktur für einen Layer auf
+        """
+        self.geo_layers = {}
+        for name in layer_names:
+            self.geo_layers[name] = self.__init_feature__()
 
 class BaumSessionClass():
     # Umschalten der Wiesen/ Baum-Anzeige

@@ -39,7 +39,7 @@ class WieseObjectMixin(ObstLinkIn, object):
 
 
 class WieseCreateView(View):
-    template_name = "wiese/wiese_create.html" # DetailView
+    template_name = "wiese/wiese_create.html"
     def get(self, request, *args, **kwargs):
         # GET method
         form = WieseModelForm()
@@ -83,7 +83,7 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
         # Die beiden Parameter baeume und wiesen werden im JavaScript
         # verwendet
         #
-        context["baeume"] = baeume.get_geo_objects()
+        context["baeume"] = baeume.get_all_geo_objects()
         context["wiesen"] = wiesen.get_geo_objects()
 
         context['grafik'] ='images/wiese/Hilgh_StreuobstWiesen_2020_09.png'
@@ -91,9 +91,6 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
         context['wiesen_list'] = Wiese.objects.all().order_by('name')
 
         return context
-
-# MittelPunkt für eine Wiese    48.42748/11.36285
-
 
 class WieseView(WieseObjectMixin, View):
     """
@@ -162,16 +159,18 @@ class WieseView(WieseObjectMixin, View):
     def get(self, request, wid=None, *args, **kwargs):
         # GET method
         baeume = BaumLeaflet()
+        baeume.get_all_trees4wiese(wid)
         context = {
-            'object': self.get_object(wiesen_id=wid),
-            'grafik' : self.__find_grafik__(wid),
-            'trees' : self.__find_trees__(wid),
-            'wiesen_list' : Wiese.objects.all().order_by('name'),
+            'object'          : self.get_object(wiesen_id=wid),
+            'grafik'          : self.__find_grafik__(wid),
+            'trees'           : self.__find_trees__(wid),
+            'wiesen_list'     : Wiese.objects.all().order_by('name'),
             'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
             'obstsorten_menu' : self.get_Obst_menu(),
-            'baeume' :  baeume.get_geo_objects(),
-            'wiese_geo_info' : self.__get_geo_json_info__(wid),
+            'baeume'          :  baeume.geo_layers,
+            'wiese_geo_info'  : self.__get_geo_json_info__(wid),
         }
+        #print("Wiese-Detail: get <%s>" % pformat(baeume.geo_layers))
         self.set_dynamic(context)
         return render(request, self.template_name, context)
 
@@ -317,7 +316,7 @@ class WieseUpdateView(WieseObjectMixin, View):
 
 
 class WieseDeleteView(WieseObjectMixin, View):
-    template_name = "wiese/wiese_delete.html" # DetailView
+    template_name = "wiese/wiese_delete.html"
     def get(self, request, wiesen_id=None, *args, **kwargs):
         # GET method
         context = {}

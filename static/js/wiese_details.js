@@ -1,4 +1,14 @@
 const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+var greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
 const map = L.map('map', {
 	center: [48.43128, 11.35208],
 	zoom: 14,
@@ -20,7 +30,7 @@ var basemap =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.
 }
 	).addTo(map);
 
-const markers = JSON.parse(document.getElementById('markers-data').textContent);
+const layer = JSON.parse(document.getElementById('sorten-layer').textContent);
 const wiese_polygon = JSON.parse(document.getElementById('wiese-geo-data').textContent);
 
 function popUp(feature, layer) {
@@ -36,13 +46,27 @@ function popUp(feature, layer) {
     layer.bindPopup(text);
 }
 
-var points = L.geoJSON(markers, {
-	onEachFeature: popUp
-});
+// Schleife über die Sorten Layer
+var points = {}
+for (sorte in layer) {
+    points[sorte] = L.geoJSON(layer[sorte], {
+        onEachFeature: popUp,
+        icon: greenIcon
+    }); 
+    points[sorte].addTo(map);
+};
 
+var basemaps = {
+    "OSM": basemap
+};
+var overlays = {};
+for (sorte in layer) {
+    overlays[sorte] = points[sorte];
+};
 
-// Wenn wir keine Gruppierung wollen kann man die Bäume auch direkt als Points setzen
-points.addTo(map);
+L.control.layers(basemaps, overlays, {
+        collapsed: false
+    }).addTo(map);
 
 var poly = L.polygon(wiese_polygon).addTo(map)
 
