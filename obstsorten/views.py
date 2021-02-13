@@ -5,6 +5,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import TemplateView
 from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type
+from baeume.baeume import BaumLeaflet
 
 DEBUG = int(os.environ.get('DEBUG'))
 
@@ -144,10 +145,13 @@ class ObstSortenDetView(TemplateView):
     def get(self, request, sid=None, *args, **kwargs):
         # GET method
         ob = self.get_queryset()
+        baeume = BaumLeaflet()
+
         context = {'object': ob,
-                   'wiesen_sorte' : self.find_wiesen(ob['sorten_id']),
-                   'wiesen_list' : Wiese.objects.all().order_by('wiesen_id'),
+                   'wiesen_sorte'    : self.find_wiesen(ob['sorten_id']),
+                   'wiesen_list'     : Wiese.objects.all().order_by('wiesen_id'),
                    'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
+                   'baeume'          : baeume.get_geo_objects4sorte(ob['sorten_id']),
                   }
         return render(request, self.template_name, context)
 

@@ -8,7 +8,7 @@ from django_tables2 import SingleTableView, SingleTableMixin
 from django.views import View
 
 from .forms import WieseModelForm, WiesenUpdateForm
-from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type, ObstIcon
+from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type
 from obstsorten.views import ObstLinkIn
 from wiese.tables import WiesenTable
 from wiese.wiese import WiesenLeaflet
@@ -159,7 +159,6 @@ class WieseView(WieseObjectMixin, View):
     def get(self, request, wid=None, *args, **kwargs):
         # GET method
         baeume = BaumLeaflet()
-        baeume.get_all_trees4wiese(wid)
         context = {
             'object'          : self.get_object(wiesen_id=wid),
             'grafik'          : self.__find_grafik__(wid),
@@ -167,8 +166,7 @@ class WieseView(WieseObjectMixin, View):
             'wiesen_list'     : Wiese.objects.all().order_by('name'),
             'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
             'obstsorten_menu' : self.get_Obst_menu(),
-            'baeume'          : baeume.geo_layers,
-            'obst_icon'       : ObstIcon,
+            'baeume'          : baeume.get_all_trees4wiese(wid),
             'wiese_geo_info'  : self.__get_geo_json_info__(wid),
         }
         #print("Wiese-Detail: get <%s>" % pformat(baeume.geo_layers))

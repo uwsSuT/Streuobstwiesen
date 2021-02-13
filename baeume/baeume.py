@@ -119,6 +119,16 @@ class BaumLeaflet(GeoJsonClass):
             self.__add_geo_feature__(baum)
         return self.geojson_dict
 
+    def get_geo_objects4sorte(self, sorten_id):
+        """
+            hole alle Bäume der Sorte in gib sie in einem geojson dict zurück
+        """
+        for baum in ObstBaum.objects.filter(sorten_id=sorten_id):
+            print("get_geo_objects4sorte: %s" % pformat(baum))
+            self.__add_geo_feature__(baum)
+        print("get_geo_objects4sorte: %s" % pformat(self.geojson_dict))
+        return self.geojson_dict
+
     def get_all_trees4wiese(self, wid):
         """
             Hole alle Bäume für die Wiese und pack sie in Obst-Sorten Layer
@@ -127,11 +137,12 @@ class BaumLeaflet(GeoJsonClass):
         self.init_layer(Obst_Type)
         for osorte in ObstSorten.objects.all():
             for baum in ObstBaum.objects.filter(wiese_id=wid, sorten_id=osorte.sorten_id):
-                print("get_all_trees4wiese: %s" % pformat(baum))
+                # print("get_all_trees4wiese: %s" % pformat(baum))
                 # füg den Baum in den zugehörigen ObstType ein
                 self.__add_geo_feature__(baum,
                                          layer=self.geo_layers[Obst_Type[osorte.obst_type]])
-        print("get_all_trees4wiese: Layers: %s" % pformat(self.geo_layers))
+        # print("get_all_trees4wiese: Layers: %s" % pformat(self.geo_layers))
+        return self.geo_layers
 
 if __name__ == '__main__':
 
