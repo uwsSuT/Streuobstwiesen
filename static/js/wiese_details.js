@@ -9,6 +9,81 @@ var greenIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 
+var blueIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var yellowIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var violetIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var redIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var greyIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var blackIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var orangeIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+var ObstIcons = {
+    'Apfel'     : greenIcon,
+    'Birne'     : yellowIcon,
+    'Kirsche'   : redIcon,
+    'Zwetschge' : violetIcon,
+    'Nuss'      : orangeIcon,
+    'Quitte'    : greyIcon,
+    'Mispel'    : greyIcon,
+    'unbekannt' : blueIcon,
+    'Tod'       : blackIcon,
+};
+
 const map = L.map('map', {
 	center: [48.43128, 11.35208],
 	zoom: 14,
@@ -32,6 +107,7 @@ var basemap =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.
 
 const layer = JSON.parse(document.getElementById('sorten-layer').textContent);
 const wiese_polygon = JSON.parse(document.getElementById('wiese-geo-data').textContent);
+const obst_icons = JSON.parse(document.getElementById('obst-icons').textContent);
 
 function popUp(feature, layer) {
     var text = "<table> <tr> <th> Baum Nr. </th>" +
@@ -50,11 +126,16 @@ function popUp(feature, layer) {
 var points = {}
 for (sorte in layer) {
     points[sorte] = L.geoJSON(layer[sorte], {
-        onEachFeature: popUp,
-        icon: greenIcon
+        pointToLayer: function(feature, latlng) {
+                return L.marker(latlng, {
+                       icon: ObstIcons[sorte]
+                });
+              },
+        onEachFeature: popUp
     }); 
     points[sorte].addTo(map);
 };
+
 
 var basemaps = {
     "OSM": basemap

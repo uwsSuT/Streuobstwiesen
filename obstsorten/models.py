@@ -3,6 +3,18 @@ from django.db import models
 
 Obst_Type = ( 'Apfel', 'Birne', 'Kirsche', 'Zwetschge', 'Nuss', 'Quitte', 'Mispel', 'unbekannt', 'Tod')
 
+ObstIcon = {
+    'Apfel'     : 'greenIcon',
+    'Birne'     : 'yellowIcon',
+    'Kirsche'   : 'redIcon',
+    'Zwetschge' : 'violetIcon',
+    'Nuss'      : 'orangeIcon',
+    'Quitte'    : 'greyIcon',
+    'Mispel'    : 'greyIcon',
+    'unbekannt' : 'blueIcon',
+    'Tod'       : 'blackIcon',
+}
+
 class ObstSorten(models.Model):
     sorten_id       = models.IntegerField(primary_key=True)
     obst_type       = models.IntegerField()
