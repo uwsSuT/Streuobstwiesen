@@ -1,3 +1,8 @@
+import os
+from os.path import join, exists, isdir
+
+DEBUG = int(os.environ.get('DEBUG', default=0))
+
 """
     Helper Classen für die Darstellung von Bäumen, Wiesen und
     Hofläden
@@ -36,6 +41,45 @@ class GeoJsonClass():
         self.geo_layers = {}
         for name in layer_names:
             self.geo_layers[name] = self.__init_feature__()
+
+class BaumPics():
+    """
+        Helper Class für die Verwlatung der BaumBilder
+    """
+    def __init__(self):
+        self.baum_pics = {}
+        pwd = os.getcwd()
+        self.baum_dir = join(pwd, 'static', 'images', 'baum')
+
+    def init_baum_pic(self, baum):
+        """
+            such die zur baum_id zugehörigen Bilder in dem Static Verzeichnis
+            gib diese als Liste zurück
+        """
+        wiesen_name = baum.wiese.name
+        if not exists(self.baum_dir):
+            if DEBUG:
+                print("Could not find: %s" % self.baum_dir)
+
+        for f in os.listdir(self.baum_dir):
+            if isdir(join(self.baum_dir, f)) and \
+                    f == wiesen_name:
+                if DEBUG:
+                    print("FOUND Dir: %s" % f)
+                for b in os.listdir(join(self.baum_dir, f)):
+                    if b.find("%s_" % baum.baum_id) == 0:
+                        if DEBUG:
+                            print("FOUND Tree: %s" % b)
+                        if not baum.baum_id in self.baum_pics:
+                            self.baum_pics[baum.baum_id] = []
+                        self.baum_pics[baum.baum_id].append(
+                                    join('/', 'static', 'images', 'baum', f, b))
+
+    def get_all_pics(self, baum):
+        return self.baum_pics[baum.baum_id]
+
+    def get_first_pic(self, baum):
+        return sorted(self.baum_pics[baum.baum_id])[0]
 
 class BaumSessionClass():
     # Umschalten der Wiesen/ Baum-Anzeige

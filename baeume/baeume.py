@@ -9,9 +9,9 @@ from pprint import pformat
 
 from obstsorten.models import ObstBaum, ObstSorten, Wiese, Obst_Type
 from schtob.lib.util import compile_start_time
-from hilgi.utils import GeoJsonClass
+from hilgi.utils import GeoJsonClass, BaumPics
 
-class BaumLeaflet(GeoJsonClass):
+class BaumLeaflet(GeoJsonClass, BaumPics):
     """
      Mamagement Class für das Lesen und Verwalten von GEO-Json Baum
      Elementen.
@@ -25,6 +25,7 @@ class BaumLeaflet(GeoJsonClass):
     def __init__(self, geo_json_file="", verbose=0, TEST=False,
         *args, **kwargs):
         super().__init__(*args, **kwargs) # Initialisiere die GeoJsonClass
+        BaumPics.__init__(self, *args, **kwargs) # Initialisiere die BaumPicClass
 
         self.verbose = verbose
         self.TEST = TEST
@@ -89,6 +90,7 @@ class BaumLeaflet(GeoJsonClass):
             Füge die Daten eines Baums als neues Feature hinzu
         """
         #obst_sorte = ObstSorten.objects.get(sorten_id=baum.sorten_id)
+        self.init_baum_pic(baum)
         try:
             feature = {
                 "type": "Feature",
@@ -96,6 +98,7 @@ class BaumLeaflet(GeoJsonClass):
                     "baum_nr"   : baum.baum_id,
                     "sorte"     : baum.sorten_id.obst_sorte,
                     'obst_type' : Obst_Type[baum.sorten_id.obst_type],
+                    'baum_pic'  : self.get_first_pic(baum),
                 },
                 "geometry": {
                     "type": "Point",

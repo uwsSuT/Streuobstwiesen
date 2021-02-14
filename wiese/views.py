@@ -211,7 +211,7 @@ class BaumView(WieseObjectMixin, View):
 
     def __find_trees__(self, wid):
         """
-            Suche alle Baäume der Wiese, die sollen unterhalb des Bildes
+            Suche alle Bäume der Wiese, die sollen unterhalb des Bildes
             aufgelistet werden
         """
         trees = ObstBaum.objects.filter(wiese=wid).order_by('baum_id')

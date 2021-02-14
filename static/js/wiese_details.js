@@ -47,9 +47,14 @@ var basemap =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.
 const layer = JSON.parse(document.getElementById('sorten-layer').textContent);
 const wiese_polygon = JSON.parse(document.getElementById('wiese-geo-data').textContent);
 
-function popUp_and_ToolTip(feature, layer) {
+function BaumPopUp(feature, layer) {
     var text = "<table> <tr> <th> Baum Nr. </th>" +
                          "<td>" + layer.feature.properties.baum_nr + "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+        '<td colspan="2">' + 
+            '<a href="/wiese/baum/' + String(layer.feature.properties.baum_nr) + '">'  + 
+        (layer.feature.properties.baum_pic !== null ? '<img src="' + String(layer.feature.properties.baum_pic) + '" style="width:200px">' : '') + '</a>' + '</td>' +
                     "</tr>" +
                     "<tr> <th> Art </th>" +
                          "<td>" + layer.feature.properties.obst_type + "</td>" +
@@ -59,7 +64,8 @@ function popUp_and_ToolTip(feature, layer) {
                     "</tr> </table>";
     layer.bindPopup(text);
     // ACHTUGNG: Dem ToolTip muss ein TEXT übergeben werden; Daher das '"" +'
-    layer.bindTooltip("" + layer.feature.properties.baum_nr, {permanent: true});
+    // Ist wohl eher nicht gewünscht
+    // layer.bindTooltip("" + layer.feature.properties.baum_nr, {permanent: true});
 }
 
 // Schleife über die Sorten Layer
@@ -71,7 +77,7 @@ for (sorte in layer) {
                        icon: ObstIcons[sorte]
                 });
               },
-        onEachFeature: popUp_and_ToolTip
+        onEachFeature: BaumPopUp
     }); 
     points[sorte].addTo(map);
 };
