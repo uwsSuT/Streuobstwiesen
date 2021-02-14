@@ -76,9 +76,13 @@ class BaumPics():
                                     join('/', 'static', 'images', 'baum', f, b))
 
     def get_all_pics(self, baum):
+        if not baum.baum_id in self.baum_pics:
+            return []
         return self.baum_pics[baum.baum_id]
 
     def get_first_pic(self, baum):
+        if not baum.baum_id in self.baum_pics:
+            return 'Kein Bild vorhanden'
         return sorted(self.baum_pics[baum.baum_id])[0]
 
 class BaumSessionClass():

@@ -44,7 +44,7 @@ class WiesenLeaflet(GeoJsonClass):
 
     def get_geo_info4wiese(self, wname):
         """
-            Such die Wiese mit dem Namen un gib die Geo-Info zurück
+            Such die Wiese mit dem Namen und gib die Geo-Info zurück
         """
         for geo_pos in self.geo_struct['features']:
             if geo_pos['properties']['Ort'] == wname:

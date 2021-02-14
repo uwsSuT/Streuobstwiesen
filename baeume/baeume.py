@@ -91,6 +91,7 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
         """
         #obst_sorte = ObstSorten.objects.get(sorten_id=baum.sorten_id)
         self.init_baum_pic(baum)
+        # baum_pic = self.get_first_pic(baum)
         try:
             feature = {
                 "type": "Feature",
@@ -106,7 +107,7 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
                 }
             }
         except:
-            print("__add_geo_feature__: baum: %s" % pformat(baum))
+            print("ERROR at:__add_geo_feature__: baum: %s" % pformat(baum))
             return
         if layer:
             layer['features'].append(feature)
