@@ -137,7 +137,7 @@ class ObstSortenDetView(TemplateView):
         for baum in ObstBaum.objects.filter(sorten_id=sorten_id):
             wiese = Wiese.objects.get(wiesen_id=baum.wiese_id)
             if wiese.name not in wiesen:
-                wiesen[wiese.name] = wiese.wiesen_id
+                wiesen[wiese.www_name] = wiese.wiesen_id
         return wiesen
 
 

@@ -47,7 +47,7 @@ var basemap =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.
 const layer = JSON.parse(document.getElementById('sorten-layer').textContent);
 const wiese_polygon = JSON.parse(document.getElementById('wiese-geo-data').textContent);
 
-function popUp(feature, layer) {
+function popUp_and_ToolTip(feature, layer) {
     var text = "<table> <tr> <th> Baum Nr. </th>" +
                          "<td>" + layer.feature.properties.baum_nr + "</td>" +
                     "</tr>" +
@@ -58,6 +58,8 @@ function popUp(feature, layer) {
                          "<td>" + layer.feature.properties.sorte + "</td>" +
                     "</tr> </table>";
     layer.bindPopup(text);
+    // ACHTUGNG: Dem ToolTip muss ein TEXT übergeben werden; Daher das '"" +'
+    layer.bindTooltip("" + layer.feature.properties.baum_nr, {permanent: true});
 }
 
 // Schleife über die Sorten Layer
@@ -69,7 +71,7 @@ for (sorte in layer) {
                        icon: ObstIcons[sorte]
                 });
               },
-        onEachFeature: popUp
+        onEachFeature: popUp_and_ToolTip
     }); 
     points[sorte].addTo(map);
 };

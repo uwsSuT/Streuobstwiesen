@@ -133,7 +133,7 @@
                         {% for instance in wiesen_list %}
                             <li>
                                 <a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}">
-                                {{ instance.name }}
+                                {{ instance.www_name }}
                                 </a>
                             </li>
                         {% endfor %}

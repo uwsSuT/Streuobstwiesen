@@ -252,12 +252,13 @@ class BaumView(WieseObjectMixin, View):
         # GET method
         # print("baum-detail: %s" % self.kwargs.get('id'))
         baum = ObstBaum.objects.get(baum_id=self.kwargs.get('id'))
-        wiesen_name = Wiese.objects.get(wiesen_id=baum.wiese_id).name
+        wo = Wiese.objects.get(wiesen_id=baum.wiese_id)
         context = {
-            'baum_pics'  : self.__find_pics__(baum, wiesen_name),
+            'baum_pics'  : self.__find_pics__(baum, wo.name),
             'baum_infos' : baum,
             'sorte'      : ObstSorten.objects.get(sorten_id=baum.sorten_id_id),
-            'wiese'      : wiesen_name,
+            'wiese'      : wo.www_name,
+            'wid'        : baum.wiese_id,
             'obstsorten_menu' : self.get_Obst_menu(),
             'wiesen_list' : Wiese.objects.all().order_by('name'),
             'object'     : self.__get_sorten_object__(baum.sorten_id_id)
