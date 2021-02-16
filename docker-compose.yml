@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
 
   hilgi:
-    image: hilgi:
+    image: hilgi:0.8.1
     env_file:
       - hilgi.env
     ports:

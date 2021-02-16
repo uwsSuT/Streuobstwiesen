@@ -1,5 +1,3 @@
-const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-
 function newIcon (color) {
     return new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-' + color + '.png',
@@ -10,6 +8,9 @@ function newIcon (color) {
         shadowSize: [41, 41]
         });
 }
+
+
+
 
 var ObstIcons = {
     'Apfel'     : newIcon('green'),
@@ -23,12 +24,43 @@ var ObstIcons = {
     'Tod'       : newIcon('black')
 };
 
-const map = L.map('map', {
+mymap = L.map('map', {
 	center: [48.43128, 11.35208],
 	zoom: 14,
     maxZoom: 21,
     minZoom: 10
 })
+
+function find_me () {
+    mymap.on('locationfound', function(e) {
+
+      console.log('Location found!');
+
+      var lat = e.latlng.lat;
+      var lon = e.latlng.lng;
+      var locationAccuracy = e.accuracy;
+      var altitude = e.altitude;
+      var altitudeAccuracy = e.altitudeAccuracy;
+      var heading = e.heading;
+      var speed = e.speed;
+      var time = e.timestamp;
+
+        var standort = L.circleMarker([lat, lon], {
+            color : 'blue',
+            radius : 5,
+            weight : 3 
+        });
+
+    standort.addTo(mymap);
+    mymap.setView([lat,lon]);
+
+    });
+}
+
+function getLocation() {
+    mymap.locate();
+    find_me();
+}
 
 // add Hilgertshausen Rathaus als eigenen Layer
 var rathaus = L.circleMarker([48.43128, 11.35208], {
@@ -36,21 +68,21 @@ var rathaus = L.circleMarker([48.43128, 11.35208], {
 	radius : 5,
 	weight : 3
 })
-rathaus.addTo(map)
+rathaus.addTo(mymap)
 
 var basemap =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
 	maxZoom: 20,
 	attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }
-	).addTo(map);
+	).addTo(mymap);
 
-const layer = JSON.parse(document.getElementById('sorten-layer').textContent);
-const wiese_polygon = JSON.parse(document.getElementById('wiese-geo-data').textContent);
+so_layer = JSON.parse(document.getElementById('sorten-layer').textContent);
+wiese_polygon = JSON.parse(document.getElementById('wiese-geo-data').textContent);
 
 // Schleife über die Sorten Layer
 var points = {}
-for (sorte in layer) {
-    points[sorte] = L.geoJSON(layer[sorte], {
+for (sorte in so_layer) {
+    points[sorte] = L.geoJSON(so_layer[sorte], {
         pointToLayer: function(feature, latlng) {
                 return L.marker(latlng, {
                        icon: ObstIcons[sorte]
@@ -58,7 +90,7 @@ for (sorte in layer) {
               },
         onEachFeature: BaumPopUp
     }); 
-    points[sorte].addTo(map);
+    points[sorte].addTo(mymap);
 };
 
 
@@ -66,16 +98,16 @@ var basemaps = {
     "OSM": basemap
 };
 var overlays = {};
-for (sorte in layer) {
+for (sorte in so_layer) {
     overlays[sorte] = points[sorte];
 };
 
 L.control.layers(basemaps, overlays, {
         collapsed: false
-    }).addTo(map);
+    }).addTo(mymap);
 
-var poly = L.polygon(wiese_polygon).addTo(map)
+var poly = L.polygon(wiese_polygon).addTo(mymap)
 
-map.fitBounds(poly.getBounds());
+mymap.fitBounds(poly.getBounds());
 
 

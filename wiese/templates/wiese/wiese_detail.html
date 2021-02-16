@@ -3,21 +3,19 @@
 
 {% block content %}
 <div class="row">
-<h2>{{object.wiesen_id }} - {{ object.www_name }}</h2>
+    <div class="col-xs-9">
+        <h2>{{object.wiesen_id }} - {{ object.www_name }}</h2>
+    </div>
+    <div class="col-xs-3">
+        <button type="button" class="btn btn-info" id='getLocation' onclick=getLocation()>Find Me</button>
+    </div>
 
-    {% if baeume_statisch %}
-        {% if grafik %}
-            <img class="img-fluid" src="{% static grafik %}"style="width:100%">
-        {% else %}
-        Keine Grafik vorhanden
-        {% endif %}
-    {% else %}
-        <!-- Dynamische Präsentation der Bäume mit Laeflet -->
-        {{ baeume|json_script:"sorten-layer" }}
-        {{ obst_icon|json_script:"obst-icons" }}
-        {{ wiese_geo_info|json_script:"wiese-geo-data" }}
-        <div id="map"></div>
-    {% endif %}
+    <!-- Dynamische Präsentation der Bäume mit Laeflet -->
+    {{ baeume|json_script:"sorten-layer" }}
+    {{ obst_icon|json_script:"obst-icons" }}
+    {{ wiese_geo_info|json_script:"wiese-geo-data" }}
+
+    <div id="map"></div>
 
 <!--
     {% if object.obstwiese %}

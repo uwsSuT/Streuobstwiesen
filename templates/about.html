@@ -1,4 +1,4 @@
-{% extends '_base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}About{% endblock title %}
@@ -99,4 +99,81 @@ Die WWW-Seite wurde von der Schäfer &amp; Tobies Software u. Consulting GmbH er
     </tr>
 </tbody>
 </table>
+
+<div id="map"></div>
+
+  <input type="button" value="Find me!" id="btnLocation">
+
+  <p>
+    <b>Location</b>: <span id="lat"></span>, <span id="lon"></span>
+    <br>
+    <b>Location accuracy</b>: <span id="locationAccuracy"></span>
+    <br>
+    <b>Altitude</b>: <span id="altitude"></span>
+    <br>
+    <b>Altitude accuracy</b>: <span id="altitudeAccuracy"></span>
+    <br>
+    <b>Heading</b>: <span id="heading"></span>
+    <br>
+    <b>Speed</b>: <span id="speed"></span>
+    <br>
+    <b>Time</b>: <span id="time"></span>
+  </p>
+
+  <script>
+
+    const map = L.map('map', {
+        center: [48.43128, 11.35208],
+        zoom: 14,
+        maxZoom: 21,
+        minZoom: 10
+    })
+    var basemap =  L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }
+        ).addTo(map);
+
+    function getLocation() {
+
+      map.locate();
+
+    }
+
+    document.getElementById('btnLocation').onclick = getLocation;
+
+    map.on('locationfound', function(e) {
+
+      console.log('Location found!');
+
+      var lat = e.latlng.lat;
+      var lon = e.latlng.lng;
+      var locationAccuracy = e.accuracy;
+      var altitude = e.altitude;
+      var altitudeAccuracy = e.altitudeAccuracy;
+      var heading = e.heading;
+      var speed = e.speed;
+      var time = e.timestamp;
+
+      document.getElementById('lat').innerHTML = lat;
+      document.getElementById('lon').innerHTML = lon;
+      document.getElementById('locationAccuracy').innerHTML = locationAccuracy;
+      document.getElementById('altitude').innerHTML = altitude;
+      document.getElementById('altitudeAccuracy').innerHTML = altitudeAccuracy;
+      document.getElementById('heading').innerHTML = heading;
+      document.getElementById('speed').innerHTML = speed;
+      document.getElementById('time').innerHTML = time;
+
+
+    var standort = L.circleMarker([lat, lon], {
+        color : 'blue',
+        radius : 5,
+        weight : 3 
+    })
+    standort.addTo(map)
+    map.setView([lat,lon])
+
+    });
+  </script>
+
 {% endblock content %}
