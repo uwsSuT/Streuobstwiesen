@@ -3,7 +3,8 @@
 
 {% block title %}Obstsorten{% endblock title %}
 
-{% block content %}{
+{% block content %}
+    <h2>{{ object.obst_type}} : {{ object.obst_sorte }}</h2>
     {{ baeume|json_script:"markers-data" }}
 
     <div id="map"></div>

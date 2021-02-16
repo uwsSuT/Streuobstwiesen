@@ -98,7 +98,7 @@ class ObstSortenView(ObstLinkIn, TemplateView):
                   }
         return render(request, self.template_name, context)
 
-class ObstSortenDetView(TemplateView):
+class ObstSortenDetView(ObstLinkIn, TemplateView):
     template_name = 'obstsorten_detail.html'
 
     def __find_grafik__(self, oid):
@@ -152,6 +152,7 @@ class ObstSortenDetView(TemplateView):
                    'wiesen_list'     : Wiese.objects.all().order_by('wiesen_id'),
                    'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
                    'baeume'          : baeume.get_geo_objects4sorte(ob['sorten_id']),
+                   'obstsorten_menu' : self.get_Obst_menu(),
                   }
         return render(request, self.template_name, context)
 

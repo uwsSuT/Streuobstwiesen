@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+#   Script zum Setzen der Version in den __init__.py Files
+#   Das Script wird im Normalfall vom "make" aufgerufen
+#
+#   Das Setzen der eigentlichen Version-Nr. sollte folglich im
+#   makefile erfolgen
+#
 
 INIT_FILES="./hilgi/__init__.py"
 
