@@ -19,8 +19,10 @@ class AboutPageView(TemplateView):
     template_name = 'about.html'
 
     def get(self, request, *args, **kwargs):
-        from hilgi import Version
-        context = { 'VERSION' : Version }
+        from hilgi import Version, Datum
+        context = { 'VERSION' : Version,
+                    'DATUM'   : Datum,
+                  }
         return render(request, self.template_name, context)
 
 class ObstLinkIn(object):

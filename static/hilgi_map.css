@@ -35,3 +35,11 @@ div.navbar {
 #getLocation {
     margin-top: 5px;
 }
+
+#nav_obstsorten {
+    margin-top: 15px;
+}
+
+#nav_blue {
+    color: rgb(51, 122, 183);
+}
