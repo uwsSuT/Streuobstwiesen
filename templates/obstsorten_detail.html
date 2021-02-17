@@ -4,53 +4,63 @@
 {% block title %}Obstsorten{% endblock title %}
 
 {% block content %}
-<div class="panel-body">
-    <table width="100%" class="table table-striped table-bordered table-hover" id="obstsorten-liste">
-        <thead>
-            <tr>
-                <th>Obst Typ</th>
-                <th>Sorte</th>
-                <th>Reife</th>
-                <th>Verwendung</th>
-                <th>Geschmack</th>
-                <th>Lagerfähigkeit</th>
-                <th>Allergie Info</th>
-                <th>WWW</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h2>{{ object.obst_type}} : {{ object.obst_sorte }}</h2>
+    {{ baeume|json_script:"markers-data" }}
+
+    <div id="map"></div>
+
+    <div class="panel-body">
+        <table width="100%" class="table table-striped table-bordered table-hover" id="obstsorten-liste">
+            <thead>
                 <tr>
-                    <td>{{ object.obst_type }}</td>
-                    <td>{{ object.obst_sorte }}</td>
-                    <td>{{ object.pflueck_reif }}</td>
-                    <td>{{ object.verwendung }}</td>
-                    <td>{{ object.geschmack }}</td>
-                    <td>{{ object.lagerfaehigkeit }}</td>
-                    <td>{{ object.alergie_info }}</td>
-                    <td>
-			{% for xurl in object.www %}
-			    <a href="{{ xurl }}">{{xurl}}</a><br>
-			{% endfor %}
-		    </td>
+                    <th>Obst Typ</th>
+                    <th>Sorte</th>
+                    <th>Reife</th>
+                    <th>Verwendung</th>
+                    <th>Geschmack</th>
+                    <th>Lagerfähigkeit</th>
+                    <th>Allergie Info</th>
+                    <th>WWW</th>
                 </tr>
-        </tbody>
-    </table>
-    <p>
-	{% if object.picture %}
-	    <img class="obst_big_pic" src="{% static object.picture %}">
-	{% endif %}
-    </p>
-    <h2>
-	Bäume mit dieser Frucht findet man auf folgenden Wiesen:
-    </h2>
-    <table width="50%" class="table table-striped table-bordered table-hover" id="wiesen-liste">
-        <tbody>
-	    {% for wiese, id in wiesen_sorte.items %}
-	    <tr>
-		<td> <a href="/wiese/{{ id }}"> {{ wiese }}</a> </td>
-	    </tr>
-	    {% endfor %}
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{ object.obst_type }}</td>
+                        <td>{{ object.obst_sorte }}</td>
+                        <td>{{ object.pflueck_reif }}</td>
+                        <td>{{ object.verwendung }}</td>
+                        <td>{{ object.geschmack }}</td>
+                        <td>{{ object.lagerfaehigkeit }}</td>
+                        <td>{{ object.alergie_info }}</td>
+                        <td>
+    			{% for xurl in object.www %}
+    			    <a href="{{ xurl }}">{{xurl}}</a><br>
+    			{% endfor %}
+    		    </td>
+                    </tr>
+            </tbody>
+        </table>
+        <p>
+    	{% if object.picture %}
+    	    <img class="obst_big_pic" src="{% static object.picture %}">
+    	{% endif %}
+        </p>
+        <h2>
+    	Bäume mit dieser Frucht findet man auf folgenden Wiesen:
+        </h2>
+        <table width="50%" class="table table-striped table-bordered table-hover" id="wiesen-liste">
+            <tbody>
+    	    {% for wiese, id in wiesen_sorte.items %}
+    	    <tr>
+    		<td> <a href="/wiese/{{ id }}"> {{ wiese }}</a> </td>
+    	    </tr>
+    	    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% block script %}
+  <script src="{% static 'js/obstsorte_map.js' %}"></script>
+{% endblock script %}
+
 {% endblock content %}

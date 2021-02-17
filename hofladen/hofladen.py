@@ -8,12 +8,14 @@ from csv import reader
 from pprint import pformat
 
 from hofladen.models import Hofladen, HofRubrik, Unterrubrik
+from hilgi.utils import GeoJsonClass
 
 LADENPOS = 1
 Eigenschaften = ('BIO', 'SIEGEL', 'UNVERPACKT')
 
-class HofladenCl():
-    def __init__(self, csv_name="", geo_json="", TEST=False, verbose=0):
+class HofladenCl(GeoJsonClass):
+    def __init__(self, csv_name="", geo_json="", TEST=False, verbose=0,
+                 *args, **kwargs):
         """
             Die Class soll alle Funktion vom Erzeugen eines neuen Hofladens
             bis zum Erzeugen einer GEO-JSON Struct für das WWW-GUI
@@ -22,6 +24,7 @@ class HofladenCl():
             gegeben sein.
             Für das GUI müssen diese leer sein!
         """
+        super().__init__(*args, **kwargs) # Initialisiere die GeoJsonClass
         if csv_name and not exists(csv_name):
             print("ERROR: Die CSV_Datei: '%s' existiert nicht" % csv_name)
             sys.exit(1)
@@ -392,21 +395,6 @@ class HofladenCl():
             )
         obj.save()
 
-    def __init_goejson_struct__(self):
-        """
-            Bau die GEOjson Strucktur auf
-        """
-        self.geojson_dict = {
-            "type": "FeatureCollection",
-            "crs": {
-                "type": "name",
-                "properties": {
-                    "name": "EPSG:4326"
-                }
-            },
-            "features": []
-        }
-
     def __add_geo_feature__(self, hof):
         """
             Füge die Daten eines Hofs als neues Feature hinzu
@@ -463,7 +451,6 @@ class HofladenCl():
         #
         # lies die Daten aus der DB
         #
-        self.__init_goejson_struct__()
         if urubrik_id:
             # Hol nur die Laeden die diese UnterRubrik (Artikel) haben
             urubrik = Unterrubrik.objects.get(id=urubrik_id)
@@ -494,7 +481,7 @@ class HofladenCl():
             if rubrik.name.upper() in Eigenschaften:
                 continue
             rubriken.append(rubrik.name)
-        
+
         return rubriken
 
     def get_rubriken(self):

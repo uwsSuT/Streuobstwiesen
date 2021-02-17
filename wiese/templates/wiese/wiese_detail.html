@@ -3,14 +3,21 @@
 
 {% block content %}
 <div class="row">
-<h2>{{object.wiesen_id }} - {{ object.name }}</h2>
+    <div class="col-xs-9">
+        <h2>{{object.wiesen_id }} - {{ object.www_name }}</h2>
+    </div>
+    <div class="col-xs-3">
+        <button type="button" class="btn btn-info" id='getLocation' onclick=getLocation()>Find Me</button>
+    </div>
 
-    {% if grafik %}
-	<img class="img-fluid" src="{% static grafik %}"style="width:100%">
-    {% else %}
-	Keine Grafik vorhanden
-    {% endif %}
+    <!-- Dynamische Präsentation der Bäume mit Laeflet -->
+    {{ baeume|json_script:"sorten-layer" }}
+    {{ obst_icon|json_script:"obst-icons" }}
+    {{ wiese_geo_info|json_script:"wiese-geo-data" }}
 
+    <div id="map"></div>
+
+<!--
     {% if object.obstwiese %}
 	<p>Die Wiese ist eine Obstwiese</p>
     {% endif %}
@@ -18,7 +25,7 @@
     {% if object.bluehwiese %}
 	<p>Diese Wiese ist eine Blühwiese</p>
     {% endif %}
-
+-->
     <div class="panel-body">
 	<table width="100%" class="table table-striped table-bordered table-hover" id="baum-liste">
 	    <thead>
@@ -58,5 +65,10 @@
 	</table>
     </div>
 </div>
-{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/wiese_details.js' %}"></script>
+{% endblock script %}
+
+{% endblock content %}
 

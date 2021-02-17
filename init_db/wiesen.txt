@@ -1,15 +1,27 @@
-1:Sportplatz_Bruenndlkapelle:True:True
-2:Bruenndlweg_Richtung_Thalmannsdorf:True:False
-3:Gumpmuehle:True:False
-4:Spielplatz:True:False
-5:Feldkreuz:True:False
-6:Kunstpfad_Ost:True:False
-7:Kunstpfad_Nord:True:False
-8:Buergermeisterwiese:True:False
-9:Mannrieder_Berg:True:False
-10:Stadelham_Gartelsried:True:False
-11:Osterfeuer:True:False
-12:MuenchnerStr_Ost:True:False
-13:MuenchnerStr_West:True:False
-14:Ferlhof_Kunstpfad:True:False
-15:Skater_Tennisplatz:True:False
+#
+#   Auflistung der Wiesen-Bezeichnung
+#   die Bedeutung der Splaten sind:
+#
+# Spalte 1: ID in der PostgreSQL
+# Spalte 2: Name im Filesystem; In einem so benannten Unterverezichnis werden die Bilder
+#                               der zugehörigen Bäume abgelegt
+# Spalte 3: Streuobstwiese;  Boolean: Ist diese Wiese eine Strueobstwiese ( True | False )
+# Spalte 4: Blühwiese;       Boolean: Ist diese Wiese eine Blühwiese ( True | False )
+# Spalte 5: WWW-Name;        Name der im QGis und im der WWW-GUI verwendet wird
+#                       ACHTUNG: Die Namen im QGIS und hier müssen übereinstimmen
+#
+1:Sportplatz_Bruenndlkapelle:True:True:Sportplatz / Brünndlkapelle
+2:Bruenndlweg_Richtung_Thalmannsdorf:True:False:Brünndlkapelle / Richtung Thalmannsdorf
+3:Gumpmuehle:True:False:Flurbereinigung Gumpmühle
+4:Spielplatz:True:False:Spielplatz
+5:Feldkreuz:True:False:Feldkreuz
+6:Kunstpfad_Ost:True:False:Kunstpfad Ost
+7:Kunstpfad_Nord:True:False:Kunstpfad Nord
+8:Buergermeisterwiese:True:False:Bürgermeister-Wiese
+9:Mannrieder_Berg:True:False:Mannrieder-Berg
+10:Stadelham_Gartelsried:True:False:Stadelham - Gartelsried
+11:Osterfeuer:True:False:Osterfeuer
+12:MuenchnerStr_Ost:True:False:Münchnerstr. Ost
+13:MuenchnerStr_West:True:False:Münchnerstr. West
+14:Ferlhof_Kunstpfad:True:False:Ferlhof - Kunstpfad
+15:Skater_Tennisplatz:True:False:Skater-Tennisplatz

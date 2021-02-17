@@ -1,5 +1,6 @@
 #!/bin/python3
 
+
 #
 # Initialisiere die Obstsorten und Hoflaeden in der Postgres DB
 #
@@ -24,8 +25,10 @@ from django.conf import settings
 from pprint import pformat
 
 from schtob.lib.util import compile_start_time
+from baeume.baeume import BaumLeaflet
+from init_db import Baeume_geo
 
-from schtob.init_db.db_env import DATABASES 
+from init_db.db_env import DATABASES
 
 #
 # Hard coded Switch damit das Script auf Heroku laufen kann
@@ -120,16 +123,21 @@ def insert_wiesen(fname):
     """
     with open(fname, newline='') as csvfile:
         for l in csvfile:
+            # Kommentar
+            if l.strip()[0] == '#':
+                continue
+            if len(l.strip()) == 0:
+                continue
             vals = l.split(':')
             wiesen_id = int(vals[0])
             name      = vals[1]
             obstwiese = vals[2].upper() == 'TRUE'
-            bluehwiese = vals[2].upper() == 'FALSE'
+            bluehwiese = vals[3].upper() == 'TRUE'
+            www_name  = vals[4].strip()
 
             obj = Wiese(wiesen_id=wiesen_id, name=name, obstwiese=obstwiese,
-                    bluehwiese=bluehwiese)
+                    bluehwiese=bluehwiese, www_name=www_name)
             obj.save()
-
 
 def re_init():
     delete_all()
@@ -230,7 +238,10 @@ def insert_baeume(fname):
             obj = ObstBaum(baum_id=bid, sorten_id=sorten_id, wiese=wiese,
                            zustand=zustand, letzter_schnitt=letzter_schnitt)
             obj.save()
-
+    #
+    # Und jetzt holen wir die Geo-Coodinates
+    #
+    BaumLeaflet(Baeume_geo, verbose=2)
 
 if __name__ == '__main__':
 
