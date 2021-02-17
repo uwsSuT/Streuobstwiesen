@@ -1,4 +1,4 @@
-{% extends '_base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}About{% endblock title %}
@@ -6,12 +6,19 @@
 {% block content %}
 <h1>About Page</h1>
 
-<h3> Darstellung der Streuobstwiesen der Gemenide Hilgertshausen:</h3>
-<p>Version: {{VERSION}} </p>
+<h1>WWW-Seite der Nachhaltigkeitsgruppe Hilgertshausen</h1>
+<h3>Darstellung der Streuobstwiesen der Gemeinde Hilgertshausen:</h3>
+<h3> Darstellung und Suche von Direktvermarktern und Hofläden rund um Hilgertshausen</h3>
+<h4>Version: {{VERSION}} vom {{ DATUM }}</h4>
 
 <p>
 Diese WWW-Seite soll die Streuobst- und Blühwiesen der Gemeinde Hilgertshausen-Tandern
-Ortsteil Hilgertshausen abbilden.
+Ortsteil Hilgertshausen, sowie nachhaltige Einkaufsmöglichkeiten rund um die Gemeinde, abbilden.
+</p>
+<p>
+    Wir verfolgen mit dieser WWW-Seite keinen wirtschaftlichen Zweck,
+    sondern möchten die Umwelt und die Nachhaltigkeitsbestrebungen
+    in unserer Gemeinde und dem Umkreis fördern.
 </p>
 <p>
 Die gezeigten Darstellungen können durchaus Fehler beinhalten.
@@ -97,4 +104,5 @@ Die WWW-Seite wurde von der Schäfer &amp; Tobies Software u. Consulting GmbH er
     </tr>
 </tbody>
 </table>
+
 {% endblock content %}

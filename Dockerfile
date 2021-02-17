@@ -10,6 +10,7 @@ WORKDIR /app
 COPY benutzer /app/benutzer/
 COPY hilgi /app/hilgi/
 COPY wiese /app/wiese/
+COPY baeume /app/baeume/
 COPY obstsorten /app/obstsorten/
 COPY hofladen /app/hofladen/
 COPY static /app/static/

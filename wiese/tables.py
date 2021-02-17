@@ -13,8 +13,8 @@ class WiesenTable(tables.Table):
         row_attrs = {
                 'data-id' : lambda record: record.pk,
                 }
-        fields = ('wiesen_id', 'name')
+        fields = ('wiesen_id', 'www_name')
 
     # generiere einen URL-Link für den Namen-der Wiese
     wiesen_id =  TemplateColumn('<a href="/wiese/{{record.pk}}">{{record.wiesen_id}}</a>')
-    name = TemplateColumn('<a href="/wiese/{{record.pk}}">{{record.name}}</a>')
+    www_name = TemplateColumn('<a href="/wiese/{{record.pk}}">{{record.www_name}}</a>')

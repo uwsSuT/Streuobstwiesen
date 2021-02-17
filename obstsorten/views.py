@@ -5,6 +5,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import TemplateView
 from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type
+from baeume.baeume import BaumLeaflet
 
 DEBUG = int(os.environ.get('DEBUG'))
 
@@ -18,8 +19,10 @@ class AboutPageView(TemplateView):
     template_name = 'about.html'
 
     def get(self, request, *args, **kwargs):
-        from hilgi import Version
-        context = { 'VERSION' : Version }
+        from hilgi import Version, Datum
+        context = { 'VERSION' : Version,
+                    'DATUM'   : Datum,
+                  }
         return render(request, self.template_name, context)
 
 class ObstLinkIn(object):
@@ -97,7 +100,7 @@ class ObstSortenView(ObstLinkIn, TemplateView):
                   }
         return render(request, self.template_name, context)
 
-class ObstSortenDetView(TemplateView):
+class ObstSortenDetView(ObstLinkIn, TemplateView):
     template_name = 'obstsorten_detail.html'
 
     def __find_grafik__(self, oid):
@@ -136,7 +139,7 @@ class ObstSortenDetView(TemplateView):
         for baum in ObstBaum.objects.filter(sorten_id=sorten_id):
             wiese = Wiese.objects.get(wiesen_id=baum.wiese_id)
             if wiese.name not in wiesen:
-                wiesen[wiese.name] = wiese.wiesen_id
+                wiesen[wiese.www_name] = wiese.wiesen_id
         return wiesen
 
 
@@ -144,10 +147,14 @@ class ObstSortenDetView(TemplateView):
     def get(self, request, sid=None, *args, **kwargs):
         # GET method
         ob = self.get_queryset()
+        baeume = BaumLeaflet()
+
         context = {'object': ob,
-                   'wiesen_sorte' : self.find_wiesen(ob['sorten_id']),
-                   'wiesen_list' : Wiese.objects.all().order_by('wiesen_id'),
+                   'wiesen_sorte'    : self.find_wiesen(ob['sorten_id']),
+                   'wiesen_list'     : Wiese.objects.all().order_by('wiesen_id'),
                    'obstsorten_list' : ObstSorten.objects.all().order_by('sorten_id'),
+                   'baeume'          : baeume.get_geo_objects4sorte(ob['sorten_id']),
+                   'obstsorten_menu' : self.get_Obst_menu(),
                   }
         return render(request, self.template_name, context)
 

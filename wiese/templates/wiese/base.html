@@ -12,138 +12,151 @@
     <title>{% block title %}Wiesen-Verwaltung{% endblock title %}</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <!-- MetisMenu CSS -->
-    <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet">
+  <!-- LeafLet  -->
+  <link rel="stylesheet" href="{% static 'css/leaflet.css' %}" />
+  <script src="{% static 'js/leaflet.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'leaflet-plugins/leaflet-markercluster/MarkerCluster.css' %}"/>
+  <link rel="stylesheet" href="{% static 'leaflet-plugins/leaflet-markercluster/MarkerCluster.Default.css' %}"/>
+  <script src="{% static 'leaflet-plugins/leaflet-markercluster/MarkerCluster.js' %}">    </script>
 
-    <!-- Custom CSS -->
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-
-    <!-- jQuery -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    
-
-    <!-- Custom Fonts -->
-    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet"     type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <link rel="stylesheet" href="{% static 'hilgi_map.css' %}">
+  
+  <script src="{% static 'js/BaumPopUp.js' %}">    </script>
+ 
 </head>
 <body>
 
 {% if user.is_authenticated %}
-    <div id="wrapper">
- <!-- Navigation -->
+    <div class="navbar">
+        <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/">
-                    <img class="rounded-circle" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" height=27 border=5px>
-                </a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/">
+                            <img class="rounded-circle" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" height=27 border=5px>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/"> Hilgertshausen</a>
+                    </li>
+                </ul>
             </div>
             <!-- /.navbar-header -->
-            <ul class="nav navbar-nav">
-                <li>
-                <a class="navbar-brand" href="https://www.hilgertshausen-tandern.de/"> Hilgertshausen</a>
-                </li>
-                <li>
-                    <a class="navbar-brand" href="/obstsorten">Obstsorten</a>
-                </li>
-            </ul>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li>
-                            <a class="p-2 text-dark" href="{% url 'about' %}">About</a>
-                        </li>
-    {% if user.is_staff %}
-                        <li>
-                            <a class="p-2 text-dark" href="/">Gruppen Seite</a>
-                        </li>
-    {% endif %}
-                        <li>
-                            <a href="{% url 'account_logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-    <!-- /.navbar-top-links -->
-
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li>
-                    <a href="{% url 'wiese:wiesen-list' %}"><i class="fa fa-dashboard fa-fw"></i>     Überblick</a>
-                </li>
-                {% if wiesen_list %}
-                <li>
-                    <a href="#"><i class="fa fa-eye fa-fw"></i> Obstwiesen<span     class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        {% for instance in wiesen_list %}
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <a id="nav_obstsorten" class="nav navbar-nav" href="/obstsorten">Obstsorten</a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a id="nav_blue" class="nav navbar-nav" href="/hofladen/">Hofläden</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i id="nav_blue" class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+        {% if user.is_staff %}
                             <li>
-                                <a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}">
-                                {{ instance.name }}
-                                </a>
+                                <a class="p-2 text-dark" href="/">Gruppen Seite</a>
                             </li>
-                        {% endfor %}
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-                {% endif %}
-                {% if obstsorten_menu %}
-                <li>
-                    <a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                    {% for otype in obstsorten_menu %}
-                        <li>
-                            <a href="#"><i class="fa fa-eye fa-fw"></i>{{ otype.name }}
-                                <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                {% for o in otype.obstsorten %}
-                                    <li>
-                                        <a href="{% url 'obstsorten_detail' o %}"> {{ o }} </a>
-                                    </li>
-                                {% endfor %}
+        {% endif %}
+                            <li>
+                                <a href="{% url 'account_logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li>
+                                <a class="p-2 text-dark" href="{% url 'about' %}">Kontakt</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- /.navbar-top-links -->
+    <div class="row">
+        <div class="col-sm-2">
+           <nav>
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse collapse in">
+                            <ul class="nav" id="side-menu">
+                                <li>
+                                    <a href="{% url 'wiese:wiesen-list' %}"><i class="fa fa-dashboard fa-fw"></i>     Überblick</a>
+                                </li>
+                                {% if wiesen_list %}
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-eye fa-fw"></i>
+                                           Obstwiesen
+                                        <i class="fa fa-caret-down"></i>
+                                    </a>
+                                    <ul class="nav nav-second-level">
+                                        {% for instance in wiesen_list %}
+                                            <li>
+                                                <a href="{% url 'wiese:wiesen-detail' instance.wiesen_id %}">
+                                                {{ instance.www_name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <!-- /.nav-second-level -->
+                                </li>
+                                {% endif %}
+                                {% if obstsorten_menu %}
+                                <li>
+                                    <a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>    Obstsorten
+                                        <i class="fa fa-caret-down"></i>
+                                    </a>
+                                    <ul class="nav nav-second-level">
+                                    {% for otype in obstsorten_menu %}
+                                        <li>
+                                            <a href="#"><i class="fa fa-eye fa-fw"></i>
+                                                {{ otype.name }}
+                                                <i class="fa fa-caret-down"></i>
+                                            </a>
+                                            <ul class="nav nav-second-level">
+                                                {% for o in otype.obstsorten %}
+                                                    <li>
+                                                        <a href="{% url 'obstsorten_detail' o %}"> {{ o }} </a>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten</a>
+                                </li>
+                                {% endif %}
                             </ul>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </li>
-                {% else %}
-                <li>
-                    <a href="{% url 'obstsorten' %}"><i class="fa fa-eye fa-fw"></i>  Obstsorten</a>
-                </li>
-                {% endif %}
-            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
+                    </div>
+            <!-- /.navbar-static-side -->
+           </nav>
         </div>
-        <!-- /.sidebar-collapse -->
-    </div>
-    <!-- /.navbar-static-side -->
-</nav>
-
-        <div id="page-wrapper">
-            {% block content %}{% endblock %}
+        <div class="col-sm-9">
+              {% block content %}{% endblock %}
         </div>
-        <!-- /#page-wrapper -->
 
     </div>
-    <!-- /#wrapper -->
-
+   
     <!-- Metis Menu Plugin JavaScript -->
     <script src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
 
@@ -173,6 +186,9 @@
         </div>
     </div>
 {% endif %}
+ 
+{% block script %} {% endblock %}
+
 </body>
 
 </html>

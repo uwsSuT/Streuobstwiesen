@@ -28,9 +28,10 @@ class Wiese(models.Model):
     # grafik        = models.ImageField(blank=True, upload_to='images/Wiese', default=None)
     obstwiese     = models.BooleanField(default=True)
     bluehwiese    = models.BooleanField(default=False)
+    www_name      = models.CharField(max_length=128, blank=True, null=True)
 
     def __str__(self):
-        return self.name
+        return self.www_name
 
 class ObstBaum(models.Model):
     baum_id     = models.AutoField(primary_key=True)
@@ -39,6 +40,7 @@ class ObstBaum(models.Model):
     # bilder      = ArrayField(models.ImageField(upload_to='uploads/Baum'), blank=True, size=20)
     zustand     = models.CharField(max_length=248, blank=True)
     letzter_schnitt = models.DateField(null=True, blank=True)
+    coordinate = models.CharField(max_length=24, blank=True, null=True)
 
     def __str__(self):
         try:
