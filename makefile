@@ -3,9 +3,9 @@
 # einmal local 
 # einmal für Heroku
 #
-## uws : 2021.02.17
+## uws : 2021.03.08
 
-VERSION = 0.8.1.1
+VERSION = 0.8.1.2
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum

@@ -57,7 +57,7 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
                             wiesen_id=geo_pos['properties']['Wiesen_Nr'])
             zustand = geo_pos['properties']['Zustand']
             if geo_pos['properties']['Schnitt']:
-                    letzter_schnitt = compile_start_time(
+                letzter_schnitt = compile_start_time(
                             geo_pos['properties']['Schnitt'],
                             tformat='DATETIME')
             else:
