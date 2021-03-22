@@ -1,6 +1,6 @@
 from django import forms
 
-from obstsorten.models import Wiese
+from wiese.models import Wiese
 
 class WieseModelForm(forms.ModelForm):
     class Meta:

@@ -51,7 +51,8 @@ if not settings.configured:
 
 
 from csv import reader
-from obstsorten.models import Obst_Type, ObstSorten, Wiese, ObstBaum
+from obstsorten.models import Obst_Type, ObstSorten, ObstBaum
+from wiese.models import Wiese
 from hofladen.models import Hofladen
 
 enums = {
@@ -248,4 +249,5 @@ if __name__ == '__main__':
 
     insert_obstsorten('init_db/Obstsorten.csv')
     insert_wiesen('init_db/wiesen.txt')
-    insert_baeume('init_db/Baeume.csv')
+    # insert_baeume('init_db/Baeume.csv')
+    BaumLeaflet(Baeume_geo, verbose=2)

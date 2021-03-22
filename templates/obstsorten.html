@@ -15,7 +15,7 @@
                 <th>Geschmack</th>
                 <th>Lagerfähigkeit</th>
                 <th>Allergie Info</th>
-                <th>Bild</th>
+                {# <th>Bild</th> #}
                 <th>WWW</th>
             </tr>
         </thead>
@@ -29,11 +29,13 @@
                     <th>{{ instance.geschmack }}</th>
                     <th>{{ instance.lagerfaehigkeit }}</th>
                     <th>{{ instance.alergie_info }}</th>
+                    {% comment %}
                     <th>
 			{% if instance.picture %}
 			    <img class="obstpic" src="{% static instance.picture %}">
 			{% endif %}
-		    </th>
+                    </th>
+                    {% endcomment %}
                     <th>
 			{% for xurl in instance.www %}
 			    <a href="{{ xurl }}">{{xurl}}</a><br>

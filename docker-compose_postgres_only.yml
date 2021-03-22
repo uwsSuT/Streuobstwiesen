@@ -10,7 +10,8 @@ services:
     env_file:
       - pg.env
     volumes:
-      - /home/uws/postgres/data:/var/lib/postgresql/data
+      # - /home/uws/postgres/data:/var/lib/postgresql/data
+      - /home/uws/postgres/new_data:/var/lib/postgresql/data
     restart: unless-stopped
 
   adminer:

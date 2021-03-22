@@ -35,9 +35,9 @@
 <body>
 
 {% if user.is_authenticated %}
-    <div class="navbar">
+    <nav class="navbar">
+        <div class="container-fluid">
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -57,16 +57,59 @@
             </div>
             <!-- /.navbar-header -->
             <div class="collapse navbar-collapse" id="myNavbar">
-                <a id="nav_obstsorten" class="nav navbar-nav" href="/obstsorten">Obstsorten</a>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a id="nav_blue" class="nav navbar-nav" href="/hofladen/">Hofläden</a>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a id="nav_obstsorten" class="nav navbar-nav" href="/obstsorten">
+                            Obstsorten
+                        </a>
                     </li>
+{% if user.is_superuser %}
+                    {# Administration der WiesenPlanung #}
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Pflegeplan
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a id="nav_blue" class="nav navbar-nav"
+                                                     href="/wiese/pflege/baeume/">
+                                        Bäume
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="nav_blue" class="nav navbar-nav"
+                                                     href="/wiese/pflege/blumen/">
+                                        Blumen
+                                    </a>
+                                </li>
+                                <li>>
+                                    <a id="nav_blue" class="nav navbar-nav"
+                                                     href="/wiese/pflege/graeser/">
+                                        Gräser
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="nav_blue" class="nav navbar-nav"
+                                                     href="/wiese/pflege/kraeuter/">
+                                        Kräuter
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                </ul>
+{% endif %}
+                <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i id="nav_blue" class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a id="nav_blue" class="nav navbar-nav" href="/hofladen/">
+                                    Hofläden
+                                </a>
+                            </li>
         {% if user.is_staff %}
                             <li>
                                 <a class="p-2 text-dark" href="/">Gruppen Seite</a>
@@ -85,8 +128,7 @@
                     <!-- /.dropdown -->
                 </ul>
             </div>
-        </nav>
-    </div>
+    </nav>
     <!-- /.navbar-top-links -->
     <div class="row">
         <div class="col-sm-2">

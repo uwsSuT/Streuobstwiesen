@@ -7,7 +7,8 @@ import codecs
 from csv import reader
 from pprint import pformat
 
-from obstsorten.models import ObstBaum, ObstSorten, Wiese, Obst_Type
+from obstsorten.models import ObstBaum, ObstSorten, Obst_Type
+from wiese.models import Wiese
 from schtob.lib.util import compile_start_time
 from hilgi.utils import GeoJsonClass, BaumPics
 

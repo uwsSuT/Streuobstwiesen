@@ -24,7 +24,7 @@ from pprint import pformat
 
 from schtob.lib.util import compile_start_time
 
-from schtob.init_db.db_env import DATABASES 
+from schtob.init_db.db_env import DATABASES
 
 #
 # Hard coded Switch damit das Script auf Heroku laufen kann
@@ -47,7 +47,8 @@ if not settings.configured:
 
 
 from csv import reader
-from obstsorten.models import Obst_Type, ObstSorten, Wiese, ObstBaum
+from obstsorten.models import Obst_Type, ObstSorten, ObstBaum
+from wiese.models import Wiese
 from hofladen.models import Hofladen
 
 enums = {

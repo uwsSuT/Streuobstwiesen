@@ -1,6 +1,8 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
+from wiese.models import Wiese
+
 Obst_Type = ( 'Apfel', 'Birne', 'Kirsche', 'Zwetschge', 'Nuss', 'Quitte', 'Mispel', 'unbekannt', 'Tod')
 
 class ObstSorten(models.Model):
@@ -20,18 +22,6 @@ class ObstSorten(models.Model):
 
     def __str__(self):
         return self.obst_sorte
-
-class Wiese(models.Model):
-    wiesen_id     = models.IntegerField(primary_key=True)
-    name          = models.CharField(max_length=64)
-    # bilder        = ArrayField(models.CharField(max_length=128), blank=True, null=True, size=20)
-    # grafik        = models.ImageField(blank=True, upload_to='images/Wiese', default=None)
-    obstwiese     = models.BooleanField(default=True)
-    bluehwiese    = models.BooleanField(default=False)
-    www_name      = models.CharField(max_length=128, blank=True, null=True)
-
-    def __str__(self):
-        return self.www_name
 
 class ObstBaum(models.Model):
     baum_id     = models.AutoField(primary_key=True)

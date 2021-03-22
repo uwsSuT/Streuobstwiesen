@@ -1,7 +1,7 @@
 from django_tables2 import tables, TemplateColumn, CheckBoxColumn
 from django_tables2.columns import DateTimeColumn, LinkColumn
 
-from obstsorten.models import Wiese
+from wiese.models import Wiese
 
 class WiesenTable(tables.Table):
 
