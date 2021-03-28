@@ -1,5 +1,5 @@
 # Base Image
-FROM python:3.6
+FROM python:3.7
 
 # create and set working directory
 RUN mkdir /app
@@ -16,8 +16,14 @@ RUN pip3 install --upgrade pip && \
         tzdata \
         gdal-bin \
         && \
+    apt-get purge -y gcc && \
+    apt-get purge -y git && \
+    apt-get purge -y python2.7 && \
+    apt-get purge -y tcl && \
+    apt-get purge -y perl && \
+    apt-get autoremove -y && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /var/lib/apt/lists/* /var/cache/debconf/* && \
     rm -f /app/hilgi/settings.local.py && \
     useradd uws
 
@@ -49,10 +55,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PORT=8000
 
 # Schmeiss überflüssige Bilder raus
-RUN rm -rf /app/staticfiles/images
-USER uws
+RUN rm -rf /app/staticfiles/images /root/.cache/* /usr/share/doc/*
 
 # Expose is NOT supported by Heroku
 # EXPOSE 8888
 #CMD gunicorn hilgi.wsgi:application --bind 0.0.0.0:$PORT
+USER uws
 CMD uwsgi --module=hilgi.wsgi:application --master --pidfile=/tmp/project-master.pid --http=0.0.0.0:$PORT --socket=/tmp/djnsr.sock --chmod-socket=666

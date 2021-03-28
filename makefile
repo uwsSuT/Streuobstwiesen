@@ -3,9 +3,9 @@
 # einmal local 
 # einmal für Heroku
 #
-## uws : 2021.03.27
+## uws : 2021.03.28
 
-VERSION = 0.8.1.3
+VERSION = 0.8.1.4
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -39,7 +39,7 @@ make_schtob:
 	cp ../NetWorker_REST_API/schtob/lib/*.py schtob/lib/
 
 build_local: make_schtob
-	- rm Pipfile.lock
+	- rm -f Pipfile.lock
 	./manage_version.sh $(VERSION)
 	cp -p hilgi/settings.local.py hilgi/settings.py
 	mkdir -p staticfiles
@@ -52,7 +52,8 @@ build_local: make_schtob
 	echo "    docker-compose -f docker-compose.yml up"
 
 build_heroku: make_schtob
-	- rm Pipfile.lock
+	- rm -f Pipfile.lock
+	./manage_version.sh $(VERSION)
 	cp -p hilgi/settings.heroku.py hilgi/settings.py
 	cp -p Pipfile.heroku Pipfile
 	HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu' \
@@ -65,6 +66,10 @@ build_heroku: make_schtob
 	heroku run python3 manage.py makemigrations -a hilgi-docker
 	heroku run python3 manage.py migrate -a hilgi-docker
 	rm -rf schtob
+	echo "Go To Heroku ;   heroku run bash -a hilgi-docker"
+	echo "python manage.py shell"
+	echo "from init_db.initialize import re_init "
+	echo "re_init()"
 
 copy_wiesen:
 	echo "Das geht nur auf dem LAPTOP"
