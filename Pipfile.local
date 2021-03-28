@@ -20,6 +20,7 @@ django-tables2 = "2.3.2"
 geocoder = "*"
 arcgis = "*"
 geojson = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.6"

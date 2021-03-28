@@ -21,6 +21,7 @@ django-heroku = "*"
 geocoder = "*"
 arcgis = "*"
 geojson = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.6"

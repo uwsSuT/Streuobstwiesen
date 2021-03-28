@@ -173,6 +173,9 @@ def delete_baeume():
 
 
 def insert_baeume(fname):
+    BaumLeaflet(Baeume_geo, verbose=2)
+
+def xinsert_baeume(fname):
     """
         Initialisiere die Baum-Tabelle
 

@@ -6,6 +6,21 @@ RUN mkdir /app
 RUN mkdir /app/hofverkauf
 WORKDIR /app
 
+COPY Pipfile /app/
+
+# install environment dependencies
+RUN pip3 install --upgrade pip && \
+    pip3 install pipenv && \
+    pipenv install --skip-lock --system --dev && \
+    apt-get update && apt-get install -y --no-install-recommends \
+        tzdata \
+        gdal-bin \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    useradd uws
+
+
 # Add current directory code to working directory
 COPY benutzer /app/benutzer/
 COPY hilgi /app/hilgi/
@@ -17,7 +32,6 @@ COPY static /app/static/
 COPY staticfiles /app/staticfiles/
 COPY templates /app/templates/
 COPY init_db /app/init_db/
-COPY Pipfile /app/
 COPY manage.py /app/
 COPY schtob /app/schtob/
 COPY hofverkauf/Hofverkauf.csv /app/hofverkauf
@@ -35,26 +49,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 # $PORT is set by Heroku
 ENV PORT=8000
 
-# Install system dependencies with OpenCV
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        tzdata \
-        python3-setuptools \
-        python3-pip \
-        python3-venv \
-        git \
-        gdal-bin \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-
-# install environment dependencies
-RUN pip3 install --upgrade pip 
-RUN pip3 install pipenv
-
-# Install project dependencies
-RUN pipenv install --skip-lock --system --dev
 
 # Expose is NOT supported by Heroku
 # EXPOSE 8888
-CMD gunicorn hilgi.wsgi:application --bind 0.0.0.0:$PORT
+#CMD gunicorn hilgi.wsgi:application --bind 0.0.0.0:$PORT
+
+# Schmeiss überflüssige Bilder raus
+RUN rm -rf /app/staticfiles/images
+#USER uws
+
+CMD uwsgi --module=hilgi.wsgi:application --master --pidfile=/tmp/project-master.pid --http=0.0.0.0:$PORT --socket=/tmp/djnsr.sock --chmod-socket=666

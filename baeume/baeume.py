@@ -52,7 +52,7 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
                 print("Baum: %s" % pformat(geo_pos))
             bid = geo_pos['properties']['Baum_Nr']
             sorten_id = ObstSorten.objects.get(
-                            sorten_id=geo_pos['properties']['id'])
+                            sorten_id=geo_pos['properties']['Sorten_id'])
             wiese = Wiese.objects.get(
                             wiesen_id=geo_pos['properties']['Wiesen_Nr'])
             zustand = geo_pos['properties']['Zustand']
