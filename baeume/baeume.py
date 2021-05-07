@@ -7,7 +7,8 @@ import codecs
 from csv import reader
 from pprint import pformat
 
-from obstsorten.models import ObstBaum, ObstSorten, Wiese, Obst_Type
+from obstsorten.models import ObstBaum, ObstSorten, Wiese
+from obstsorten.defs import Obst_Type
 from schtob.lib.util import compile_start_time
 from hilgi.utils import GeoJsonClass, BaumPics
 
@@ -22,7 +23,7 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
      geeignete Dict-Strucktur mit allen Bäumen.
         - letzteres funktioniert zurzeit aber nur auf Basis der DB
     """
-    def __init__(self, geo_json_file="", verbose=0, TEST=False,
+    def __init__(self, geo_json_file="", verbose=0, TEST=False, update_db=True,
         *args, **kwargs):
         super().__init__(*args, **kwargs) # Initialisiere die GeoJsonClass
         BaumPics.__init__(self, *args, **kwargs) # Initialisiere die BaumPicClass
@@ -30,6 +31,7 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
         self.verbose = verbose
         self.TEST = TEST
         self.geo_json_file = geo_json_file
+        self.update_db = update_db
 
         if geo_json_file:
             if not exists(geo_json_file):
@@ -37,7 +39,6 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
                                 geojson))
                 sys.exit(1)
             self.__init_geo_json__()
-
 
     def __init_geo_json__(self):
         """
@@ -80,10 +81,11 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
 #                obj = ObstBaum(sorten_id=sorten_id, wiese=wiese,
 #                           zustand=zustand, letzter_schnitt=letzter_schnitt)
 #            else:
-            obj = ObstBaum(baum_id=bid, sorten_id=sorten_id, wiese=wiese,
+            if self.update_db:
+                obj = ObstBaum(baum_id=bid, sorten_id=sorten_id, wiese=wiese,
                            zustand=zustand, letzter_schnitt=letzter_schnitt,
                            coordinate=coordinate)
-            obj.save()
+                obj.save()
 
     def __add_geo_feature__(self, baum, layer=None):
         """

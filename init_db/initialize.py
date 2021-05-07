@@ -20,6 +20,7 @@
 #
 
 import os
+from os.path import exists
 import django
 from django.conf import settings
 from pprint import pformat
@@ -51,7 +52,8 @@ if not settings.configured:
 
 
 from csv import reader
-from obstsorten.models import Obst_Type, ObstSorten, Wiese, ObstBaum
+from obstsorten.models import ObstSorten, Wiese, ObstBaum
+from obstsorten.defs import Obst_Type
 from hofladen.models import Hofladen
 
 enums = {

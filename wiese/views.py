@@ -8,7 +8,8 @@ from django_tables2 import SingleTableView, SingleTableMixin
 from django.views import View
 
 from .forms import WieseModelForm, WiesenUpdateForm
-from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type
+from obstsorten.models import Wiese, ObstBaum, ObstSorten
+from obstsorten.defs import Obst_Type
 from obstsorten.views import ObstLinkIn
 from wiese.tables import WiesenTable
 from wiese.wiese import WiesenLeaflet

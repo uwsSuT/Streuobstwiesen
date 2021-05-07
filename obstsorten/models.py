@@ -1,8 +1,6 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-Obst_Type = ( 'Apfel', 'Birne', 'Kirsche', 'Zwetschge', 'Nuss', 'Quitte', 'Mispel', 'unbekannt', 'Tod')
-
 class ObstSorten(models.Model):
     sorten_id       = models.IntegerField(primary_key=True)
     obst_type       = models.IntegerField()

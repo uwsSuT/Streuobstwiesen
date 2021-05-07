@@ -4,7 +4,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import TemplateView
-from obstsorten.models import Wiese, ObstBaum, ObstSorten, Obst_Type
+from obstsorten.models import Wiese, ObstBaum, ObstSorten
+from obstsorten.defs import Obst_Type
 from baeume.baeume import BaumLeaflet
 
 DEBUG = int(os.environ.get('DEBUG'))
