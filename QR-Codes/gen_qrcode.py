@@ -11,6 +11,7 @@ from fpdf import FPDF
 
 from schtob.lib.dbg import dprint
 from init_db.wiese import Wiesen, BaumInfos, ObstInfos
+from obstsorten.defs import qr_text4sorte
 
 base_dir = "../init_db"
 WiesenFile = join(base_dir, 'wiesen.txt')
@@ -81,11 +82,15 @@ class Qrcode():
                 makedirs(wiese)
             img_fname = join(wiese, "%s.jpg" % baum)
             img.save(img_fname)
-            self.baum_infos[baum] = {
-                'img' : img_fname,
-                'sorte' : self.get_sorte4baum(baum),
-                'nr'    : baum,
-            }
+            try:
+                self.baum_infos[baum] = {
+                    'img' : img_fname,
+                    'sorte' : self.get_sorte4baum(baum),
+                    'nr'    : baum,
+                }
+            except:
+                # Toter Baum (hat keine Sorte
+                pass
 
 class GenPDF():
     def __init__(self, qr_image, pdf_name='/tmp/qr_codes.pdf', verbose=0):
@@ -101,7 +106,9 @@ class GenPDF():
         self.pdf = FPDF(orientation='L', unit='mm', format='A4')
         self.pdf.add_page()
         self.pdf.set_line_width(0.0)
-        self.pdf.set_font('Arial', 'B', 24)
+        self.pdf.add_font('DejaVu_Sans', '', 'DejaVuSansCondensed-BoldOblique.ttf', uni=True)
+
+        self.pdf.set_font('DejaVu_Sans', '', 24)
 
         self.act_x = 0
         self.act_y = 0
@@ -119,7 +126,11 @@ class GenPDF():
         """
             zeichne den Rand um das Bild für den Baum an der act Pos
         """
-        x1 = (self.baum_nr % self.baum_per_line) * self.line_h + 5
+        # Damit der Rand des letzten Barcodes nicht über den druckbaren
+        # Bereich hinaus geht fürgen wir nur beim ersten Schild der
+        # Zeile 5mm hizu
+        x1 = (self.baum_nr % self.baum_per_line) * self.line_h +
+                    (5 if self.baum_nr % 3 == 0 else 0)
         x2 = x1 + self.qr_pic_dim
         if self.baum_nr < 3:
             y1 = self.act_y + 5
@@ -131,24 +142,53 @@ class GenPDF():
 
         self.pdf.rect(x1, y1, self.qr_pic_dim, self.qr_pic_dim)
 
+    def get_qr_name(self, sorte):
+        """
+            Hol den Namen für die Sorte aus dem "defs" file
+        """
+        if sorte in qr_text4sorte:
+            return qr_text4sorte[sorte]
+        if '\n' in sorte:
+            nsorte = sorte.replace('\n', '')
+            if nsorte in qr_text4sorte:
+                return qr_text4sorte[nsorte]
+        return sorte
+
     def add_baum(self, baum):
         """
             zeichne den nächsten Baum
         """
         dprint("add_baum: %s" % pformat(baum))
+        #
+        # Die Positionierung der X-Position muss um den Wert der für
+        # den Rand angepasst wurde wiederum hier angepasst werden
+        # daher die:
+        #       (0 if self.baum_nr % 3 == 0 else -5
+        #
         self.draw_rand()
-        self.pdf.set_xy((self.baum_nr % self.baum_per_line) * self.line_h,
-                        self.act_y + 7)
+        self.pdf.set_xy(
+            x=(self.baum_nr % self.baum_per_line) * self.line_h +
+                    (0 if self.baum_nr % 3 == 0 else -5),
+            y=self.act_y + 7)
         self.pdf.cell(w=self.line_h, h=10, align='C', txt="%s" % baum['nr'])
-        self.pdf.set_xy((self.baum_nr % self.baum_per_line) * self.line_h,
-                        self.act_y + 10)
-        self.pdf.cell(w=self.line_h, h=25, align='C', txt=baum['sorte'])
+
+        if self.verbose:
+            print("nr: %s sorte: <%s>" % (baum['nr'], baum['sorte']))
+        self.pdf.set_xy(
+            x=(self.baum_nr % self.baum_per_line) * self.line_h +
+                    (0 if self.baum_nr % 3 == 0 else -5),
+            y=self.act_y + 10)
+        self.pdf.cell(w=self.line_h, h=25, align='C',
+                      txt=self.get_qr_name(baum['sorte']))
+
         self.pdf.image(baum['img'],
-               x=(self.baum_nr % self.baum_per_line) * self.line_h + 20,
-               y=self.act_y + 30,
-               w=self.qr_pic_w, h=self.qr_pic_w)
+           x=(self.baum_nr % self.baum_per_line) * self.line_h + 20 +
+                            (0 if self.baum_nr % 3 == 0 else -5),
+           y=self.act_y + 30,
+           w=self.qr_pic_w, h=self.qr_pic_w)
 
     def gen_pdf(self, ):
+        # Sortieren nach Baum Nr. # XXX
         for baum in self.qr_image.baum_infos:
             self.add_baum(self.qr_image.baum_infos[baum])
             self.baum_nr += 1
