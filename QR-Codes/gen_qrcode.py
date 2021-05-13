@@ -23,7 +23,7 @@ URL_base = "https://hilgi-docker.herokuapp.com/wiese/baum/"
 class Qrcode():
     def __init__(self, baum_nr=0, wiesen_nr=0, wiesen_name="",
                  wiesen_infos=None, geo_infos=None, obst_infos=None,
-                 verbose=0):
+                 All=False, verbose=0):
         """
             initialisiere die QR-Code Class
         """
@@ -43,6 +43,10 @@ class Qrcode():
             self.baeume = self.get_baueme4wiese(wiesen_nr=wiesen_nr)
         elif wiesen_name:
             self.baeume = self.get_baueme4wiese(wiesen_name=wiesen_name)
+        elif All:
+            self.baeume = []
+            for nr in range(1,16):
+                self.baeume += self.get_baueme4wiese(wiesen_nr=nr)
 
         self.baum_infos = {}
 
@@ -93,7 +97,8 @@ class Qrcode():
                 pass
 
 class GenPDF():
-    def __init__(self, qr_image, pdf_name='/tmp/qr_codes.pdf', verbose=0):
+    def __init__(self, qr_image, pdf_name='/tmp/qr_codes.pdf',
+                 page_size='A4', verbose=0):
         """
             generiere für die gegebenen Bäume ein PDF
             das Argument 'qr_image' enthält die Bäume die in dem PDF
@@ -103,7 +108,7 @@ class GenPDF():
         self.verbose = verbose
         self.pdf_name = pdf_name
 
-        self.pdf = FPDF(orientation='L', unit='mm', format='A4')
+        self.pdf = FPDF(orientation='L', unit='mm', format=page_size)
         self.pdf.add_page()
         self.pdf.set_line_width(0.0)
         self.pdf.add_font('DejaVu_Sans', '', 'DejaVuSansCondensed-BoldOblique.ttf', uni=True)
@@ -114,8 +119,12 @@ class GenPDF():
         self.act_y = 0
 
         self.baum_nr = 0
-        self.baum_per_page = 6
-        self.baum_per_line = 3
+        if page_size == 'A4':
+            self.baum_per_page = 6
+            self.baum_per_line = 3
+        elif page_size == 'A3':
+            self.baum_per_page = 12
+            self.baum_per_line = 4
 
         self.line_h = 100
         self.qr_pic_dim = 90
@@ -129,15 +138,15 @@ class GenPDF():
         # Damit der Rand des letzten Barcodes nicht über den druckbaren
         # Bereich hinaus geht fürgen wir nur beim ersten Schild der
         # Zeile 5mm hizu
-        x1 = (self.baum_nr % self.baum_per_line) * self.line_h +
-                    (5 if self.baum_nr % 3 == 0 else 0)
+        x1 = (self.baum_nr % self.baum_per_line) * self.line_h + \
+                    (5 if self.baum_nr % self.baum_per_line == 0 else 0)
         x2 = x1 + self.qr_pic_dim
-        if self.baum_nr < 3:
+        if self.baum_nr < self.baum_per_line:
             y1 = self.act_y + 5
             self.act_y = 0
         else:
-            y1 = self.line_h + 5
-            self.act_y = self.line_h
+            y1 = int(self.baum_nr / self.baum_per_line) * self.line_h
+            self.act_y = y1
         y2 = y1 + self.qr_pic_dim
 
         self.pdf.rect(x1, y1, self.qr_pic_dim, self.qr_pic_dim)
@@ -154,11 +163,45 @@ class GenPDF():
                 return qr_text4sorte[nsorte]
         return sorte
 
+    def draw_nr(self, baum):
+        x = (self.baum_nr % self.baum_per_line) * self.line_h + \
+                    (0 if self.baum_nr % self.baum_per_line == 0 else -5)
+        if self.baum_nr < self.baum_per_line:
+            y = self.act_y + 7
+        else:
+            y = self.act_y + 2
+        self.pdf.set_xy(x, y)
+        self.pdf.cell(w=self.line_h, h=10, align='C', txt="%s" % baum['nr'])
+
+    def draw_sorte(self, baum):
+        x = (self.baum_nr % self.baum_per_line) * self.line_h +  \
+                    (0 if self.baum_nr % self.baum_per_line == 0 else -5)
+        if self.baum_nr < self.baum_per_line:
+            y = self.act_y + 10
+        else:
+            y = self.act_y + 5
+        self.pdf.set_xy(x, y)
+        self.pdf.cell(w=self.line_h, h=25, align='C',
+                      txt=self.get_qr_name(baum['sorte']))
+
+    def draw_image(self, baum):
+        x = (self.baum_nr % self.baum_per_line) * self.line_h + 20 + \
+                (0 if self.baum_nr % self.baum_per_line == 0 else -5)
+        if self.baum_nr < self.baum_per_line:
+            y = self.act_y + 30
+        else:
+            y = self.act_y + 25
+
+        self.pdf.image(baum['img'], x, y,
+           w=self.qr_pic_w, h=self.qr_pic_w)
+
     def add_baum(self, baum):
         """
             zeichne den nächsten Baum
         """
         dprint("add_baum: %s" % pformat(baum))
+        if self.verbose:
+            print("nr: %s sorte: <%s>" % (baum['nr'], baum['sorte']))
         #
         # Die Positionierung der X-Position muss um den Wert der für
         # den Rand angepasst wurde wiederum hier angepasst werden
@@ -166,26 +209,10 @@ class GenPDF():
         #       (0 if self.baum_nr % 3 == 0 else -5
         #
         self.draw_rand()
-        self.pdf.set_xy(
-            x=(self.baum_nr % self.baum_per_line) * self.line_h +
-                    (0 if self.baum_nr % 3 == 0 else -5),
-            y=self.act_y + 7)
-        self.pdf.cell(w=self.line_h, h=10, align='C', txt="%s" % baum['nr'])
+        self.draw_nr(baum)
+        self.draw_sorte(baum)
+        self.draw_image(baum)
 
-        if self.verbose:
-            print("nr: %s sorte: <%s>" % (baum['nr'], baum['sorte']))
-        self.pdf.set_xy(
-            x=(self.baum_nr % self.baum_per_line) * self.line_h +
-                    (0 if self.baum_nr % 3 == 0 else -5),
-            y=self.act_y + 10)
-        self.pdf.cell(w=self.line_h, h=25, align='C',
-                      txt=self.get_qr_name(baum['sorte']))
-
-        self.pdf.image(baum['img'],
-           x=(self.baum_nr % self.baum_per_line) * self.line_h + 20 +
-                            (0 if self.baum_nr % 3 == 0 else -5),
-           y=self.act_y + 30,
-           w=self.qr_pic_w, h=self.qr_pic_w)
 
     def gen_pdf(self, ):
         # Sortieren nach Baum Nr. # XXX
@@ -203,7 +230,7 @@ class GenPDF():
 
 def usage():
     print( """
-USAGE: %(proc)s [-v]  (-b <nr> | --wiese <wiesen-name> | --wiese_nr <nr>)
+USAGE: %(proc)s [-v]  [-f <outfile>] [-p (A4 | A3)] (-b <nr> | --wiese <wiesen-name> | --wiese_nr <nr> | --ALL)
 """ % ({ 'proc' : basename(__file__)}))
     sys.exit(err)
 
@@ -213,10 +240,13 @@ if __name__ == '__main__':
     baum_nr = 0
     wiesen_nr = 0
     wiesen_name = ""
+    outfile = '/tmp/qr_codes.pdf'
+    page_size = 'A4'
+    AlleWiesen = False
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'vb:',
-                ['wiese=', 'wiese_nr='])
+        opts, args = getopt.getopt(sys.argv[1:], 'vb:f:p:',
+                ['wiese=', 'wiese_nr=', 'ALL'])
     except getopt.GetoptError as err:
         print(str(err))
         usage()
@@ -226,10 +256,18 @@ if __name__ == '__main__':
             verbose += 1
         elif o == '-b':
             baum_nr = a
+        elif o == '-f':
+            outfile = a
+        elif o == '-p':
+            page_size = a
+            if a not in ('A3', 'A4', 'A5'):
+                usage()
         elif o == '--wiese':
             wiesen_name = a
         elif o == '--wiese_nr':
             wiesen_nr = int(a)
+        elif o == '--ALL':
+            AlleWiesen = True
 
     wiesen = Wiesen(WiesenFile)
 
@@ -248,6 +286,8 @@ if __name__ == '__main__':
                 print("""bekannte Wiesen-Nr:
     %s""" % pformat(wiesen.wiesen.keys()))
             sys.exit(2)
+    elif AlleWiesen:
+        pass
     else:
         if not baum_nr:
             usage()
@@ -263,10 +303,12 @@ if __name__ == '__main__':
                 geo_infos = geo_infos,
                 wiesen_infos = wiesen,
                 obst_infos = obst_infos,
+                All = AlleWiesen,
                 verbose=verbose)
 
     qr.gen_qr_images()
 
-    pdf = GenPDF(qr, verbose=verbose)
+    pdf = GenPDF(qr, verbose=verbose, pdf_name=outfile,
+                 page_size=page_size)
 
     pdf.gen_pdf()

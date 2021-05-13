@@ -3,7 +3,6 @@
 "name": "Baeume",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "id": null, "Sorte": "Apfel_unbestimmt", "Art": "Apfel", "Reifezeit": null, "Wiesen_Nr": 1, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": null, "Baum_Nr": 112, "Zustand": null, "Sorten_id": 99 }, "geometry": { "type": "Point", "coordinates": [ 11.36202, 48.42746 ] } },
 { "type": "Feature", "properties": { "id": 99, "Sorte": "Apfel_unbestimmt", "Art": "Apfel", "Reifezeit": null, "Wiesen_Nr": 1, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": null, "Baum_Nr": 108, "Zustand": null, "Sorten_id": 99 }, "geometry": null },
 { "type": "Feature", "properties": { "id": 14, "Sorte": "Rheinischer_Bohnapfel\n", "Art": "Apfel", "Reifezeit": null, "Wiesen_Nr": 1, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": null, "Baum_Nr": 102, "Zustand": null, "Sorten_id": 14 }, "geometry": { "type": "Point", "coordinates": [ 11.36329, 48.42749 ] } },
 { "type": "Feature", "properties": { "id": 11, "Sorte": "Wiltshire", "Art": "Apfel", "Reifezeit": null, "Wiesen_Nr": 1, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": null, "Baum_Nr": 109, "Zustand": null, "Sorten_id": 11 }, "geometry": { "type": "Point", "coordinates": [ 11.36257, 48.42748 ] } },
@@ -218,6 +217,7 @@
 { "type": "Feature", "properties": { "id": null, "Sorte": "Quitte", "Art": "Apfel-Quitte", "Reifezeit": null, "Wiesen_Nr": 9, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": "2021\/03\/06", "Baum_Nr": 918, "Zustand": null, "Sorten_id": 601 }, "geometry": { "type": "Point", "coordinates": [ 11.35144, 48.43778 ] } },
 { "type": "Feature", "properties": { "id": null, "Sorte": "Quitte", "Art": "Apfel-Quitte", "Reifezeit": null, "Wiesen_Nr": 9, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": "2021\/03\/06", "Baum_Nr": 919, "Zustand": null, "Sorten_id": 601 }, "geometry": { "type": "Point", "coordinates": [ 11.35158, 48.43775 ] } },
 { "type": "Feature", "properties": { "id": null, "Sorte": "Quitte", "Art": "Apfel-Quitte", "Reifezeit": null, "Wiesen_Nr": 9, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": "2021\/03\/06", "Baum_Nr": 920, "Zustand": null, "Sorten_id": 601 }, "geometry": { "type": "Point", "coordinates": [ 11.35165, 48.43769 ] } },
-{ "type": "Feature", "properties": { "id": null, "Sorte": "Tod", "Art": "Tod", "Reifezeit": null, "Wiesen_Nr": 9, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": null, "Baum_Nr": 921, "Zustand": "Tod", "Sorten_id": 1000 }, "geometry": { "type": "Point", "coordinates": [ 11.35122, 48.43819 ] } }
+{ "type": "Feature", "properties": { "id": null, "Sorte": "Tod", "Art": "Tod", "Reifezeit": null, "Wiesen_Nr": 9, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": null, "Baum_Nr": 921, "Zustand": "Tod", "Sorten_id": 1000 }, "geometry": { "type": "Point", "coordinates": [ 11.35122, 48.43819 ] } },
+{ "type": "Feature", "properties": { "id": null, "Sorte": "Apfel_unbestimmt", "Art": "Apfel", "Reifezeit": null, "Wiesen_Nr": 1, "Baum_Bild": null, "Blueten": null, "Frucht": null, "Schnitt": null, "Baum_Nr": 112, "Zustand": null, "Sorten_id": 99 }, "geometry": { "type": "Point", "coordinates": [ 11.36213, 48.42746 ] } }
 ]
 }

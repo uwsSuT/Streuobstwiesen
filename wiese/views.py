@@ -188,6 +188,7 @@ class BaumView(WieseObjectMixin, View):
             gib diese als Liste zurück
         """
         baum_pics = []
+        baum_i = 0
         pwd = os.getcwd()
         bdir = join(pwd, 'static', 'images', 'baum')
         if not exists(bdir):
@@ -204,7 +205,17 @@ class BaumView(WieseObjectMixin, View):
                     if b.find("%s_" % baum.baum_id) == 0:
                         if DEBUG:
                             print("FOUND Tree: %s" % b)
-                        baum_pics.append(join('images', 'baum', f, b))
+                        #baum_pics.append(join('images', 'baum', f, b))
+                        #
+                        # Generier eine List von Dicts damit wir in der
+                        # Darstellung ein Carousel mit Buttons bauen können
+                        #    siehe: baum_detail.html
+                        #
+                        baum_pics.append(
+                                { 'nr'  : baum_i,
+                                  'pic' : join('images', 'baum', f, b),
+                                })
+                        baum_i += 1
 
             elif f.find("%s_" % baum.baum_id) == 0:
                 baum_pics.append(join('images', 'baum', f))

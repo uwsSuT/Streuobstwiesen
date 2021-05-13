@@ -5,7 +5,7 @@
 #
 ## uws : 2021.03.28
 
-VERSION = 0.8.1.4
+VERSION = 0.8.2.0
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -84,7 +84,7 @@ copy_pics:
 		echo "===================================================";\
 		echo " Check ob ein Bild neuer ist nur die sollten kopiert werden";\
 		echo "====================================================="; \
-		for pic in $$(cat Nr)*.jpg; do \
+		for pic in $$(cat Nr)*.[Jj][Pp][Gg]; do \
 			if [  -e $${actdir}/$(LOCAL_PIC_DIR)/$$wn/$$pic ] && \
 			   [ ! $$pic -nt $${actdir}/$(LOCAL_PIC_DIR)/$$wn/$$pic ]; \
 			   then \
@@ -93,17 +93,8 @@ copy_pics:
 			fi; \
 			cp -p $$pic $${actdir}/$(LOCAL_PIC_DIR)/$$wn; \
 			cd $${actdir}/$(LOCAL_PIC_DIR)/$$wn; \
-			identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
-			if [ $$? -eq 0 ]; then \
-				convert $${pic} -resize 1024x768 /tmp/$${pic}; \
-				mv /tmp/$${pic} .;\
-			else \
-				identify $${pic} | grep "9248x6936" >/dev/null 2>&1; \
-				if [ $$? -eq 0 ]; then \
-					convert $${pic} -resize 1024x768 /tmp/$${pic}; \
-					mv /tmp/$${pic} .;\
-				fi; \
-			fi; \
+                        convert $${pic} -resize 1024x768 /tmp/$${pic}; \
+                        mv /tmp/$${pic} .;\
 			cd $(QGIS_PIC_DIR)/$$wn; \
 		done; \
 	done
