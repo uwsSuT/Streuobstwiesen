@@ -1,14 +1,14 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Info und Aktivitäten{% endblock title %}
 
 {% block content %}
 <div class="row">
     <div class="col-lg-8">
         <div class="jumbotron">
             <!-- <h2>Streuobst- und Blühwiesen der Gemeinde </h2> -->
-            <h2>Streuobstwiesen der Gemeinde </h2>
+            <h2>Blüh- und Streuobstwiesen der Gemeinde </h2>
             <img class="mainpic" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" width=215>
             <h2>Hilgertshausen - Tandern</h2>
             <p>Ortsteil Hilgertshausen</p>
@@ -35,310 +35,294 @@
             </p>
     </div>
 </div>
-{% if user.is_authenticated %}
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Anstehende Termine
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            25.09.21
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                            Abtransport des Mähgutes der Bürgermeisterwiese
-                            mit Kindern des JUZ und Michael Heider und seinen
-                            Pferden.
-                            </p>
-                        </div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Anstehende Termine
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        25.09.21
                     </div>
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            im Oktober
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Mähen der Wiesen
-                                <ul>
-                                    <li>
-                                        Gartelsried/Stadelham 2'ter Teil
-                                    </li>
-                                    <li>
-                                        Osterfeuerwiese
-                                    </li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            im November
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Schneiden von Obstbäumen in Zusammenarbeit
-                                mit dem Obst- und Gartenbauverein Hilgertshausen.
-                            </p>
-                        </div>
+                    <div class="panel-body">
+                        <p>
+                        Abtransport des Mähgutes der Bürgermeisterwiese
+                        mit Kindern des JUZ und Michael Heider und seinen
+                        Pferden.
+                        </p>
                     </div>
                 </div>
             </div>
-                        <div class="panel-footer">
-                            Erstellt am 19.09.21 von Resi u. Uwe Schäfer
-                        </div>
-            <!-- /.col-lg-6 -->
-        </div>
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Durchgeführte Aktivitäten
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            18.09.2021
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Ansähen von Blumensamen.
-                            </p>
-                            <p>
-                                Der leider verstorbene Naturschutzwächter 
-                                Josef Nagl hatte in seiner Tätigkeit 
-                                Samen von vielen einheimischen Blumen gesammelt.
-                                Ein Teil dieser Samen haben wir mit der
-                                freundlichen Unterstützung des
-                                Naturschutzwächters Michael Keller aus
-                                Oberzeitlbach auf der Wiese Gartelsried/Stadelham
-                                ausgesäht.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            17.09.2021
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Am Freitag wurde die Bürgermeisterwiese 
-                                wiederum mit 7 Mitstreitern gerecht. 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            15.09.2021
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Rechen der Wiesen Feldkreuz sowie Kunstpfad Ost
-                                und Nord
-                            </p>
-                            <p>
-                                Am Mittwoch Abend wurde das Mähgut mit 
-                                tatkräftiger Unterstützung von 7 fleißigen
-                                Helfern zusammengerecht.
-                            </p>
-                            <p>
-                                Das Mähgut wurde am kommenden Morgen vom
-                                Ferlhof abgeholt. 
-                            </p>
-                        </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            10. und 11.09.2021
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Mähen auf den Streuobstwiesen
-                            </p>
-                            <p>
-                                Die Gemeinde hat seit August diesen Jahres einen
-                                Balkenmäher für die Pflege der Wiesen in Tandern
-                                und Hilgertshausen beschafft. Diesen Mäher, ein 
-                                Profigerät aus der Schweiz, haben wir am Freitag
-                                und Samstag erstmalig zum Einsatz gebracht.
-                                Trotz einiger ungeplanter Schwierigikeiten mit 
-                                den Dornen der Schlehen (wir hatten uns zwei
-                                Plattfüsse eingehandelt), wurden folgende Wiesen
-                                gemäht:
-                            </p>
-                            <ol>
-                                <li>
-                                    Gartelsried / Stadelham (leider nur zur Hälfte s.o.)
-                                    <ul>
-                                        <li>
-                                            Am Freitag und Samstag wurden die
-                                            Schlehen und 
-                                            das gemähte Gras auch gleich
-                                            gerecht.
-                                        </li>
-                                        <li>
-                                            Das Mähgut wurde von der Gemeinde
-                                            und dem Landwirt des Oberstloh-Hofes
-                                            am kommenden Montag den 13.09.
-                                            abgeholt.
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    Felkreuz
-                                </li>
-                                <li>
-                                    Kunstpfad Nord
-                                </li>
-                                <li>
-                                    Kunstpfad Ost
-                                </li>
-                                <li>
-                                    Bürgermeisterwiese
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            29.07.2021
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Info Veranstaltung zur Gewinnung neuer Mitstreiter
-                            </p>
-                            <p>
-                              <div class="item">
-                                <img src={% static 'images/aktionen/Biene_auf_Hosenknopf.jpg' %} style="width:100%;">
-                              </div>
-                                Die besprochenen Themen des Treffens findet Ihr hier:
-                            <a href="https://padlet.com/uwewsch/xeb6jshpup8cc5mg"> Agenda </a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            17. Oktober 2020
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Rechen der Blühwiesen am Mannrieder-Berg und Kunstpfad-Ost
-                            </p>
-                              <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                                  <li data-target="#myCarousel" data-slide-to="3"></li>
-                                </ol>
-
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-                                  <div class="item active">
-                                    <img src={% static 'images/aktionen/20201017_101731.jpg' %} style="width:100%;">
-                                  </div>
-
-                                  <div class="item">
-                                    <img src={% static 'images/aktionen/20201017_101719.jpg' %} style="width:100%;">
-                                  </div>
-                                
-                                  <div class="item">
-                                    <img src={% static 'images/aktionen/20201017_093402.jpg' %} style="width:100%;">
-                                  </div>
-                                  <div class="item">
-                                    <img src={% static 'images/aktionen/20201017_093311.jpg' %} style="width:100%;">
-                                  </div>
-                                </div>
-
-                                <!-- Left and right controls -->
-                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                                  <span class="glyphicon glyphicon-chevron-left"></span>
-                                  <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                                  <span class="glyphicon glyphicon-chevron-right"></span>
-                                  <span class="sr-only">Next</span>
-                                </a>
-                              </div>
-                            </div>
-                            <div class="panel-footer">
-                                Erstellt am 24.10.20 von Uwe Schäfer
-                            </div>
-                        </div>
+            <div class="panel-body">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        im Oktober
                     </div>
                     <div class="panel-body">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            14. Oktober 2020
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                Äpfel schütteln und sammeln für JUZ und Kindergarten
-                            </p>
-                            <div class="item">
-                                <img src={% static 'images/aktionen/Aepfel-Sammeln_20201014.png' %} style="width:100%;">
+                        <p>
+                            Mähen der Wiesen
+                            <ul>
+                                <li>
+                                    Gartelsried/Stadelham 2'ter Teil
+                                </li>
+                                <li>
+                                    Osterfeuerwiese
+                                </li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        im November
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Schneiden von Obstbäumen in Zusammenarbeit
+                            mit dem Obst- und Gartenbauverein Hilgertshausen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <div class="panel-footer">
+                        Erstellt am 19.09.21 von Resi u. Uwe Schäfer
+                    </div>
+        <!-- /.col-lg-6 -->
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Durchgeführte Aktivitäten
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        18.09.2021
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Ansähen von Blumensamen.
+                        </p>
+                        <p>
+                            Der leider verstorbene Naturschutzwächter 
+                            Josef Nagl hatte in seiner Tätigkeit 
+                            Samen von vielen einheimischen Blumen gesammelt.
+                            Ein Teil dieser Samen haben wir mit der
+                            freundlichen Unterstützung des
+                            Naturschutzwächters Michael Keller aus
+                            Oberzeitlbach auf der Wiese Gartelsried/Stadelham
+                            ausgesäht.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        17.09.2021
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Am Freitag wurde die Bürgermeisterwiese 
+                            wiederum mit 7 Mitstreitern gerecht. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        15.09.2021
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Rechen der Wiesen Feldkreuz sowie Kunstpfad Ost
+                            und Nord
+                        </p>
+                        <p>
+                            Am Mittwoch Abend wurde das Mähgut mit 
+                            tatkräftiger Unterstützung von 7 fleißigen
+                            Helfern zusammengerecht.
+                        </p>
+                        <p>
+                            Das Mähgut wurde am kommenden Morgen vom
+                            Ferlhof abgeholt. 
+                        </p>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        10. und 11.09.2021
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Mähen auf den Streuobstwiesen
+                        </p>
+                        <p>
+                            Die Gemeinde hat seit August diesen Jahres einen
+                            Balkenmäher für die Pflege der Wiesen in Tandern
+                            und Hilgertshausen beschafft. Diesen Mäher, ein 
+                            Profigerät aus der Schweiz, haben wir am Freitag
+                            und Samstag erstmalig zum Einsatz gebracht.
+                            Trotz einiger ungeplanter Schwierigikeiten mit 
+                            den Dornen der Schlehen (wir hatten uns zwei
+                            Plattfüsse eingehandelt), wurden folgende Wiesen
+                            gemäht:
+                        </p>
+                        <ol>
+                            <li>
+                                Gartelsried / Stadelham (leider nur zur Hälfte s.o.)
+                                <ul>
+                                    <li>
+                                        Am Freitag und Samstag wurden die
+                                        Schlehen und 
+                                        das gemähte Gras auch gleich
+                                        gerecht.
+                                    </li>
+                                    <li>
+                                        Das Mähgut wurde von der Gemeinde
+                                        und dem Landwirt des Oberstloh-Hofes
+                                        am kommenden Montag den 13.09.
+                                        abgeholt.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Felkreuz
+                            </li>
+                            <li>
+                                Kunstpfad Nord
+                            </li>
+                            <li>
+                                Kunstpfad Ost
+                            </li>
+                            <li>
+                                Bürgermeisterwiese
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        29.07.2021
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Info Veranstaltung zur Gewinnung neuer Mitstreiter
+                        </p>
+                        <p>
+                          <div class="item">
+                            <img src={% static 'images/aktionen/Biene_auf_Hosenknopf.jpg' %} style="width:100%;">
+                          </div>
+                            Die besprochenen Themen des Treffens findet Ihr hier:
+                        <a href="https://padlet.com/uwewsch/xeb6jshpup8cc5mg"> Agenda </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        17. Oktober 2020
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Rechen der Blühwiesen am Mannrieder-Berg und Kunstpfad-Ost
+                        </p>
+                          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                              <li data-target="#myCarousel" data-slide-to="1"></li>
+                              <li data-target="#myCarousel" data-slide-to="2"></li>
+                              <li data-target="#myCarousel" data-slide-to="3"></li>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                              <div class="item active">
+                                <img src={% static 'images/aktionen/20201017_101731.jpg' %} style="width:100%;">
+                              </div>
+
+                              <div class="item">
+                                <img src={% static 'images/aktionen/20201017_101719.jpg' %} style="width:100%;">
+                              </div>
+                            
+                              <div class="item">
+                                <img src={% static 'images/aktionen/20201017_093402.jpg' %} style="width:100%;">
+                              </div>
+                              <div class="item">
+                                <img src={% static 'images/aktionen/20201017_093311.jpg' %} style="width:100%;">
+                              </div>
                             </div>
-                            <!-- Button trigger modal -->
-                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                Große Ansicht
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="clo    se" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myMo    dalLabel">Apfelsaft für die Jugend</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="item">
-                                                <img src={% static 'images/aktionen/Aepfel-Sammeln_20201014.png' %} style="width:956px;">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn     btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                    <!-- /.modal-content -->
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
+
+                            <!-- Left and right controls -->
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                              <span class="glyphicon glyphicon-chevron-left"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                              <span class="glyphicon glyphicon-chevron-right"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </div>
                         </div>
                         <div class="panel-footer">
                             Erstellt am 24.10.20 von Uwe Schäfer
                         </div>
                     </div>
                 </div>
+                <div class="panel-body">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        14. Oktober 2020
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Äpfel schütteln und sammeln für JUZ und Kindergarten
+                        </p>
+                        <div class="item">
+                            <img src={% static 'images/aktionen/Aepfel-Sammeln_20201014.png' %} style="width:100%;">
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            Große Ansicht
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="clo    se" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myMo    dalLabel">Apfelsaft für die Jugend</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="item">
+                                            <img src={% static 'images/aktionen/Aepfel-Sammeln_20201014.png' %} style="width:956px;">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn     btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+                    <div class="panel-footer">
+                        Erstellt am 24.10.20 von Uwe Schäfer
+                    </div>
+                </div>
             </div>
-            <!-- /.col-lg-6 -->
         </div>
+        <!-- /.col-lg-6 -->
     </div>
-{% else %}
-        <div class="row">
-        <div class="col-mg-12">
-            <div class="panel panel-primary">
-                    <div class="panel-heading text-center">
-                <strong>Sie sind nicht angemeldet.</strong>
-            </div>
-                    <div class="panel-body text">
-                Zur Verwendung dieser WWW-Seite benötigen Sie eine Kennung.
-                Diese erhalten Sie bei der Gemeinde Hilgertshausen-Tandern.
-                <h3><a href="{% url 'account_login' %}">Log In</a> </h3>
-            </div>
-            </div>
-        </div>
-        </div>
-{% endif %}
+</div>
 {% endblock content %}
 
