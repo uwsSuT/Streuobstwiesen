@@ -3,9 +3,12 @@
 # einmal local 
 # einmal für Heroku
 #
-## uws : 2021.03.28
+## uws : 2021.10.04
+#
+# letzte Änderung:
+# 04.10.21      Entfernen der Hofläden
 
-VERSION = 0.8.2.1
+VERSION = 0.8.3.0
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -59,6 +62,7 @@ build_heroku: make_schtob
 	HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu' \
 	python manage.py collectstatic --noinput
 	docker build -t hilgi-docker-obst:$(VERSION) -f Dockerfile .
+	heroku login
 	heroku container:login
 	heroku container:push web -a hilgi-docker
 	heroku config:set HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu' -a hilgi-docker
@@ -107,24 +111,24 @@ copy_action_pics:
 	echo "===================================================";\
 	echo " Check ob ein Bild neuer ist nur die sollten kopiert werden";\
 	echo "====================================================="; \
-	for pic in *.jpg; do \
+	for pic in 2021/*.jpg; do \
 		if [  -e $${actdir}/$(LOCAL_ACTION_DIR)/$$pic ] && \
 		   [ ! $$pic -nt $${actdir}/$(LOCAL_ACTION_DIR)/$$pic ]; \
 		   then \
 			echo "PIC $$pic is not newer"; \
 			continue; \
 		fi; \
-		cp -p $$pic $${actdir}/$(LOCAL_ACTION_DIR); \
+		cp -p $$pic $${actdir}/$(LOCAL_ACTION_DIR)/$$(dirname $$pic); \
 		cd $${actdir}/$(LOCAL_ACTION_DIR); \
 		identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
 		if [ $$? -eq 0 ]; then \
-			convert $${pic} -resize 1024x768 /tmp/$${pic}; \
-			mv /tmp/$${pic} .;\
+			convert $${pic} -resize 1024x768 /tmp/$$(basename $$pic); \
+			mv /tmp/$$(basename $$pic) ./$$(dirname $$pic) ;\
 		else \
 			identify $${pic} | grep "9248x6936" >/dev/null 2>&1; \
 			if [ $$? -eq 0 ]; then \
-				convert $${pic} -resize 1024x768 /tmp/$${pic}; \
-				mv /tmp/$${pic} .;\
+				convert $${pic} -resize 1024x768 /tmp/$$(basename $$pic); \
+				mv /tmp/$$(basename $$pic) ./$$(dirname $$pic);\
 			fi; \
 		fi; \
 		cd $(QGIS_ACTION_DIR); \
