@@ -52,7 +52,8 @@ build_local: make_schtob
 	docker build -t hilgi:$(VERSION) -f Dockerfile-local .
 	rm -rf schtob
 	echo "TO Start the new Image run "
-	echo "    docker-compose -f docker-compose.yml up"
+	echo "    docker-compose -f docker-compose.yml up "
+	echo "    http://localhost:8002"
 
 build_heroku: make_schtob
 	- rm -f Pipfile.lock
