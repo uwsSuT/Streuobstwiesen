@@ -8,7 +8,7 @@
 # letzte Änderung:
 # 04.10.21      Entfernen der Hofläden
 
-VERSION = 0.8.3.0
+VERSION = 0.8.3.1
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -123,14 +123,14 @@ copy_action_pics:
 		cd $${actdir}/$(LOCAL_ACTION_DIR); \
 		identify $${pic} | grep "4032x3024" >/dev/null 2>&1; \
 		if [ $$? -eq 0 ]; then \
-			convert $${pic} -resize 1024x768 /tmp/$$(basename $$pic); \
-			mv /tmp/$$(basename $$pic) ./$$(dirname $$pic) ;\
+                    convert $${pic} -resize 1024x768 /tmp/$$(basename $$pic); \
+                    mv /tmp/$$(basename $$pic) ./$$(dirname $$pic) ;\
+		elif [ identify $${pic} | grep "9248x6936" >/dev/null 2>&1 ]; then \
+                    convert $${pic} -resize 1024x768 /tmp/$$(basename $$pic); \
+                    mv /tmp/$$(basename $$pic) ./$$(dirname $$pic);\
 		else \
-			identify $${pic} | grep "9248x6936" >/dev/null 2>&1; \
-			if [ $$? -eq 0 ]; then \
-				convert $${pic} -resize 1024x768 /tmp/$$(basename $$pic); \
-				mv /tmp/$$(basename $$pic) ./$$(dirname $$pic);\
-			fi; \
+                    convert $${pic} -resize 1024x768 /tmp/$$(basename $$pic); \
+                    mv /tmp/$$(basename $$pic) ./$$(dirname $$pic);\
 		fi; \
 		cd $(QGIS_ACTION_DIR); \
 	done; \
