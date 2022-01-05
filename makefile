@@ -3,12 +3,15 @@
 # einmal local 
 # einmal für Heroku
 #
-## uws : 2021.10.04
+## uws : 2022.01.04
 #
 # letzte Änderung:
 # 04.10.21      Entfernen der Hofläden
+#
+# 04.01.2022	Hinzufügen der Blühwiesen
+#
 
-VERSION = 0.8.3.1
+VERSION = 0.9.0.0
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -17,6 +20,8 @@ LOCAL_ACTION_DIR = $(STATIC_IMG_DIR)/aktionen
 QGIS_WIESEN_DIR = "/home/uws/privat/Streuobstwiesen/Bilder"
 QGIS_PIC_DIR = $(QGIS_WIESEN_DIR)/Baum_Bilder
 QGIS_ACTION_DIR = $(QGIS_WIESEN_DIR)/Aktionen
+QGIS_BLUEH_PIC_DIR = $(QGIS_WIESEN_DIR)/Bluehwiesen
+BLUEH_LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/bluehwiesen
 
 WIESEN_NAMES = Buergermeisterwiese \
 		Skater_Tennisplatz\
@@ -34,6 +39,14 @@ WIESEN_NAMES = Buergermeisterwiese \
 		Osterfeuer \
 		Stadelham_Gartelsried \
 
+BLUEH_WIESEN_NAMES = Feldkreuz_West \
+		Kunstpfad_Ost_Kunstobjekte \
+		Mannrieder_Berg_Nord \
+		Stadelham_Gartelsried_unten \
+		Stadelham_Gartelsried_oben \
+		Osterfeuer \
+		Brünndlhang \
+                Wegzwickl_Biotop_Nr._52 \
 
 make_schtob:
 	mkdir -p schtob/lib
@@ -101,6 +114,30 @@ copy_pics:
                         convert $${pic} -resize 1024x768 /tmp/$${pic}; \
                         mv /tmp/$${pic} .;\
 			cd $(QGIS_PIC_DIR)/$$wn; \
+		done; \
+	done
+
+copy_blueh_pics:
+	echo "Das geht nur auf dem LAPTOP"
+	actdir=$$(pwd); export actdir ;\
+    set -x; \
+	for wn in $(BLUEH_WIESEN_NAMES); do \
+		cd $(QGIS_BLUEH_PIC_DIR)/$$wn; \
+		echo "===================================================";\
+		echo " Check ob ein Bild neuer ist nur die sollten kopiert werden";\
+		echo "====================================================="; \
+		for pic in $$(cat Nr)*.[Jj][Pp][Gg]; do \
+			if [  -e $${actdir}/$(BLUEH_LOCAL_PIC_DIR)/$$wn/$$pic ] && \
+			   [ ! $$pic -nt $${actdir}/$(BLUEH_LOCAL_PIC_DIR)/$$wn/$$pic ]; \
+			   then \
+				echo "PIC $$pic is not newer"; \
+				continue; \
+			fi; \
+			cp -p $$pic $${actdir}/$(BLUEH_LOCAL_PIC_DIR)/$$wn; \
+			cd $${actdir}/$(BLUEH_LOCAL_PIC_DIR)/$$wn; \
+                        convert $${pic} -resize 1024x768 /tmp/$${pic}; \
+                        mv /tmp/$${pic} .;\
+			cd $(QGIS_BLUEH_PIC_DIR)/$$wn; \
 		done; \
 	done
 

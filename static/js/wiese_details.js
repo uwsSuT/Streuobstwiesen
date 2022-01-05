@@ -9,9 +9,6 @@ function newIcon (color) {
         });
 }
 
-
-
-
 var ObstIcons = {
     'Apfel'     : newIcon('green'),
     'Birne'     : newIcon('yellow'),

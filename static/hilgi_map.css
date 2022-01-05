@@ -32,6 +32,9 @@ div.navbar {
     margin-bottom: 0px;
 }
 
+img.baum_det_pic {
+  width: 1024px;
+}
 #getLocation {
     margin-top: 5px;
 }

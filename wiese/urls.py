@@ -7,6 +7,8 @@ from .views import (
         WieseUpdateView,
         BaumView,
         BaumPicView,
+        BluehWiesenListView,
+        BluehWiesenView,
         Set_dynamic_static_view,
 )
 
@@ -21,4 +23,7 @@ urlpatterns = [
     path('baum/<int:id>/', BaumView.as_view(), name='baum-detail'),
     path('baumpic/<path:pic>/<int:id>/', BaumPicView.as_view(), name='baumpic'),
     path('wiese_dynamic/<str:val>/', Set_dynamic_static_view, name='set_dyn_static'),
+
+    path('bluehwiesen/', BluehWiesenListView.as_view(), name='bluehwiesen'),
+    path('bluehwiesen/<int:id>', BluehWiesenView.as_view(), name='bluehwiese'),
 ]

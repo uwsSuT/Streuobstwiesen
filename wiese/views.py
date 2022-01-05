@@ -12,11 +12,11 @@ from obstsorten.models import Wiese, ObstBaum, ObstSorten
 from obstsorten.defs import Obst_Type
 from obstsorten.views import ObstLinkIn
 from wiese.tables import WiesenTable
-from wiese.wiese import WiesenLeaflet
+from wiese.wiese import WiesenLeaflet, BluewiesenLeaflet
 from baeume.baeume import BaumLeaflet
 from hilgi.utils import BaumSessionClass
 
-from init_db import  Streuobst_geo
+from init_db import  Streuobst_geo, Bluehwiesen_geo
 
 DEBUG = int(os.environ.get('DEBUG', default=1))
 
@@ -37,7 +37,6 @@ class WieseObjectMixin(ObstLinkIn, object):
         else:
             context['baeume_statisch'] = self.request.session['baeume_statisch']
             context['baeume_dynamisch'] = self.request.session['baeume_dynamisch']
-
 
 class WieseCreateView(View):
     template_name = "wiese/wiese_create.html"
@@ -75,7 +74,8 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
         """
         context = super().get_context_data(**kwargs)
         baeume = BaumLeaflet()
-        wiesen = WiesenLeaflet(geo_json_file=Streuobst_geo)
+        wiesen = WiesenLeaflet(geo_json_file=Streuobst_geo, verbose=DEBUG)
+        #bluehwiesen = WiesenLeaflet(geo_json_file=Bluehwiesen_geo, verbose=DEBUG)
         #print("WieseListView: dir: %s" % pformat(dir(self)))
 
         self.set_dynamic(context)
@@ -86,11 +86,41 @@ class WieseListView(WieseObjectMixin, SingleTableMixin, ListView):
         #
         context["baeume"] = baeume.get_all_geo_objects()
         context["wiesen"] = wiesen.get_geo_objects()
+#        context["bluehwiesen"] = bluehwiesen.get_geo_objects()
 
         context['grafik'] ='images/wiese/Hilgh_StreuobstWiesen_2020_09.png'
         context['obstsorten_menu'] = self.get_Obst_menu()
         context['wiesen_list'] = Wiese.objects.all().order_by('name')
 
+        return context
+
+class BluehWiesenListView(WieseObjectMixin, SingleTableMixin, ListView):
+    #
+    # Darstellung aller BlühWiesen mit Karte und Liste der definierten Wiesen
+    #
+    model = Wiese
+    table_class = WiesenTable
+    template_name = "wiese/bluehwiesen.html"
+
+    def get_context_data(self, **kwargs):
+        """
+            Holt die ContextDaten vom Model und der WiesenTabelle
+            wird hier noch mal um die dynamischen geo_objects
+            und um die Menu-Entry erweitert
+        """
+        context = super().get_context_data(**kwargs)
+        bluehwiesen = BluewiesenLeaflet(geo_json_file=Bluehwiesen_geo, verbose=DEBUG)
+        bluehwiesen.add_wiesen_pics()
+
+        self.set_dynamic(context)
+
+        #
+        # Die beiden Parameter baeume und wiesen werden im JavaScript
+        # verwendet
+        #
+        context["bluehwiesen"] = bluehwiesen.get_geo_objects()
+
+        context['grafik'] ='images/wiese/Hilgh_StreuobstWiesen_2020_09.png'
         return context
 
 class WieseView(WieseObjectMixin, View):
@@ -199,12 +229,8 @@ class BaumView(WieseObjectMixin, View):
         for f in os.listdir(join(pwd, 'static', 'images', 'baum')):
             if isdir(join(pwd, 'static', 'images', 'baum', f)) and \
                     f == wiesen_name:
-                if DEBUG:
-                    print("FOUND Dir: %s" % f)
                 for b in os.listdir(join(pwd, 'static', 'images', 'baum', f)):
                     if b.find("%s_" % baum.baum_id) == 0:
-                        if DEBUG:
-                            print("FOUND Tree: %s" % b)
                         #baum_pics.append(join('images', 'baum', f, b))
                         #
                         # Generier eine List von Dicts damit wir in der
@@ -294,6 +320,29 @@ class BaumPicView(WieseObjectMixin, View):
            'obstsorten_menu' : self.get_Obst_menu(),
            'wiesen_list' : Wiese.objects.all().order_by('name'),
           }
+        return render(request, self.template_name, context)
+
+class BluehWiesenView(WieseObjectMixin, View):
+    """
+        Zeig alle Infos zu einer Blühwiese
+          - letzte Maht
+          - letzte Saat
+          - Saatgut
+          - Bilder
+    """
+    def get(self, request, id=None, *args, **kwargs):
+        """
+            Holt die ContextDaten vom GeoJson File
+        """
+        print("BluehwiesenView: id: %s" % id)
+        self.template_name = "wiese/bluehwiese.html"
+        bluehwiesen = BluewiesenLeaflet(geo_json_file=Bluehwiesen_geo,
+                                        verbose=DEBUG if DEBUG > 1 else 0)
+        bluehwiesen.get_wiesen_infos()
+
+        context = {'wieseninfo' : bluehwiesen.wiesen_infos[id],
+                  }
+
         return render(request, self.template_name, context)
 
 class WieseUpdateView(WieseObjectMixin, View):

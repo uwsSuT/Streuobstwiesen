@@ -64,11 +64,11 @@ class BaumPics():
         for f in os.listdir(self.baum_dir):
             if isdir(join(self.baum_dir, f)) and \
                     f == wiesen_name:
-                if DEBUG:
+                if DEBUG > 2:
                     print("FOUND Dir: %s" % f)
                 for b in os.listdir(join(self.baum_dir, f)):
                     if b.find("%s_" % baum.baum_id) == 0:
-                        if DEBUG:
+                        if DEBUG > 2:
                             print("FOUND Tree: %s" % b)
                         if not baum.baum_id in self.baum_pics:
                             self.baum_pics[baum.baum_id] = []

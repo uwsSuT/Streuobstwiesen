@@ -1,0 +1,38 @@
+{% extends 'wiese/blueh_base.html' %}
+{% load static %}
+
+{% block title %}Blühwiesen{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <h2> In 2021 neu angelegte Blühwiesen</h2>
+      
+        <!-- Dynamische Präsentation der Bäume mit Laeflet -->
+        {{ bluehwiesen|json_script:"bluehwiesen-data" }}
+
+        <div id="map"></div>
+
+        <p id="WiesenInfo">
+            Auf der obigen Map sind die in Hilgertshausen im Jahre 2021
+            neu angelegten bzw. angesäten Blühfläschen durch rote Polygone
+            gekennzeichnet.
+        </p>
+        <p>
+            Ein Klick auf ein Polygon öffnet ein Popup-Fenster,
+            in dem ein Bild der Wiese und deren Arbeitsname ersichtlich wird.
+            Durch einen Klick auf das dargestellte Bild wird eine 
+            WWW-Seite geöffnet, auf der weitere Bilder der Wiese und zusätzliche
+            Informationen zu den verwendeten Blumensamen und Zeitpunkten 
+            eingesehen werden können.
+        </p>
+    </div>
+</div>
+
+{% block script %}
+  <script src="{% static 'js/bluehwiese_map.js' %}"></script>
+{% endblock script %}
+
+{% endblock content %}
+
