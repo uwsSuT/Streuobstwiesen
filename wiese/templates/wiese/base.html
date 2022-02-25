@@ -157,7 +157,6 @@
     <!-- Metis Menu Plugin JavaScript -->
     <script src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
 
-
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'js/sb-admin-2.js' %}"></script>
 {% else %}
@@ -168,6 +167,19 @@
 	    <img class="mainpic" src="{% static 'images/Hilgertshausen_Wappen.jpg' %}" width=200>
         </center>
         <p><br></p>
+    <!-- Der folgende Block ist nur für die BaumInfo OHNE Login -->
+    <!-- In dem Fall steht derjenige vor dem Baum und hat keine Kennung -->
+    {% if baum_infos.baum_id %}
+       
+        <div class="col-sm-9">
+              {% block baum_content %}{% endblock %}
+        </div>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="{% static 'js/sb-admin-2.js' %}"></script>
+    {% else %}
 	</div>
         <div class="col-mg-12">
             <div class="panel panel-primary">
@@ -181,6 +193,7 @@
 		</div>
             </div>
         </div>
+    {% endif %}
     </div>
 {% endif %}
  
