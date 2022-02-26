@@ -11,7 +11,7 @@
 # 04.01.2022	Hinzufügen der Blühwiesen
 #
 
-VERSION = 0.9.1.0
+VERSION = 0.9.1.1
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
