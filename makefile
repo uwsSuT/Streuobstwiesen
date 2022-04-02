@@ -149,7 +149,7 @@ copy_action_pics:
 	echo "===================================================";\
 	echo " Check ob ein Bild neuer ist nur die sollten kopiert werden";\
 	echo "====================================================="; \
-	for pic in 2021/*.jpg; do \
+	for pic in 2022/*.jpg; do \
 		if [  -e $${actdir}/$(LOCAL_ACTION_DIR)/$$pic ] && \
 		   [ ! $$pic -nt $${actdir}/$(LOCAL_ACTION_DIR)/$$pic ]; \
 		   then \
