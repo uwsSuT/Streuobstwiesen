@@ -38,6 +38,8 @@ class ObstBaum(models.Model):
     # bilder      = ArrayField(models.ImageField(upload_to='uploads/Baum'), blank=True, size=20)
     zustand     = models.CharField(max_length=248, blank=True)
     letzter_schnitt = models.DateField(null=True, blank=True)
+    letzte_duengung = models.DateField(null=True, blank=True)
+    duengung_noetig = models.BooleanField(default=False)
     coordinate = models.CharField(max_length=24, blank=True, null=True)
 
     def __str__(self):

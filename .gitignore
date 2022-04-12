@@ -4,7 +4,7 @@
 /public/js/vendor
 /public/css/vendor
 staticfiles
-migrations/*.py
+migrations
 *.swp
 *.pgw
 __pycache__

@@ -34,6 +34,8 @@
 		    <th>Bezeichnung</th>
 		    <th>Zustand</th>
 		    <th>letzter Schnitt</th>
+		    <th>Düngung nötig</th>
+		    <th>letzte Düngung</th>
 		</tr>
 	    </thead>
 	    <tbody>
@@ -59,6 +61,8 @@
             </th>
 			<th>{{ instance.zustand }}</th>
 			<th>{{ instance.letzter_schnitt }}</th>
+			<th>{{ instance.duengung_noetig }}</th>
+			<th>{{ instance.letzte_duengung }}</th>
 		    </tr>
 		{% endfor %}
 	    </tbody>

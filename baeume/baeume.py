@@ -49,6 +49,9 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
 
         bid = 1
         for geo_pos in self.geo_struct['features']:
+            letzter_schnitt = None
+            letzte_duengung = None
+            duengung_noetig = False
             if self.verbose:
                 print("Baum: %s" % pformat(geo_pos))
             bid = geo_pos['properties']['Baum_Nr']
@@ -61,8 +64,13 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
                 letzter_schnitt = compile_start_time(
                             geo_pos['properties']['Schnitt'],
                             tformat='DATETIME')
-            else:
-                letzter_schnitt = None
+            if geo_pos['properties']['Duengung']:
+                letzte_duengung = compile_start_time(
+                            geo_pos['properties']['Duengung'],
+                            tformat='DATETIME')
+            if geo_pos['properties']['D_noetig']:
+                duengung_noetig = True if int(geo_pos['properties']['D_noetig']) else False
+
             try:
                 coordinate = "%s, %s" % (
                     geo_pos['geometry']['coordinates'][0],
@@ -77,14 +85,13 @@ class BaumLeaflet(GeoJsonClass, BaumPics):
                 baum = ObstBaum.objects.get(baum_id=bid)
             except:
                 baum = 0 # den Baum gibt es noch nicht
-#            if baum:
-#                obj = ObstBaum(sorten_id=sorten_id, wiese=wiese,
-#                           zustand=zustand, letzter_schnitt=letzter_schnitt)
-#            else:
             if self.update_db:
                 obj = ObstBaum(baum_id=bid, sorten_id=sorten_id, wiese=wiese,
                            zustand=zustand, letzter_schnitt=letzter_schnitt,
-                           coordinate=coordinate)
+                           coordinate=coordinate,
+                           letzte_duengung=letzte_duengung,
+                           duengung_noetig=duengung_noetig
+                           )
                 obj.save()
 
     def __add_geo_feature__(self, baum, layer=None):
