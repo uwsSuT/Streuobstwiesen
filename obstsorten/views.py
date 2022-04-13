@@ -4,9 +4,17 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import TemplateView
+from django_filters.views import FilterView
+from django_tables2 import SingleTableView, SingleTableMixin
+from django_tables2.config import RequestConfig
+from django_tables2.export.export import TableExport
+from django_tables2.export.views import ExportMixin
+
 from obstsorten.models import Wiese, ObstBaum, ObstSorten
 from obstsorten.defs import Obst_Type
 from baeume.baeume import BaumLeaflet
+from baeume.tables import BaumInfosTable
+from baeume.filters import BaumInfosFilter
 
 DEBUG = int(os.environ.get('DEBUG'))
 
@@ -159,3 +167,9 @@ class ObstSortenDetView(ObstLinkIn, TemplateView):
                   }
         return render(request, self.template_name, context)
 
+class BaumInfosView(ObstLinkIn, SingleTableMixin, FilterView):
+
+    model = ObstBaum
+    table_class = BaumInfosTable
+    filterset_class = BaumInfosFilter
+    template_name = "baum_infos.html"

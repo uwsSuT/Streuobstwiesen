@@ -52,7 +52,7 @@ if not settings.configured:
 
 
 from csv import reader
-from obstsorten.models import ObstSorten, Wiese, ObstBaum
+from obstsorten.models import ObstSorten, Wiese, ObstBaum, ObstTypen
 from obstsorten.defs import Obst_Type
 from hofladen.models import Hofladen
 
@@ -80,23 +80,29 @@ def insert_obstsorten(fname):
                 obst_type = frucht[0].strip()
                 if obst_type == 'unbekannter Baum':
                     # trag den Type extra ein
-                    ot = Obst_Type.index('unbekannt')
+                    oname = 'unbekannt'
+                    ot = Obst_Type.index(oname)
+                    type_obj = ObstTypen.objects.get(name=oname)
                     obj = ObstSorten(sorten_id=999, obst_type=ot,
-                            obst_sorte='unbekannt')
+                            obst_sorte=oname, type_name=type_obj)
                     obj.save()
                     continue
                 if obst_type == 'Tod':
                     # trag den Type extra ein
-                    ot = Obst_Type.index('Tod')
+                    oname = 'Tod'
+                    ot = Obst_Type.index(oname)
+                    type_obj = ObstTypen.objects.get(name=oname)
                     obj = ObstSorten(sorten_id=1000, obst_type=ot,
-                            obst_sorte='Tod')
+                            obst_sorte=oname, type_name=type_obj)
                     obj.save()
                     continue
                 try:
                     ot = Obst_Type.index(obst_type)
+                    oname = obst_type
                 except:
                     print("Unbekannter Obst-Type: %s" % obst_type)
                     ot = Obst_Type.index('unbekannt')
+                type_obj = ObstTypen.objects.get(name=oname)
                 continue
             elif not frucht[0] and not frucht[1]:
                 # Leere Zeile
@@ -116,7 +122,8 @@ def insert_obstsorten(fname):
                        pflueck_reif=pflueck_reif, genuss_reif=genuss_reif,
                        verwendung=verwendung, geschmack=geschmack,
                        lagerfaehigkeit=lagerfaehigkeit,
-                       alergie_info=alergie_info, www=www)
+                       alergie_info=alergie_info, www=www,
+                       type_name=type_obj)
             obj.save()
 
 def insert_wiesen(fname):
@@ -141,16 +148,33 @@ def insert_wiesen(fname):
                     bluehwiese=bluehwiese, www_name=www_name)
             obj.save()
 
+def insert_obsttypen():
+    for ot in Obst_Type:
+        obj = ObstTypen(name=ot)
+        obj.save()
+
 def re_init():
     delete_all()
+    insert_obsttypen()
     insert_obstsorten('init_db/Obstsorten.csv')
     insert_wiesen('init_db/wiesen.txt')
     insert_baeume('init_db/Baeume.csv')
 
 def delete_all():
+    delete_obst_types()
     delete_baeume()
     delete_wiesen()
     delete_obstsorten()
+
+def delete_obst_types():
+    """
+        Lösche alle Obstsorten für einen reinit
+    """
+    try:
+        for sorte in ObstTypen.objects.all():
+            sorte.delete()
+    except:
+        pass
 
 def delete_obstsorten():
     """
@@ -160,6 +184,7 @@ def delete_obstsorten():
         for sorte in ObstSorten.objects.all():
             sorte.delete()
     except:
+        print("ERROR: delete_obstsorten")
         pass
 
 def delete_wiesen():

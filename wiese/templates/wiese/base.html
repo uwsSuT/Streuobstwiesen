@@ -57,13 +57,18 @@
             </div>
             <!-- /.navbar-header -->
             <div class="collapse navbar-collapse" id="myNavbar">
-                <a id="nav_obstsorten" class="nav navbar-nav" href="/obstsorten">Obstsorten</a>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i id="nav_blue" class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
+			    <li>
+				<a class="nav navbar-brand" href="/obstsorten">Obstsorten</a>
+			    </li>
+			    <li>
+				<a href="{% url 'obstbaeume' %}" class="nav navbar-brand">  Obstbäume</a>
+			    </li>
         {% if user.is_staff %}
                             <li>
                                 <a class="p-2 text-dark" href="/">Gruppen Seite</a>
