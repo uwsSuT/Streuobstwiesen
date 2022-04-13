@@ -56,6 +56,12 @@ make_schtob:
 	cp ../NetWorker_REST_API/schtob/nsr_api_defines.py schtob
 	cp ../NetWorker_REST_API/schtob/lib/*.py schtob/lib/
 
+make_migrate:
+	obstsorten/ed_utils.sh obstsorten/utils.py IN 1 1
+	python manage.py makemigrations -a hilgi-docker
+	obstsorten/ed_utils.sh obstsorten/utils.py OUT 1 1
+	python manage.py migrate -a hilgi-docker
+
 build_local: make_schtob
 	- rm -f Pipfile.lock
 	./manage_version.sh $(VERSION)
@@ -83,7 +89,9 @@ build_heroku: make_schtob
 	heroku container:push web -a hilgi-docker
 	heroku config:set HILGI_SEC_KEY='qt+*4)txyz(_=0f*(p6v-jbl+x7!eb*o^6lracku7ym@#!kpcu' -a hilgi-docker
 	heroku container:release web -a hilgi-docker
+	heroku run -a hilgi-docker /app/obstsorten/ed_utils.sh /app/obstsorten/utils.py IN 1 1
 	heroku run python3 manage.py makemigrations -a hilgi-docker
+	heroku run -a hilgi-docker /app/obstsorten/ed_utils.sh /app/obstsorten/utils.py OUT 1 1
 	heroku run python3 manage.py migrate -a hilgi-docker
 	rm -rf schtob
 	echo "Go To Heroku ;   heroku run bash -a hilgi-docker"

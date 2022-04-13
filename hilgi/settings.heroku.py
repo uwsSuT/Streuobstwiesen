@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.gis',
 
     # Third-party
+    'bootstrap4',
     'django_tables2',
+    'django_filters',
     'crispy_forms',
     'allauth',
     'allauth.account',

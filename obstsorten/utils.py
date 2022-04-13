@@ -32,13 +32,13 @@ def get_sorten_typ(gen_tuple=False):
         t = []
 
     otypes = []
-    # MAKEMIGRATIONS_ERROR - START
+    # MAKEMIGRATIONS_ERROR2 - START
     for otyp in ObstTypen.objects.all().order_by('name'):
         if gen_tuple:
             t += ((otyp.id, otyp.name), )
         else:
             t.append(("%s" % otyp.id, otyp.name))
-    # MAKEMIGRATIONS_ERROR - END
+    # MAKEMIGRATIONS_ERROR2 - END
     return t
 
 def get_wiesen_names(gen_tuple=False):
@@ -52,11 +52,11 @@ def get_wiesen_names(gen_tuple=False):
     else:
         t = []
 
-    # MAKEMIGRATIONS_ERROR - START
+    # MAKEMIGRATIONS_ERROR3 - START
     for wiese in Wiese.objects.all().order_by('name'):
         if gen_tuple:
             t += ((wiese.wiesen_id, wiese.www_name), )
         else:
             t.append(("%s" % wiese.wiesen_id, wiese.www_name))
-    # MAKEMIGRATIONS_ERROR - END
+    # MAKEMIGRATIONS_ERROR3 - END
     return t

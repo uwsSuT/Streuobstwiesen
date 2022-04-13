@@ -1,5 +1,5 @@
 # Base Image
-FROM python:3.7
+FROM python:3.8
 
 # create and set working directory
 RUN mkdir /app
@@ -16,6 +16,7 @@ RUN pip3 install --upgrade pip && \
         tzdata \
         gdal-bin \
 	python3-gdal \
+        ed \
         && \
     apt-get purge -y gcc && \
     apt-get purge -y git && \
