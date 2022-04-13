@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load django_tables2 %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block title %}Obstbäume{% endblock title %}
+
+{% block content %}
+{% if filter %}
+    <form action="" method="get" class="form form-inline">
+        {% bootstrap_form filter.form layout='inline' %}
+        {% bootstrap_button 'filter' %}
+    </form>
+{% endif %}
+    {% render_table table %}
+{% endblock content %}

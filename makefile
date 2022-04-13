@@ -3,15 +3,17 @@
 # einmal local 
 # einmal für Heroku
 #
-## uws : 2022.01.04
+## uws : 2022.04.13
 #
 # letzte Änderung:
 # 04.10.21      Entfernen der Hofläden
 #
 # 04.01.2022	Hinzufügen der Blühwiesen
 #
+# 13.4.22	Hinfzufügen des Bäume-Views mit Düngungs-Infos
+# 
 
-VERSION = 0.9.1.1
+VERSION = 0.9.2.0
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
