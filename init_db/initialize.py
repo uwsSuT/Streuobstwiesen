@@ -54,7 +54,7 @@ if not settings.configured:
 from csv import reader
 from obstsorten.models import ObstSorten, Wiese, ObstBaum, ObstTypen
 from obstsorten.defs import Obst_Type
-from hofladen.models import Hofladen
+#from hofladen.models import Hofladen
 
 enums = {
         'obst_typen' : Obst_Type,
@@ -99,9 +99,11 @@ def insert_obstsorten(fname):
                 try:
                     ot = Obst_Type.index(obst_type)
                     oname = obst_type
+                    print("ot: %s oname: %s" % (ot, oname))
                 except:
                     print("Unbekannter Obst-Type: %s" % obst_type)
                     ot = Obst_Type.index('unbekannt')
+                    continue
                 type_obj = ObstTypen.objects.get(name=oname)
                 continue
             elif not frucht[0] and not frucht[1]:

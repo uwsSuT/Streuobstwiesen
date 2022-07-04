@@ -25,5 +25,5 @@ urlpatterns = [
     # Local apps
     path('', include('obstsorten.urls')),
     path('wiese/', include('wiese.urls')),
-    path('hofladen/', include('hofladen.urls'))
+    #path('hofladen/', include('hofladen.urls'))
 ]

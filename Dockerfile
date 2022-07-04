@@ -3,7 +3,7 @@ FROM python:3.8
 
 # create and set working directory
 RUN mkdir /app
-RUN mkdir /app/hofverkauf
+# RUN mkdir /app/hofverkauf
 WORKDIR /app
 
 
@@ -35,15 +35,15 @@ COPY hilgi /app/hilgi/
 COPY wiese /app/wiese/
 COPY baeume /app/baeume/
 COPY obstsorten /app/obstsorten/
-COPY hofladen /app/hofladen/
+# COPY hofladen /app/hofladen/
 COPY static /app/static/
 COPY staticfiles /app/staticfiles/
 COPY templates /app/templates/
 COPY init_db /app/init_db/
 COPY manage.py /app/
 COPY schtob /app/schtob/
-COPY hofverkauf/Hofverkauf.csv /app/hofverkauf
-COPY hofverkauf/hofladen.geojson /app/hofverkauf
+#COPY hofverkauf/Hofverkauf.csv /app/hofverkauf
+#COPY hofverkauf/hofladen.geojson /app/hofverkauf
 
 # set default environment variables
 ENV PYTHONUNBUFFERED 1

@@ -12,8 +12,9 @@
 #
 # 13.4.22	Hinfzufügen des Bäume-Views mit Düngungs-Infos
 # 
+# 04.07.22      Entferne Hofläden endgültig; First deploy from uwe-nuc
 
-VERSION = 0.9.2.0
+VERSION = 0.9.2.1
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
@@ -58,9 +59,11 @@ make_schtob:
 
 make_migrate:
 	obstsorten/ed_utils.sh obstsorten/utils.py IN 1 1
-	python manage.py makemigrations -a hilgi-docker
+	#python manage.py makemigrations -a hilgi-docker
+	python3 manage.py makemigrations
 	obstsorten/ed_utils.sh obstsorten/utils.py OUT 1 1
-	python manage.py migrate -a hilgi-docker
+	#python manage.py migrate -a hilgi-docker
+	python3 manage.py migrate 
 
 build_local: make_schtob
 	- rm -f Pipfile.lock
