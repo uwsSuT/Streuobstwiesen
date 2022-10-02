@@ -1,111 +1,143 @@
-,Nr.,Sorte,Anzahl,Bild,Reifezeit,Verwendung,Geschmack,Lagerfähigkeit,"Für Allergiker Geeignet","Vorkommen Wiesen-Nr. / Anzahl",WWW
+,Nr.,Sorte,Anzahl,Bild,Reifezeit,Verwendung,Geschmack,Lagerfähigkeit,"Für Allergiker
+ Geeignet","Vorkommen
+Wiesen-Nr. / Anzahl",WWW
 Apfel,,,,,,,,,,,
-,1,Korbiniansapfel,3,,Ende Oktober bis Mitte November,"Tafelobst, Frischobst, Mus, Kompott, Einkochen, Kuchenobst, Backobst",ausgewogen zwischen süß und sauer,bis in den Frühling hinein lagerfähig,,"6 / 1 8 / 1","https://de.wikipedia.org/wiki/Korbiniansapfel https://www.pflanzmich.de/search/?queryInput=Korbiniansapfel"
-,2,Jacob Lebel,4,,"Mitte September bis Anfang Oktober sollten aber zum Frischverzehr möglichst spät geerntet werden","Frischverzehr, Weiterverarbeitung","saftig, aber mürbe und ohne Würze","Ohne geeignete Lagerung halten sich die Äpfel nur bis November Mit Kühlung bis Januar",,"2 / 2 6 / 1 7 / 1 ","https://www.pflanzmich.de/produkt/33650/apfel-jacob-lebel.html https://de.wikipedia.org/wiki/Jakob_Lebel"
-,3,Prinz Albrecht,2,,Ende September,"Frischverzehr, Kuchenbelag, Marmelade",süßsäuerlich und sehr saftig,bis Dezember,Gut geeignet,6 / 1,"https://www.pflanzmich.de/produkt/36417/apfel-prinz-albrecht-von-preussen.html
+,1,Korbiniansapfel,3,,Pflückreife: Ende Oktober ,"Tafelobst, Frischobst, Mus, Kompott, Einkochen, Kuchenobst, Backobst",ausgewogen zwischen süß und sauer,bis in den Frühling hinein lagerfähig,,"6 / 1
+8 / 1","https://de.wikipedia.org/wiki/Korbiniansapfel
+https://www.pflanzmich.de/search/?queryInput=Korbiniansapfel"
+,2,Jacob Lebel,4,,"Pflückreife: Mitte September bis Anfang Oktober
+
+Sollten aber zum Frischverzehr möglichst spät geerntet werden","Frischverzehr, Weiterverarbeitung","saftig, aber mürbe und ohne Würze","Ohne geeignete Lagerung halten sich die Äpfel nur bis November
+
+Mit Kühlung bis Januar",,"2 / 2
+6 / 1
+7 / 1
+","https://www.pflanzmich.de/produkt/33650/apfel-jacob-lebel.html
+https://de.wikipedia.org/wiki/Jakob_Lebel"
+,3,Prinz Albrecht,2,,"Pflückreife: Ende September
+Genussreif: Oktober","Frischverzehr, Kuchenbelag, Marmelade",süßsäuerlich und sehr saftig,bis Dezember / Januar,Gut geeignet,6 / 1,"https://www.pflanzmich.de/produkt/36417/apfel-prinz-albrecht-von-preussen.html
 https://de.wikipedia.org/wiki/Prinz_Albrecht_von_Preu%C3%9Fen"
-,4,Danzinger Kantapfel,4,,Ende September,Tafelapfel,süßsäuerlich bis leicht würzig,bis Januar ist der Apfel verwertbar,,"2 / 1
+,4,Danzinger Kantapfel,4,,Pflückreife: Ende September,"Tafelapfel
+Zum backen und Mosten",süßsäuerlich bis leicht würzig,bis Januar ist der Apfel verwertbar,,"2 / 1
 6 / 2
 8 / 1","https://de.wikipedia.org/wiki/Danziger_Kantapfel
 https://www.pflanzmich.de/produkt/35382/apfel-danziger-kantapfel.html"
-,5,"Rheinischer Winterrambur",6,,Mitte Oktober,"Frischverzehr, Kuchenbelag, Marmelade","süßlich, schwach gewürzt, ist säurearm und reich an Vitamin Citamin C","Dezember bis März, 
+,5,"Rheinischer 
+Winterrambur",6,,"Pflückreife: Mitte Oktober
+Genußreife: Dezember","Frischverzehr, Kuchenbelag, Marmelade","süßlich, schwach gewürzt, ist säurearm und reich an Vitamin Citamin C","bis März, 
 Bei geeigneter Lagerung bis Mai",,"5 / 1
 6 / 1
 7 / 2
 8 / 1
 12 / 1","https://www.pflanzmich.de/produkt/11370/apfel-rheinischer-winterrambur.html
 https://de.wikipedia.org/wiki/Rheinischer_Winterrambur"
-,6,Kaiser Wilhelm,1,,Ende September,"Frischverzehr, Kuchenbelag","
-wohlschmeckendes, himbeerartiges Aroma",von Ende Oktober bis April genießbar,,6 / 1,"https://www.pflanzmich.de/produkt/35449/apfel-kaiser-wilhelm.html
+,6,Kaiser Wilhelm,1,,"Pflückreife: Ende September
+Genussreif: Ende Oktober","Frischverzehr, Kuchenbelag","
+wohlschmeckendes, himbeerartiges Aroma",bis April,,6 / 1,"https://www.pflanzmich.de/produkt/35449/apfel-kaiser-wilhelm.html
 https://de.wikipedia.org/wiki/Kaiser_Wilhelm_(Apfel)"
-,7,Goldparmäne,4,,"Ende September Anfang Oktober
+,7,Goldparmäne,4,,"Pflückreife: Ende September Anfang Oktober
 
-von Oktober bis Januar genussreif",nussartiges Aroma und sind relativ säurearm,nussartiges Aroma und relativ säurearm,,Gut geeignet,"5 / 2
+Genussreife: von Oktober bis Januar","Tafelapfel, Apfemus
+Zum backen und mosten",nussartiges Aroma und relativ säurearm,Januar bis März,Gut geeignet,"5 / 2
 6 / 1
 8 / 1","https://www.pflanzmich.de/produkt/11120/apfel-goldparmaene.html
 https://de.wikipedia.org/wiki/Goldparm%C3%A4ne"
-,8,Maunzenapfel,3,,"Oktober
-Herbstsorte/Lagersorte",Mostapfel und auch als Back- und Kochapfel ,direkt vom Baum bisweilen bestenfalls als ungenießbar,bis Februar,Bedingt geeignet,2 / 3,"https://de.wikipedia.org/wiki/Maunzen
+,8,Maunzenapfel,3,,Pflückreife: Oktober,Mostapfel und auch als Back- und Kochapfel ,direkt vom Baum bisweilen ungenießbar,bis Februar,Bedingt geeignet,2 / 3,"https://de.wikipedia.org/wiki/Maunzen
 https://www.pflanzmich.de/produkt/11290/apfel-maunzenapfel.html"
 ,9,Topaz,3,,"ab September
 
 Genußreife ab November","Frischverzehr,  Saft- und Apfelmusherstellung","süßsäuerlich, saftig aromatisch",bis zum März,,"6 / 1
 7 / 2","https://www.pflanzmich.de/produkt/13398/apfel-topaz.html
 "
-,10,Fromms Goldrenette,1,,"Mitte Oktober
+,10,Fromms Goldrenette,1,,"Pflückreife: Mitte Oktober
 
-Ende November bis Februar genussreif","hoher Vitamin C Gehalt, edles Aroma",süßsäuerlich,sollten am besten in Folienbeuteln gelagert werden,,7 / 1,"https://www.pflanzmich.de/produkt/37669/apfel-fromms-goldrenette.html
+Genußreife: Ende November ",sehr guter Tafel- und Wirtschaftsapfel,"süßsäuerlich
+hoher Vitamin C Gehalt, edles Aroma","Lagerfähig bis Februar
+Sollten am besten in Folienbeuteln gelagert werden
+",,7 / 1,"https://www.pflanzmich.de/produkt/37669/apfel-fromms-goldrenette.html
 "
-,11,Wiltshire,3,,"Lagerfähig  : ab Oktober
-Genußreife :  ab November",Tafel- und Mostapfel,süß-säuerlich,direktverzehr,Bedingt geeignet,1 / 3  ,"https://de.wikipedia.org/wiki/Sch%C3%B6ner_von_Wiltshire
+,11,Wiltshire,3,,"Pflückreif  : ab Oktober
+Genußreife :  ab November",Tafel- und Mostapfel,süßsäuerlich,direktverzehr,Bedingt geeignet,1 / 3  ,"https://de.wikipedia.org/wiki/Sch%C3%B6ner_von_Wiltshire
 https://www.pflanzmich.de/produkt/38206/apfel-schoener-von-wiltshire.html"
-,12,Brettacher,3,,"Lagerfähig : ab Oktober
-Genußreife : ab Februar","Backen oder Kochen
+,12,Brettacher,3,,"Pflückreife : ab Oktober
+Genußreife : ab Dezember","Backen oder Kochen
 
 Frischverzehr, Kuchenbelag, Marmelade",eher säuerlich,"Lagerapfel
 
-in einem kühlen Raum bis Ende des nächsten Frühjahres",,"1 / 1
+in einem kühlen Raum bis Ende April",,"1 / 1
 8 / 1
 9 / 1","https://de.wikipedia.org/wiki/Brettacher
 https://www.pflanzmich.de/produkt/13813/apfel-brettacher.html"
-,13,Boskoop,7,,November,Apfelmus oder Apfelpfannkuchen sowie als Back- oder Bratapfel,Süß-säuerlich,bis März,,"1 / 1
+,13,Boskoop,7,,"Pflückreife: Oktober / November
+Genußreife :  ab Dezember",Apfelmus oder Apfelpfannkuchen sowie als Back- oder Bratapfel,süßsäuerlich,bis März,,"1 / 1
 2 / 1
 4 / 2
 8 / 1
 12 / 1
 13 / 1","https://de.wikipedia.org/wiki/Sch%C3%B6ner_aus_Boskoop
 https://www.pflanzmich.de/produkt/11000/apfel-boskoop.html"
-,14,Rheinischer Bohnapfel,5,,"Mitte Oktober bis Anfang November 
+,14,Rheinischer Bohnapfel,5,,"Pflückreife Mitte Oktober bis Anfang November 
 
-Genußreife : ab Januar",Wirtschaftsapfel,säuerlich,bis Juni,,"1 / 2
+Genußreife : ab Januar",Mostapfel,säuerlich,bis Juni,,"1 / 2
 2 / 1
 4 / 1
 8 / 1","https://de.wikipedia.org/wiki/Bohnapfel
 https://www.pflanzmich.de/search/?queryInput=Rheinischer+Bohnapfel"
-,15,Jakob Fischer,6,,September,"Tafelobst,  als Haushaltsapfel zum Einmachen, Backen, Entsaften und für Kompott geeignet. ",süßsäuerlich,vier Wochen haltbar,,"1 / 1
+,15,Jakob Fischer,6,,Pflückreife: September,"Tafelobst,  als Haushaltsapfel zum Einmachen, Backen, Entsaften und für Kompott geeignet. ",süßsäuerlich,vier Wochen haltbar,,"1 / 1
 2 / 1
 4 / 1
 5 / 1
 8 / 1
 9 / 1","https://www.pflanzmich.de/produkt/35440/apfel-jakob-fischer.html
 https://de.wikipedia.org/wiki/Jakob_Fischer_(Apfel)"
-,16,Gelber Edelapfel,3,,September - Oktober,Kochen und Backen,weinsäuerlich bis kräftig säuerlich,,für Diabetiker geeignet,2 / 1,"https://de.wikipedia.org/wiki/Gelber_Edelapfel
+,16,Gelber Edelapfel,3,,"Pflückreif: September
+Genussreif: Oktober",Kochen und Backen,"weinsäuerlich bis kräftig säuerlich
+Viel Vitamin C",bis Januar,für Diabetiker geeignet,2 / 1,"https://de.wikipedia.org/wiki/Gelber_Edelapfel
 https://www.pflanzmich.de/produkt/35389/apfel-gelber-edelapfel.html"
-,17,Roter Jonathan,1,,Ende September bis Anfang Oktober,"Weihnachtsapfel
+,17,Roter Jonathan,1,,Pflückreife: Ende September bis Anfang Oktober,"Weihnachtsapfel
 Frischverzehr, Kuchenbelag, Marmelade",säuerlich,gut lagerfähig,,4 / 1,"https://www.pflanzmich.de/produkt/11230/apfel-roter-jonathan.html
 "
-,18,Klarapfel,1,,Juli,"Apfelmus und Apfelstrudel, aber auch als Tafelapfel","etwas säuerlich
+,18,Klarapfel,1,,Pflückreife: Juli,"Apfelmus und Apfelstrudel, aber auch als Tafelapfel","etwas säuerlich
 
 nach der Ernte schnell mehlig und trocken",nur etwa zwei bis drei Wochen lagerfähig,,8 / 1,"https://www.pflanzmich.de/produkt/11250/apfel-weisser-klarapfel.html
 https://de.wikipedia.org/wiki/Wei%C3%9Fer_Klarapfel"
-,19,Glockenapfel,1,,Oktober pflückreif und ab Dezember genussreif,"Frischverzehr, Kuchenbelag, Marmelade",säuerlich-erfrischend,im Kühllager bis Juni,Gut geeignet,8 / 1,"https://de.wikipedia.org/wiki/Glockenapfel
+,19,Glockenapfel,1,,"Pflückreife: Oktober 
+Genussreife:  Dezember","Frischverzehr, Kuchenbelag, Marmelade",säuerlich-erfrischend,im Kühllager bis Juni,Gut geeignet,8 / 1,"https://de.wikipedia.org/wiki/Glockenapfel
 https://www.pflanzmich.de/produkt/11090/apfel-weisser-winterglockenapfel.html"
-,20,Gewürzluiken,1,,Oktober – genußreif ab November,"Tafel- und Wirtschaftsapfel, auch für Saftherstellung","leicht würzigen, säuerlich",bis März ,,8 / 1,"https://de.wikipedia.org/wiki/Gew%C3%BCrzluiken
+,20,Gewürzluiken,1,,"Pflückreife: Oktober
+Genußreife:  ab November","Tafel- und Wirtschaftsapfel, auch für Saftherstellung","leicht würzigen, säuerlich",bis März ,,8 / 1,"https://de.wikipedia.org/wiki/Gew%C3%BCrzluiken
 https://www.pflanzmich.de/produkt/35435/apfel-gewuerzluiken.html"
-,21,Landsberger Renette,1,,November,Tafelapfel,angenehmer „süßweinigter“ Geschmack,bis Ende Januar,,8 / 1,"https://www.pflanzmich.de/produkt/11260/apfel-landsberger-renette.html
+,21,Landsberger Renette,1,,"Pflückreife: Oktober
+Genussreife: November","Tafelapfel, Apfelmus, Most",angenehmer „süßweiniger“ Geschmack,bis Ende Januar,,8 / 1,"https://www.pflanzmich.de/produkt/11260/apfel-landsberger-renette.html
 https://de.wikipedia.org/wiki/Landsberger_Renette"
 ,22,Wettringer Taubenapfel,1,,"Pflückreife ist im Oktober
 
 genussreif ist der Apfel dann sofort und noch bis in den Dezember","Tafel- und Wirtschaftsapfel, als Brennobst begehrt",süßsäuerlich,bis Dezember,,1 / 1 ,"https://www.pflanzmich.de/produkt/14656/apfel-wettringer-taubenapfel.html
 "
-,23,Florina,1,,Oktober,"Lagerapfel, Frischverzehr",eher süß,bis Dezember/Januar,,2 / 1,"https://www.pflanzmich.de/produkt/39060/apfel-florina.html
+,23,Florina,1,,"Pflückreife: Oktober
+Genussreife: November","Lagerapfel, Frischverzehr, Backen","saftig, eher süß",bis Dezember/Januar,,2 / 1,"https://www.pflanzmich.de/produkt/39060/apfel-florina.html
 https://de.wikipedia.org/wiki/Florina_(Apfel)"
-,24,Schöner von Herrnhut,,,Ende September - Oktober,für Frischverzehr und Saft geeignet,"saftiger, süßsäuerlicher Tafelapfel",Ende September - Februar,,,"https://www.baumschule-horstmann.de/shop/exec/product/68/6590/Herbstapfel-Schoener-von-Herrnhut.html
+,24,Schöner von Herrnhut,,,Ende September - Oktober,für Frischverzehr und Saft geeignet,"saftiger, süßsäuerlicher Tafelapfel",bis Februar,,,"https://www.baumschule-horstmann.de/shop/exec/product/68/6590/Herbstapfel-Schoener-von-Herrnhut.html
 https://de.wikipedia.org/wiki/Sch%C3%B6ner_von_Herrnhut"
-,25,Lohrer Rambur,,,Oktober,guter Tafel- und Wirtschaftsapfel,"wenig gewürzt, saftig",Mitte Dezember bis April,,,"https://www.streuobst-mainfranken.de/cms/index.php/obstsorten/sortenvorstellung/apfel-sorten/134-lohrer-rambur
+,25,Lohrer Rambur,,,"Pflückreife: Oktober
+Genußreife: Novembeer",guter Tafel- und Wirtschaftsapfel,"wenig gewürzt, saftig",bis April,,,"https://www.streuobst-mainfranken.de/cms/index.php/obstsorten/sortenvorstellung/apfel-sorten/134-lohrer-rambur
 https://www.kv-gartenbauvereine-bamberg.de/de/obstparadies/apfelsorten/lohrer%20rambur.php
 "
-,26,Zabergäu Renette,,,Oktober,"als Tafelapfel, zum Kochen, Backen oder Mosten","feinfruchtig, mild säuerlich, mäßig süß, schwach aromatisch",bis in den März,,,"https://de.wikipedia.org/wiki/Zaberg%C3%A4urenette
+,26,Zabergäurenette,,,Pflückreife: Oktober,"als Tafelapfel, zum Kochen, Backen oder Mosten","feinfruchtig, mild säuerlich, mäßig süß, schwach aromatisch",bis in den März,,,"https://de.wikipedia.org/wiki/Zaberg%C3%A4urenette
 "
-,27,Geheimrat Dr. Oldenburg,,,"September, genussreif ab Oktober",Tafelobst,fein süßsäuerlich,bis Dezember,,,"https://de.wikipedia.org/wiki/Geheimrat_Dr._Oldenburg
+,27,Geheimrat Dr. Oldenburg,,,"Pflückreif: September
+Genussreif:  ab Oktober",Tafelobst,fein süßsäuerlich,bis Dezember,,,"https://de.wikipedia.org/wiki/Geheimrat_Dr._Oldenburg
 https://www.baumschule-horstmann.de/shop/exec/product/68/6590/Herbstapfel-Schoener-von-Herrnhut.html
 "
-,28,Berner Rosenapfel,,,Ende September,Tafelapfel und zur Saftbereitung,"süss-weinsäuerlich mit kräftigem, himbeerartigem Gewürz",bis Januar,,,"https://de.wikipedia.org/wiki/Berner_Rosenapfel
+,28,Berner Rosenapfel,,,Pflückreife: Ende September,Tafelapfel und zur Saftbereitung,"süss-weinsäuerlich mit kräftigem, himbeerartigem Gewürz",bis Januar,,,"https://de.wikipedia.org/wiki/Berner_Rosenapfel
 https://www.baumschule-horstmann.de/shop/exec/product/68/4780/Herbstapfel-Berner-Rosenapfel.html
 "
-,29,Holsteiner Cox,,,Ende September ab Oktober genussreif,Tafelapfel,säuerlich,bis Dezember,,,"https://de.wikipedia.org/wiki/Holsteiner_Cox
+,29,Holsteiner Cox,,,"
+Pflückreife: Ende September
+Genussreife: ab Oktober","Tafelapfel, Kuchen, Bratapfel",säuerlich,bis Dezember,,,"https://de.wikipedia.org/wiki/Holsteiner_Cox
 "
-,30,Gloster,,,Oktober,"Tafelapfel, Müsli, Salat",säuerlich,Oktober bis Mai,,,"https://de.wikipedia.org/wiki/Gloster_(Apfel)
+,30,Gloster,,,"Pflückreife: Oktober
+Genußreife: Dezember","Tafelapfel, Müsli, Salat",säuerlich,bis Mai,,,"https://de.wikipedia.org/wiki/Gloster_(Apfel)
 "
 ,99,Apfel – unbestimmt,24,,,,,,,"1 / 4
 5 / 3
@@ -183,7 +215,7 @@ https://www.pflanzmich.de/produkt/11670/suesskirsche-hedelfinger-riesenkirsche.h
 "
 ,303,Regina,1,,Ab Ende Juli,Genuss für alle Naschkatzen,aromatisch und süßsäuerlich ,,,8 / 1,"https://www.pflanzmich.de/produkt/37915/suesskirsche-regina.html
 https://de.wikipedia.org/wiki/Regina_(Kirsche)"
-,304,Süßkirsche Sunburst,1,,Juli,"Frischverzehr, Kuchenbelag, Marmelade",süß-säuerlich,,,8 / 1,"https://www.pflanzmich.de/produkt/39260/suesskirsche-sunburst.html
+,304,Süßkirsche Sunburst,1,,Juli,"Frischverzehr, Kuchenbelag, Marmelade",süßsäuerlich,,,8 / 1,"https://www.pflanzmich.de/produkt/39260/suesskirsche-sunburst.html
 https://de.wikipedia.org/wiki/Sunburst_(Kirsche)"
 ,399,Kirsche – unbestimmt,8,,,,,,,"2 / 3
 4 / 1
