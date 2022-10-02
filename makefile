@@ -13,8 +13,11 @@
 # 13.4.22	Hinfzufügen des Bäume-Views mit Düngungs-Infos
 # 
 # 04.07.22      Entferne Hofläden endgültig; First deploy from uwe-nuc
+#
+# 01.10.22      Überarbeitung der Baum-Infos (Pflückreife - Genussreife)
+#
 
-VERSION = 0.9.2.1
+VERSION = 0.9.2.2
 
 STATIC_IMG_DIR = "static/images"
 LOCAL_PIC_DIR = $(STATIC_IMG_DIR)/baum
